@@ -32,5 +32,8 @@ export default defineComponent({
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  /* filter: blur(3rem); */
+  filter: blur(5px);
+
 }
 </style>
