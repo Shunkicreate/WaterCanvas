@@ -11,15 +11,13 @@
 import { defineComponent } from 'vue';
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
 import DrowCanvas from './components/DrowCanvas.vue'
-import Overlay from './components/Overlay.vue'
 export default defineComponent({
   name: 'Home',
   components: {
-    HelloWorld,
+    // HelloWorld,
     DrowCanvas,
-    Overlay,
   }
 })
 
@@ -36,8 +34,7 @@ export default defineComponent({
   color: #2c3e50;
   margin-top: 60px;
   /* filter: blur(3rem); */
-  filter: blur(5px);
-  height: 100%;
+  /* filter: blur(5px); */
 
 }
 </style>

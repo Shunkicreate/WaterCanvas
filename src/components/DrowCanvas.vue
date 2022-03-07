@@ -1,9 +1,5 @@
 <template>
-  <div class=" bura- container border" style="text-align: center">
-    <div class="d-flex justify-content-center" id="p5Canvas"></div>
-    <p>Y座標: {{ positionY }}</p>
-    <p>X座標: {{ positionX }}</p>
-  </div>
+    <div class="d-flex justify-content-center" id="drawcanvas"></div>
 </template>
 
 <script lang="ts">
@@ -15,9 +11,10 @@ export default defineComponent({
   setup() {
     const positionY = ref(0);
     const positionX = ref(0);
-    const colorH = ref(0);
-    const colorS = ref(0);
-    const colorB = ref(0);
+    const Drawwidth = ref(window.innerWidth * 0.67);
+    const DrawHeight = ref(window.innerWidth * 0.67);
+    const HeaderHeight = ref(3)
+
     
 
     class drawCircle {
@@ -46,7 +43,8 @@ export default defineComponent({
 
     const sketch = (p: p5) => {
       p.setup = () => {
-        p.createCanvas(720, 720);
+        p.createCanvas(Drawwidth.value, DrawHeight.value).parent('drawcanvas');
+        
         // カラーモデルをHSBに
         p.colorMode(p.HSB);
         // 矩形を描画方法を指定する
@@ -55,6 +53,7 @@ export default defineComponent({
         p.noStroke();
         //hsbモードにする
         p.colorMode(p.HSB, 100);
+        p.background('orange')
 
         
       };
@@ -148,6 +147,7 @@ export default defineComponent({
     };
 
     new p5(sketch)
+    
 
     return {
       positionY,
@@ -159,21 +159,9 @@ export default defineComponent({
 
 
 <style scoped>
-
-a {
-  color: #42b983;
-}
-
-label {
-  margin: 0 0.5em;
-  font-weight: bold;
-}
-
-code {
-  background-color: #eee;
-  padding: 2px 4px;
-  border-radius: 4px;
-  color: #304455;
+#drawcanvas{
+  filter:blur(3px);
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, .5);
 }
 /* .bura-{
   filter: blur(5px);
