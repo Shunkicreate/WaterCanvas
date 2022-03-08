@@ -1,42 +1,46 @@
 <template>
-    <div class="d-flex justify-content-center" id="drawcanvas"></div>
+  <div class="d-flex justify-content-center" id="drawcanvas"></div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, reactive } from "vue";
 import p5 from "p5";
+import { inject } from 'vue'
+import drawCircles from '../tsfiles/drawCirclesClass'
+import drawCircle from '../tsfiles/drawCircleClass'
 
 export default defineComponent({
   name: "DrowCanvas",
   setup() {
-    const positionY = ref(0);
-    const positionX = ref(0);
+    // const positionY = ref(0);
+    // const positionX = ref(0);
     const Drawwidth = ref(window.innerWidth * 0.67);
     const DrawHeight = ref(window.innerWidth * 0.67);
     const HeaderHeight = ref(3)
+    const childDrawCircles = inject('drawCircless') as drawCircles
 
-    
 
-    class drawCircle {
-      x: number;
-      y: number;
-      r: number;
-      h: number;
-      s: number;
-      b: number;
-      a: number;
-      constructor(x: number, y: number, r: number, h: number, s: number, b: number, a: number) {
-        this.x = x;
-        this.y = y;
-        this.r = r;
-        this.h = h;
-        this.s = s;
-        this.b = b;
-        this.a = a;
-        }
-    }
 
-    let drawCircles: drawCircle[] = new Array();
+    // class drawCircle {
+    //   x: number;
+    //   y: number;
+    //   r: number;
+    //   h: number;
+    //   s: number;
+    //   b: number;
+    //   a: number;
+    //   constructor(x: number, y: number, r: number, h: number, s: number, b: number, a: number) {
+    //     this.x = x;
+    //     this.y = y;
+    //     this.r = r;
+    //     this.h = h;
+    //     this.s = s;
+    //     this.b = b;
+    //     this.a = a;
+    //     }
+    // }
+
+    // let drawCircles: drawCircle[] = new Array();
 
 
     // drawCircles.circleDatta.push(new drawCircle())/÷
@@ -44,7 +48,7 @@ export default defineComponent({
     const sketch = (p: p5) => {
       p.setup = () => {
         p.createCanvas(Drawwidth.value, DrawHeight.value).parent('drawcanvas');
-        
+
         // カラーモデルをHSBに
         p.colorMode(p.HSB);
         // 矩形を描画方法を指定する
@@ -55,9 +59,9 @@ export default defineComponent({
         p.colorMode(p.HSB, 100);
         p.background('orange')
 
-        
+
       };
-      
+
 
       p.draw = () => {
         //        positionY.value = p.mouseY;
@@ -113,55 +117,59 @@ export default defineComponent({
           console.log(drawCircles)
         }
         */
-        
+
         p.mouseClicked = () => {
-          const H = p.random(0,255)
-          const S = p.random(0,255)
-          const B = p.random(0,255)
+          const H = p.random(0, 255)
+          const S = p.random(0, 255)
+          const B = p.random(0, 255)
           const A = 20;
-          const R = p.random(20,80)
+          const R = p.random(20, 80)
+          if (childDrawCircles.dataArray.length > 0) {
+            childDrawCircles.dataArray.forEach((value) => {
+              for (let index = 0; index < drawCircles.length; index++) {
+                console.log(value.x[-1]);
+                p.fill(value.h[-1], value.s[-1], value.b[-1], value.a[-1] - 2);
+                p.ellipse(value.x[-1], value.y[-1], R + 30, R + 30);
+              }
 
-          drawCircles.forEach((value) => {
-            for (let index = 0; index < drawCircles.length; index++) {
-              console.log(value.x);
-            p.fill(value.h, value.s, value.b, value.a - 2);
-            p.ellipse(value.x, value.y, R + 30, R + 30);
+            });
+
+
+
+            p.ellipse(p.mouseX, p.mouseY, R, R);
+            for (let i in new drawCircle) {
+              console.log(i)
             }
-            
-          });
-          
-          
-          
-          p.ellipse(p.mouseX, p.mouseY, R, R);
 
-          drawCircles.push(new drawCircle(p.mouseX, p.mouseY, R, H, S, B, A))
+            // childDrawCircles.dataArray.push(new drawCircle(p.mouseX, p.mouseY, R, H, S, B, A))
 
-          console.log(drawCircles)
-        }
-          
+            console.log(drawCircles)
+          }
 
-        // prevent default
-        // p.filter(p.BLUR, 3);
 
+          // prevent default
+          // p.filter(p.BLUR, 3);
+
+        };
       };
-    };
 
-    new p5(sketch)
-    
+      new p5(sketch);
 
-    return {
-      positionY,
-      positionX,
-    };
-  },
+
+      // return {
+      //   positionY,
+      //   positionX,
+      // };
+    }
+  }
 });
 </script>
 
 
 <style scoped>
-#drawcanvas{
-  filter:blur(3px);
-  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, .5);
+#drawcanvas {
+  filter: blur(3px);
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.5);
 }
 /* .bura-{
   filter: blur(5px);
