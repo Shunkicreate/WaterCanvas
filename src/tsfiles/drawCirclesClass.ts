@@ -6,7 +6,6 @@ class drawCircle {
     s: number[] = new Array();
     b: number[] = new Array();
     a: number[] = new Array();
-
 }
 
 export interface _IdrawCircle {
@@ -20,6 +19,17 @@ export interface _IdrawCircle {
 }
 
 export default class drawCircles extends drawCircle {
-    dataArray:drawCircle[] = new Array();
+    dataArray: drawCircle[] = new Array();
+    // aarray: Array<{
+    //         x: number[];
+    //         y: number[];
+    //         r: number[];
+    //         h: number[];
+    //         s: number[];
+    //         b: number[];
+    //         a: number[];
+    // }>;
+    // constructor(x: number, y: number, r: number, h: number, s: number, b: number, a: number) {
+    //     this.aarray.push
 }
 

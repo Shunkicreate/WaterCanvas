@@ -4,29 +4,21 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive } from "vue";
-import { inject } from 'vue'
 import p5 from "p5";
+import { inject } from 'vue'
 import drawCircles from '../tsfiles/drawCirclesClass'
 import drawCircle from '../tsfiles/drawCircleClass'
 
 export default defineComponent({
   name: "DrowCanvas",
   setup() {
-    const positionY = ref(0);
-    const positionX = ref(0);
+    // const positionY = ref(0);
+    // const positionX = ref(0);
     const Drawwidth = ref(window.innerWidth * 0.67);
     const DrawHeight = ref(window.innerWidth * 0.67);
     const HeaderHeight = ref(3)
-    const childDrawCircless = inject('drawCircless') as drawCircles
-    type drawCirclesDataArray = {
-      x: number[];
-      y: number[];
-      r: number[];
-      h: number[];
-      s: number[];
-      b: number[];
-      a: number[];
-    }
+    const childDrawCircles = inject('drawCircless') as drawCircles
+
 
 
     // class drawCircle {
@@ -45,10 +37,10 @@ export default defineComponent({
     //     this.s = s;
     //     this.b = b;
     //     this.a = a;
-    //   }
+    //     }
     // }
 
-    let drawCircles: drawCircle[] = new Array();
+    // let drawCircles: drawCircle[] = new Array();
 
 
     // drawCircles.circleDatta.push(new drawCircle())/÷
@@ -132,66 +124,44 @@ export default defineComponent({
           const B = p.random(0, 255)
           const A = 20;
           const R = p.random(20, 80)
+          if (childDrawCircles.dataArray.length > 0) {
+            childDrawCircles.dataArray.forEach((value) => {
+              for (let index = 0; index < drawCircles.length; index++) {
+                console.log(value.x[-1]);
+                p.fill(value.h[-1], value.s[-1], value.b[-1], value.a[-1] - 2);
+                p.ellipse(value.x[-1], value.y[-1], R + 30, R + 30);
+              }
 
-          // drawCircles.forEach((value) => {
-          //   for (let index = 0; index < drawCircles.length; index++) {
-          //     console.log(value.x);
-          //     p.fill(value.h, value.s, value.b, value.a - 2);
-          //     p.ellipse(value.x, value.y, R + 30, R + 30);
-          //   }
-
-          // });
-
-
-
-          p.ellipse(p.mouseX, p.mouseY, R, R);
-          const newData = new drawCircle(p.mouseX, p.mouseY, R, H, S, B, A)
-          console.log(typeof(childDrawCircless.dataArray))
-
-          childDrawCircless.dataArray.push(newData)
-
-          console.log(childDrawCircless.dataArray)
-
-
-          // childDrawCircless.dataArray.forEach((value) => {
-          //   for (let index = 0; index < drawCircles.length; index++) {
-          //     console.log(value.x[-1]);
-          //     p.fill(value.h[-1], value.s[-1], value.b[-1], value.a[-1] - 2);
-          //     p.ellipse(value.x[-1], value.y[-1], R + 30, R + 30);
-          //   }
-
-          // });
+            });
 
 
 
-          // p.ellipse(p.mouseX, p.mouseY, R, R);
-          // for (let i in new drawCircle) {
-          //   console.log(i)
-          // }
+            // p.ellipse(p.mouseX, p.mouseY, R, R);
+            // for (let i in new drawCircle) {
+            //   console.log(i)
+            // }
 
-          // childDrawCircles.dataArray.push(new drawCircle(p.mouseX, p.mouseY, R, H, S, B, A))
+            // childDrawCircles.dataArray.push(new drawCircle(p.mouseX, p.mouseY, R, H, S, B, A))
 
-
-
-
-
-        }
+            console.log(drawCircles)
+          }
 
 
-        // prevent default
-        // p.filter(p.BLUR, 3);
+          // prevent default
+          // p.filter(p.BLUR, 3);
 
+        };
       };
-    };
 
-    new p5(sketch)
+      new p5(sketch);
 
 
-    return {
-      positionY,
-      positionX,
-    };
-  },
+      // return {
+      //   positionY,
+      //   positionX,
+      // };
+    }
+  }
 });
 </script>
 
