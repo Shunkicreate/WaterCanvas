@@ -3,6 +3,7 @@
   <!-- <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
   <div style="text-align: center;">
     <DrowCanvas></DrowCanvas>
+    {{CircleData}}
   </div>
 </template>
 
@@ -13,21 +14,17 @@ import { ref, provide, reactive } from 'vue';
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 // import HelloWorld from './components/HelloWorld.vue'
 import DrowCanvas from './components/DrowCanvas.vue'
-import drawCircle from './tsfiles/drawCirclesClass'
-// import drawCircle from './tsfiles/DrawCircleClass'
+import drawCircles from './tsfiles/drawCirclesClass'
 
 export default defineComponent({
   name: 'Home',
   components: {
-    // HelloWorld,
     DrowCanvas,
   },
   setup(){
-    // let drawCircles: drawCircle[] = new Array();
-    // const drawCircless = ref<Array>()
-    const drawCircless = reactive([])
-    provide('drawCircless', drawCircless)
-    // return drawCircless
+    const CircleData = reactive<drawCircles[]>([])
+    provide('CircleData', CircleData)
+    return {CircleData}
   }
 
 })

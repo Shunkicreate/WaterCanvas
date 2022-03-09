@@ -17,42 +17,8 @@ export default defineComponent({
     const Drawwidth = ref(window.innerWidth * 0.67);
     const DrawHeight = ref(window.innerWidth * 0.67);
     const HeaderHeight = ref(3)
-    var childDrawCircles = inject('drawCircless') as drawCircles[]
-    // var childDrawCircles = inject('drawCircless') as drawCircles[] | boolean[]
-    function pushDrawCircle(addedData:drawCircle, mainData:drawCircles[]) {
-        mainData[-1].x.push(addedData.x);
-        mainData[-1].y.push(addedData.y);
-        mainData[-1].r.push(addedData.r);
-        mainData[-1].h.push(addedData.h);
-        mainData[-1].s.push(addedData.s);
-        mainData[-1].b.push(addedData.b);
-        mainData[-1].a.push(addedData.a);
-    }
+    var childDrawCircles = inject('CircleData') as drawCircles[]
 
-
-    // class drawCircle {
-    //   x: number;
-    //   y: number;
-    //   r: number;
-    //   h: number;
-    //   s: number;
-    //   b: number;
-    //   a: number;
-    //   constructor(x: number, y: number, r: number, h: number, s: number, b: number, a: number) {
-    //     this.x = x;
-    //     this.y = y;
-    //     this.r = r;
-    //     this.h = h;
-    //     this.s = s;
-    //     this.b = b;
-    //     this.a = a;
-    //   }
-    // }
-
-    // let drawCircles: drawCircle[] = new Array();
-
-
-    // drawCircles.circleDatta.push(new drawCircle())/÷
 
     const sketch = (p: p5) => {
       p.setup = () => {
@@ -158,7 +124,7 @@ export default defineComponent({
 
           childDrawCircles.forEach((value) => {
             for (let index = 0; index < childDrawCircles.length; index++) {
-              console.log(value.x[-1]);
+              // console.log(value);
               p.fill(value.h[-1], value.s[-1], value.b[-1], value.a[-1] - 2);
               p.ellipse(value.x[-1], value.y[-1], R + 30, R + 30);
             }
