@@ -100,17 +100,6 @@ export default defineComponent({
           const A = 20;
           const R = p.random(20, 80)
 
-          // drawCircles.forEach((value) => {
-          //   for (let index = 0; index < drawCircles.length; index++) {
-          //     console.log(value.x);
-          //     p.fill(value.h, value.s, value.b, value.a - 2);
-          //     p.ellipse(value.x, value.y, R + 30, R + 30);
-          //   }
-
-          // });
-
-
-
           p.ellipse(p.mouseX, p.mouseY, R, R);
           const newData = new drawCircles(p.mouseX, p.mouseY, R, H, S, B, A)
           // console.log((newData))
