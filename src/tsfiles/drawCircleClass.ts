@@ -20,29 +20,29 @@
 // }
 
 export interface _IClass {
-    x: number[];
-    y: number[];
-    r: number[];
-    h: number[];
-    s: number[];
-    b: number[];
-    a: number[];
+    x: number;
+    y: number;
+    r: number;
+    h: number;
+    s: number;
+    b: number;
+    a: number;
 }
 export default class drawCircle implements _IClass {
-    x: number[] = new Array();
-    y: number[] = new Array();
-    r: number[] = new Array();
-    h: number[] = new Array();
-    s: number[] = new Array();
-    b: number[] = new Array();
-    a: number[] = new Array();
+    x: number
+    y: number
+    r: number
+    h: number
+    s: number
+    b: number
+    a: number
     constructor(x: number, y: number, r: number, h: number, s: number, b: number, a: number) {
-        this.x.push(x);
-        this.y.push(y);
-        this.r.push(r);
-        this.h.push(h);
-        this.s.push(s);
-        this.b.push(b);
-        this.a.push(a);
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.h = h;
+        this.s = s;
+        this.b = b;
+        this.a = a;
       }
 }

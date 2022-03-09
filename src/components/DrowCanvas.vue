@@ -17,15 +17,16 @@ export default defineComponent({
     const Drawwidth = ref(window.innerWidth * 0.67);
     const DrawHeight = ref(window.innerWidth * 0.67);
     const HeaderHeight = ref(3)
-    const childDrawCircless = inject('drawCircless') as drawCircles
-    type drawCirclesDataArray = {
-      x: number[];
-      y: number[];
-      r: number[];
-      h: number[];
-      s: number[];
-      b: number[];
-      a: number[];
+    var childDrawCircles = inject('drawCircless') as drawCircles[]
+    // var childDrawCircles = inject('drawCircless') as drawCircles[] | boolean[]
+    function pushDrawCircle(addedData:drawCircle, mainData:drawCircles[]) {
+        mainData[-1].x.push(addedData.x);
+        mainData[-1].y.push(addedData.y);
+        mainData[-1].r.push(addedData.r);
+        mainData[-1].h.push(addedData.h);
+        mainData[-1].s.push(addedData.s);
+        mainData[-1].b.push(addedData.b);
+        mainData[-1].a.push(addedData.a);
     }
 
 
@@ -48,7 +49,7 @@ export default defineComponent({
     //   }
     // }
 
-    let drawCircles: drawCircle[] = new Array();
+    // let drawCircles: drawCircle[] = new Array();
 
 
     // drawCircles.circleDatta.push(new drawCircle())/÷
@@ -145,22 +146,24 @@ export default defineComponent({
 
 
           p.ellipse(p.mouseX, p.mouseY, R, R);
-          const newData = new drawCircle(p.mouseX, p.mouseY, R, H, S, B, A)
-          console.log(typeof(childDrawCircless.dataArray))
+          const newData = new drawCircles(p.mouseX, p.mouseY, R, H, S, B, A)
+          // console.log((newData))
+          childDrawCircles.push(newData)
+          console.log("childDrawCircles",(childDrawCircles))
 
-          childDrawCircless.dataArray.push(newData)
+          // pushDrawCircle(newData, childDrawCircles)
 
-          console.log(childDrawCircless.dataArray)
+          console.log(childDrawCircles.values)
 
 
-          // childDrawCircless.dataArray.forEach((value) => {
-          //   for (let index = 0; index < drawCircles.length; index++) {
-          //     console.log(value.x[-1]);
-          //     p.fill(value.h[-1], value.s[-1], value.b[-1], value.a[-1] - 2);
-          //     p.ellipse(value.x[-1], value.y[-1], R + 30, R + 30);
-          //   }
+          childDrawCircles.forEach((value) => {
+            for (let index = 0; index < childDrawCircles.length; index++) {
+              console.log(value.x[-1]);
+              p.fill(value.h[-1], value.s[-1], value.b[-1], value.a[-1] - 2);
+              p.ellipse(value.x[-1], value.y[-1], R + 30, R + 30);
+            }
 
-          // });
+          });
 
 
 

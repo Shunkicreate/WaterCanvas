@@ -8,12 +8,14 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { ref, provide } from 'vue';
+import { ref, provide, reactive } from 'vue';
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 // import HelloWorld from './components/HelloWorld.vue'
 import DrowCanvas from './components/DrowCanvas.vue'
-import drawCircles from './tsfiles/drawCirclesClass'
+import drawCircle from './tsfiles/drawCirclesClass'
+// import drawCircle from './tsfiles/DrawCircleClass'
+
 export default defineComponent({
   name: 'Home',
   components: {
@@ -23,7 +25,7 @@ export default defineComponent({
   setup(){
     // let drawCircles: drawCircle[] = new Array();
     // const drawCircless = ref<Array>()
-    const drawCircless = ref<InstanceType<typeof drawCircles>>()
+    const drawCircless = reactive([])
     provide('drawCircless', drawCircless)
     // return drawCircless
   }
