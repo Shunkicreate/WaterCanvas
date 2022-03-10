@@ -3,7 +3,7 @@
   <!-- <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
   <div style="text-align: center;">
     <DrowCanvas></DrowCanvas>
-    {{CircleData}}
+    <!-- {{CircleData}} -->
   </div>
 </template>
 
@@ -15,6 +15,7 @@ import { ref, provide, reactive } from 'vue';
 // import HelloWorld from './components/HelloWorld.vue'
 import DrowCanvas from './components/DrowCanvas.vue'
 import drawCircles from './tsfiles/drawCirclesClass'
+import colorSelector from './tsfiles/colorSelector';
 
 export default defineComponent({
   name: 'Home',
@@ -23,7 +24,15 @@ export default defineComponent({
   },
   setup(){
     const CircleData = reactive<drawCircles[]>([])
+    const ColorData = reactive<colorSelector>({
+      blur:0,
+      opacity : 0,
+      h: 0,
+      s: 0,
+      v: 0,
+    })
     provide('CircleData', CircleData)
+    provide('ColorData', ColorData)
     return {CircleData}
   }
 
