@@ -23,7 +23,6 @@ export default defineComponent({
     const sketch = (p: p5) => {
       p.setup = () => {
         p.createCanvas(Drawwidth.value, DrawHeight.value).parent('drawcanvas');
-
         // カラーモデルをHSBに
         p.colorMode(p.HSB);
         // 矩形を描画方法を指定する
@@ -31,10 +30,8 @@ export default defineComponent({
         // 矩形の枠線を隠す
         p.noStroke();
         //hsbモードにする
-        p.colorMode(p.HSB, 100);
-        p.background('orange')
-
-
+        p.colorMode(p.HSB, 360, 100, 100, 100);
+        //p.background('orange')
       };
 
 
@@ -52,70 +49,28 @@ export default defineComponent({
         // X座標, Y座標, width, height
         //       p.rect(360, 360, p.mouseX + 1, p.mouseX + 1);
 
-        /*
-        if (p.mouseIsPressed) {
-          p.fill(colorR.value, colorG.value, colorB.value);
-          colorR.value += Math.random() * 5;
-          colorG.value += Math.random() * 5;
-          colorB.value += Math.random() * 5;
-          if (colorR.value >= 255) colorR.value = 0;
-          if (colorG.value >= 255) colorG.value = 0;
-          if (colorB.value >= 255) colorB.value = 0;
-          p.ellipse(p.mouseX, p.mouseY, 50, 50);
-        }
-        */
-
-        /*
-        正しいところ
-        p.mouseClicked = () => { 
-          const H = p.random(0,255)
-          const S = p.random(0,255)
-          const B = p.random(0,255)
-          //const A = p.random(0,255)
-          const A = 20;
-          const R = p.random(20,80)
-
-          drawCircles.forEach((value) => {
-            for (let index = 0; index < drawCircles.length; index++) {
-              console.log(value.x);
-            p.fill(value.h, value.s, value.b, value.a - 2);
-            p.ellipse(value.x, value.y, R + 30, R + 30);
-            }
-            
-          });
-
-          p.fill(H, S, B, A);
-          p.ellipse(p.mouseX, p.mouseY, R, R);
-
-          drawCircles.push(new drawCircle(p.mouseX, p.mouseY, R, H, S, B, A))
-
-          console.log(drawCircles)
-        }
-        */
 
         p.mouseClicked = () => {
-          const H = p.random(0, 255)
-          const S = p.random(0, 255)
-          const B = p.random(0, 255)
-          const A = 20;
-          const R = p.random(20, 80)
+          const H = p.random(0 , 360)
+          const S = p.random(20 , 100)
+          const B = p.random(90 , 100)
+          const A = 4;
+          const R = p.random(30, 120)
 
-          p.ellipse(p.mouseX, p.mouseY, R, R);
           const newData = new drawCircles(p.mouseX, p.mouseY, R, H, S, B, A)
           // console.log((newData))
           childDrawCircles.push(newData)
-          console.log("childDrawCircles",(childDrawCircles))
+          // console.log("childDrawCircles",(childDrawCircles))
 
           // pushDrawCircle(newData, childDrawCircles)
 
           console.log(childDrawCircles.values)
 
-
           childDrawCircles.forEach((value) => {
-            for (let index = 0; index < childDrawCircles.length; index++) {
-              // console.log(value);
-              p.fill(value.h[-1], value.s[-1], value.b[-1], value.a[-1] - 2);
-              p.ellipse(value.x[-1], value.y[-1], R + 30, R + 30);
+            for (let index = 0; index < 5; index++) {
+              p.fill(value.h[index], value.s[index], value.b[index], 6);
+              p.ellipse(value.x[index], value.y[index], R + 5, R + 5);
+              console.log(value.x[index])              
             }
 
           });
@@ -129,12 +84,7 @@ export default defineComponent({
 
           // childDrawCircles.dataArray.push(new drawCircle(p.mouseX, p.mouseY, R, H, S, B, A))
 
-
-
-
-
         }
-
 
         // prevent default
         // p.filter(p.BLUR, 3);
@@ -143,7 +93,6 @@ export default defineComponent({
     };
 
     new p5(sketch)
-
 
     return {
       positionY,
