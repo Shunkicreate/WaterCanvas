@@ -3,6 +3,7 @@
   <!-- <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
   <div style="text-align: center;">
     <DrowCanvas></DrowCanvas>
+    <ColorSetting></ColorSetting>
     <!-- {{CircleData}} -->
   </div>
 </template>
@@ -14,6 +15,7 @@ import { ref, provide, reactive } from 'vue';
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 // import HelloWorld from './components/HelloWorld.vue'
 import DrowCanvas from './components/DrowCanvas.vue'
+import ColorSetting from './components/ColorSetting.vue'
 import drawCircles from './tsfiles/drawCirclesClass'
 import colorSelector from './tsfiles/colorSelector';
 
@@ -21,6 +23,7 @@ export default defineComponent({
   name: 'Home',
   components: {
     DrowCanvas,
+    ColorSetting
   },
   setup(){
     const CircleData = reactive<drawCircles[]>([])
