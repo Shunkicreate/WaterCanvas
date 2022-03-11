@@ -240,6 +240,11 @@ babel-walk@3.0.0-canary-5:
   dependencies:
     "@babel/types" "^7.9.6"
 
+body-scroll-lock@^2.6.4:
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/body-scroll-lock/-/body-scroll-lock-2.7.1.tgz#caf3f9c91773af1ffb684cd66ed9137b5b737014"
+  integrity sha512-hS53SQ8RhM0e4DsQ3PKz6Gr2O7Kpdh59TWU98GHjaQznL7y4dFycEPk7pFQAikqBaUSCArkc5E3pe7CWIt2fZA==
+
 bootstrap@^5.1.3:
   version "5.1.3"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.1.3.tgz#ba081b0c130f810fa70900acbc1c6d3c28fa8f34"
@@ -786,6 +791,13 @@ upath@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/upath/-/upath-2.0.1.tgz#50c73dea68d6f6b990f51d279ce6081665d61a8b"
   integrity sha512-1uEe95xksV1O0CYKXo8vQvN1JEbtJp7lb7C5U9HMsIp6IVwntkH/oNUzyVNQSd4S1sYk2FpSSW44FqMc8qee5w==
+
+v-scroll-lock@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/v-scroll-lock/-/v-scroll-lock-1.3.1.tgz#f1db8e79af0c0337b46164faea5d1782016b3933"
+  integrity sha512-t41gdxloJ0+5VzHPTi9+PjqjXMeXsM81nP1QUszMQCaLp4pfF0vcJ8aNh3UKK49Pc+RJdCbw3Kj/Z1HCSPQEyA==
+  dependencies:
+    body-scroll-lock "^2.6.4"
 
 vite@^2.8.0:
   version "2.8.6"

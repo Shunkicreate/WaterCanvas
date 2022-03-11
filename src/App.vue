@@ -28,23 +28,22 @@ export default defineComponent({
     DrowCanvas,
     ColorSetting
   },
-  setup(){
+  setup() {
     const CircleData = reactive<drawCircles[]>([])
     const ColorData = reactive<colorSelector>({
-      blur:0,
-      opacity : 0,
+      blur: 0,
+      opacity: 0,
       h: 0,
       s: 0,
       v: 0,
     })
-    const WindowWidth = ref(window.innerWidth*0.50)
-    const WindowHeight = ref(window.innerHeight*0.85)
+    const WindowWidth = ref(window.innerWidth * 0.5)
+    const WindowHeight = ref(window.innerHeight * 0.85)
     provide('CircleData', CircleData)
     provide('ColorData', ColorData)
     provide('WindowWidth', WindowWidth.value)
     provide('WindowHeight', WindowHeight.value)
-  }
-
+  },
 })
 </script>
 
@@ -65,8 +64,7 @@ canvas {
   margin: 0 5% 0 5%;
   border-radius: 1.5rem;
   background: #fafaf7;
-  box-shadow: 15px 15px 20px #d9d7d4,
-              -15px -15px 20px #fff;
+  box-shadow: 15px 15px 20px #d9d7d4, -15px -15px 20px #fff;
 }
 
 header {
@@ -74,6 +72,4 @@ header {
   color: #858585;
   margin-left: 5%;
 }
-
-
 </style>
