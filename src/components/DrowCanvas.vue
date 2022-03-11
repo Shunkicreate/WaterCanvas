@@ -21,6 +21,7 @@ export default defineComponent({
     const childWindowWidth = inject('WindowWidth') as number
     const childWindowHeight = inject('WindowHeight') as number
     const counter = ref(0)
+    const ChildSavedImage = inject('SavedImage') as String
 
 
 
@@ -31,7 +32,7 @@ export default defineComponent({
         p.colorMode(p.HSB);
         // 矩形を描画方法を指定する
         p.rectMode(p.CENTER);
-        
+
         // 矩形の枠線を隠す
         p.noStroke();
         //hsbモードにする
@@ -78,11 +79,8 @@ export default defineComponent({
           counter.value++
           if(counter.value%15 === 0){
             drawEllipse()
-
           }
         }
-
-
       };
     };
 

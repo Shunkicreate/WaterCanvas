@@ -39,10 +39,12 @@ export default defineComponent({
     })
     const WindowWidth = ref(window.innerWidth * 0.5)
     const WindowHeight = ref(window.innerHeight * 0.85)
+    const SavedImage = reactive({url:"",save:false})
     provide('CircleData', CircleData)
     provide('ColorData', ColorData)
     provide('WindowWidth', WindowWidth.value)
     provide('WindowHeight', WindowHeight.value)
+    provide('SavedImage',SavedImage.url)
   },
 })
 </script>

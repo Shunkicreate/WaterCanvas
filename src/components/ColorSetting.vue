@@ -18,7 +18,7 @@
               <p>What is this?</p>
             </div>
             <div class="action save">
-              <p>Save Image</p>
+              <!-- <a @click="save" href=""><p>Save Image</p></a> -->
             </div>
           </div>
           <div class="SNS">
@@ -35,8 +35,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from "vue";
+import { defineComponent, inject} from "vue";
 import colorSelector from "../tsfiles/colorSelector";
+
 
 export default defineComponent({
     name: "ColorSetting",
@@ -45,6 +46,12 @@ export default defineComponent({
         return {
             childColorSelector
             }
+            // const save = {
+            //   data(){
+            //     count: 0
+            //   }
+            //   return save
+            // }
     }
 
 });
