@@ -1,6 +1,9 @@
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
   <!-- <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
+  <header>
+    <h1>WATER CANVAS</h1>
+  </header>
   <div style="text-align: center;">
     <DrowCanvas></DrowCanvas>
     <ColorSetting></ColorSetting>
@@ -55,7 +58,6 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
 canvas {
@@ -63,10 +65,16 @@ canvas {
   width: 75%;
   float: left;
   margin: 0 5% 0 5%;
-  border-radius: 5px;
+  border-radius: 10px;
   background: #fafaf7;
   box-shadow: 15px 15px 20px #d9d7d4,
               -15px -15px 20px #fff;
+}
+
+header {
+  text-align: left;
+  color: #858585;
+  margin-left: 5%;
 }
 
 
