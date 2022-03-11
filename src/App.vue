@@ -37,7 +37,7 @@ export default defineComponent({
       s: 0,
       v: 0,
     })
-    const WindowWidth = ref(window.innerWidth * 0.5)
+    const WindowWidth = ref(window.innerWidth * 0.55)
     const WindowHeight = ref(window.innerHeight * 0.85)
     const SavedImage = reactive({ url: "", save: false })
     function disableScroll(event: any) {
@@ -67,7 +67,7 @@ export default defineComponent({
 
 canvas {
   float: left;
-  margin: 0 5% 0 5%;
+  margin: 0 4% 0 5%;
   border-radius: 1.5rem;
   background: #fafaf7;
   box-shadow: 15px 15px 20px #d9d7d4, -15px -15px 20px #fff;

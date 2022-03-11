@@ -1,5 +1,4 @@
 <template>
-  <body>
       <div class="colorSection">
         <div class="style color">
           <div class="picker">
@@ -30,8 +29,6 @@
           </div>
         </div>
       </div>
-    </body>
-
 </template>
 
 <script lang="ts">
@@ -58,11 +55,7 @@ export default defineComponent({
 </script>
 
 <style>
-body {
-  height: 42.5rem;
-  margin: 0;
-  background: #fafaf7;
-}
+
 
 .style {
   background: #fafaf7;
