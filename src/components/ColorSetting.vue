@@ -59,19 +59,19 @@ export default defineComponent({
 
 <style>
 body {
-  height: 1300px;
+  height: 42.5rem;
   margin: 0;
   background: #fafaf7;
 }
 
 .style {
   background: #fafaf7;
-  box-shadow: 15px 15px 20px #d9d7d4,
-              -15px -15px 20px #fff;
+  box-shadow: 0.9rem 0.9rem 1.25rem #d9d7d4,
+              -0.9rem -0.9rem 1.25rem #fff;
 }
 
 .colorSection {
-  height: 620px;
+  height: 38.75rem;
   width: 35%;
   float: left;
 }
@@ -79,71 +79,71 @@ body {
 .color {
   height: 100%;
   width: 80%;
-  border-radius: 50px;
+  border-radius: 3.125rem;
   margin: 0 10%;
-  padding-top: 50px;
+  padding-top: 3.125rem;
 }
 
 .picker {
   width: 70%;
-  height: 240px;
+  height: 15rem;
   margin: 0 15%;
 }
 
 .toolBar {
-  margin: 40px 15% 30px 15%;
+  margin: 2.5rem 15% 1.875rem 15%;
 }
 
 .bar {
   width: 80%;
   height: auto;
-  line-height: 34px;
-  padding-left: 12px;
-  margin-bottom: 20px;
+  line-height: 2.125rem;
+  padding-left: 1.25rem;
+  margin-bottom: 1.25rem;
   background-color:#fafaf7;
-  box-shadow: inset 8px 8px 10px #d9d7d4,
-              inset -8px -8px 10px #fff;
+  box-shadow: inset 0.5rem 0.5rem 0.625rem #d9d7d4,
+              inset -0.5rem -0.5rem 0.625rem #fff;
   text-align: left;
-  border-radius: 20px;
+  border-radius: 1.25rem;
 }
 
 .actions {
-  margin: 10px 15%;
+  margin: 0.625rem 15%;
 }
 
 .action {
   width: 100%;
   height: auto;
-  line-height: 32px;
-  margin-bottom: 10px;
+  line-height: 2rem;
+  margin-bottom: 0.625rem;
   background-color:#ffefbf;
-  box-shadow: 4px 4px 10px #d9d7d4,
-              -4px -4px 10px #fff;
+  box-shadow: 0.25rem 0.25rem 0.625rem #d9d7d4,
+              -0.25rem -0.25rem 0.625rem #fff;
   text-align: center;
-  border-radius: 30px;
+  border-radius: 1.875rem;
 }
 
 .SNS {
-  margin: 30px 15%;
+  margin: 1.875rem 15%;
 }
 
 .SNS p {
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 .logos {
-  margin-top: 10px;
+  margin-top: 0.625rem;
 }
 
 
 .logo {
-  height: 50px;
-  width: 50px;
+  height: 3.125rem;
+  width: 3.125rem;
   float: left;
-  box-shadow: 8px 8px 10px #d9d7d4,
-              -8px -8px 10px #fff;
-  padding: 10px;
-  border-radius: 20px;
+  box-shadow: 0.5rem 0.5rem 0.625rem #d9d7d4,
+              -0.5rem -0.5rem 0.625rem #fff;
+  padding: 0.625rem;
+  border-radius: 1.25rem;
 }
 
 .insta {
@@ -155,7 +155,7 @@ body {
 }
 
 p {
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 700;
   color: #858585;
   margin: 0;
