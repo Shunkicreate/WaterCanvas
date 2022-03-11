@@ -34,14 +34,17 @@ export default defineComponent({
       s: 0,
       v: 0,
     })
+    const WindowWidth = ref(window.innerWidth*0.55)
+    const WindowHeight = ref(window.innerHeight*0.85)
     provide('CircleData', CircleData)
     provide('ColorData', ColorData)
+    provide('WindowWidth', WindowWidth.value)
+    provide('WindowHeight', WindowHeight.value)
+
     return {CircleData}
   }
 
 })
-
-
 </script>
 
 
@@ -53,8 +56,18 @@ export default defineComponent({
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-  /* filter: blur(3rem); */
-  /* filter: blur(5px); */
-
 }
+
+canvas {
+  height: 300px;
+  width: 75%;
+  float: left;
+  margin: 0 5% 0 5%;
+  border-radius: 5px;
+  background: #fafaf7;
+  box-shadow: 15px 15px 20px #d9d7d4,
+              -15px -15px 20px #fff;
+}
+
+
 </style>

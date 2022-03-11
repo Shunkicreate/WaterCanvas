@@ -1,5 +1,6 @@
 <template>
   <div class="d-flex justify-content-center" id="drawcanvas"></div>
+
 </template>
 
 <script lang="ts">
@@ -17,12 +18,15 @@ export default defineComponent({
     const Drawwidth = ref(window.innerWidth * 0.67);
     const DrawHeight = ref(window.innerWidth * 0.67);
     const HeaderHeight = ref(3)
-    var childDrawCircles = inject('CircleData') as drawCircles[]
+    const childDrawCircles = inject('CircleData') as drawCircles[]
+    const childWindowWidth = inject('WindowWidth') as number
+    const childWindowHeight = inject('WindowHeight') as number
+
 
 
     const sketch = (p: p5) => {
       p.setup = () => {
-        p.createCanvas(Drawwidth.value, DrawHeight.value).parent('drawcanvas');
+        p.createCanvas(childWindowWidth, childWindowHeight).parent('drawcanvas');
         // カラーモデルをHSBに
         p.colorMode(p.HSB);
         // 矩形を描画方法を指定する
@@ -104,11 +108,7 @@ export default defineComponent({
 
 
 <style scoped>
-#drawcanvas {
+#canvas {
   filter: blur(3px);
-  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.5);
 }
-/* .bura-{
-  filter: blur(5px);
-} */
 </style>
