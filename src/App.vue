@@ -37,14 +37,12 @@ export default defineComponent({
       s: 0,
       v: 0,
     })
-    const WindowWidth = ref(window.innerWidth*0.55)
+    const WindowWidth = ref(window.innerWidth*0.50)
     const WindowHeight = ref(window.innerHeight*0.85)
     provide('CircleData', CircleData)
     provide('ColorData', ColorData)
     provide('WindowWidth', WindowWidth.value)
     provide('WindowHeight', WindowHeight.value)
-
-    return {CircleData}
   }
 
 })
@@ -61,11 +59,11 @@ export default defineComponent({
 }
 
 canvas {
-  height: 300px;
-  width: 75%;
+  /* height: 300px; */
+  /* width: 75%; */
   float: left;
   margin: 0 5% 0 5%;
-  border-radius: 10px;
+  border-radius: 1.5rem;
   background: #fafaf7;
   box-shadow: 15px 15px 20px #d9d7d4,
               -15px -15px 20px #fff;
