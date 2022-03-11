@@ -66,8 +66,6 @@ export default defineComponent({
 }
 
 canvas {
-  /* height: 300px; */
-  /* width: 75%; */
   float: left;
   margin: 0 5% 0 5%;
   border-radius: 1.5rem;
