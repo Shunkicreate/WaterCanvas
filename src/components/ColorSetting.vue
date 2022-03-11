@@ -46,7 +46,7 @@ export default defineComponent({
         const ChildSavedImageJudge = inject('SavedImageJudge') as Boolean
         console.log(ChildSavedImageJudge)
         const SaveImage = () =>{
-          ChildSavedImageJudge.valueOf = true
+          ChildSavedImageJudge.value = true
         }
         return {
             childColorSelector,
