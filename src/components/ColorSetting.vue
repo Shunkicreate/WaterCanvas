@@ -3,7 +3,7 @@
       <div class="colorSection">
         <div class="style color">
           <div class="picker">
-
+            <!-- うんち -->
           </div>
           <div class="toolBar">
             <div class="bar blur">
@@ -26,12 +26,12 @@
             <div class="logos">
               <img src="../assets/Instagram.png" class="logo insta">
               <img src="../assets/Twitter.png" class="logo twitter">
-            </div>            
-          </div>          
+            </div>
+          </div>
         </div>
       </div>
     </body>
-  
+
 </template>
 
 <script lang="ts">
@@ -80,7 +80,7 @@ body {
 .picker {
   width: 70%;
   height: 240px;
-  margin: 0 15%; 
+  margin: 0 15%;
 }
 
 .toolBar {

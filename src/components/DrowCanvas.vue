@@ -56,16 +56,19 @@ export default defineComponent({
           const H = p.random(0, 360)
           const S = p.random(20, 100)
           const B = p.random(90, 100)
-          const A = 4;
+          const A = 10;
           const R = p.random(30, 120)
 
           const newData = new drawCircles(p.mouseX, p.mouseY, R, H, S, B, A)
           childDrawCircles.push(newData)
 
+          p.fill(H, S, B, A)
+          p.ellipse(p.mouseX, p.mouseY, R, R)
           childDrawCircles.forEach((value) => {
-            for (let index = 0; index < 5; index++) {
-              p.fill(value.h[index], value.s[index], value.b[index], 6);
-              p.ellipse(value.x[index], value.y[index], R + 5, R + 5);
+            for (let index = 0; index < 1; index++) {
+              p.fill(value.h[index], value.s[index], value.b[index], 3);
+              value.r[index] += 3;
+              p.ellipse(value.x[index], value.y[index], value.r[index], value.r[index]);
             }
 
           });
