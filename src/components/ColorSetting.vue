@@ -43,16 +43,21 @@ export default defineComponent({
     name: "ColorSetting",
     setup(){
         const childColorSelector = inject('ColorData') as colorSelector
-        const ChildSavedImageJudge = inject('SavedImageJudge') as Boolean
+        const ChildSavedImageJudge = inject('SavedImageJudge') as boolean
         console.log(ChildSavedImageJudge)
-        const SaveImage = () =>{
-          ChildSavedImageJudge.value = true
+        function SaveImage() {
+          ChildSavedImageJudge = true
         }
         return {
             childColorSelector,
             SaveImage
             }
     },
+    // methods: {
+    //   SaveImage() {
+    //       this.ChildSavedImageJudge = true
+    //     }
+    // }
 });
 </script>
 

@@ -50,8 +50,8 @@ export default defineComponent({
     provide('ColorData', ColorData)
     provide('WindowWidth', WindowWidth.value)
     provide('WindowHeight', WindowHeight.value)
-    provide('SavedImageURL', SavedImageURL)
-    provide('SavedImageJudge', SavedImageJudge)
+    provide('SavedImageURL', SavedImageURL.value)
+    provide('SavedImageJudge', SavedImageJudge.value)
   },
 })
 </script>
