@@ -23,5 +23,5 @@ export default class drawCircle implements _IClass {
         this.s = s;
         this.b = b;
         this.a = a;
-      }
+    }
 }
