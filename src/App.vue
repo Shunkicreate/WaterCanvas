@@ -39,12 +39,17 @@ export default defineComponent({
     })
     const WindowWidth = ref(window.innerWidth * 0.5)
     const WindowHeight = ref(window.innerHeight * 0.85)
-    const SavedImage = reactive({url:"",save:false})
+    const SavedImage = reactive({ url: "", save: false })
+    function disableScroll(event: any) {
+      event.preventDefault();
+    }
+    document.addEventListener('touchmove', disableScroll, { passive: false });
+    document.addEventListener('mousewheel', disableScroll, { passive: false });
     provide('CircleData', CircleData)
     provide('ColorData', ColorData)
     provide('WindowWidth', WindowWidth.value)
     provide('WindowHeight', WindowHeight.value)
-    provide('SavedImage',SavedImage.url)
+    provide('SavedImage', SavedImage.url)
   },
 })
 </script>
