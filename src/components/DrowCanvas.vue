@@ -1,6 +1,5 @@
 <template>
   <div class="d-flex justify-content-center" id="drawcanvas"></div>
-
 </template>
 
 <script lang="ts">
@@ -21,6 +20,7 @@ export default defineComponent({
     const childDrawCircles = inject('CircleData') as drawCircles[]
     const childWindowWidth = inject('WindowWidth') as number
     const childWindowHeight = inject('WindowHeight') as number
+    const counter = ref(0)
 
 
 
@@ -35,7 +35,6 @@ export default defineComponent({
         p.noStroke();
         //hsbモードにする
         p.colorMode(p.HSB, 360, 100, 100, 100);
-        //p.background('orange')
       };
 
 
@@ -52,46 +51,33 @@ export default defineComponent({
         // 図形の描画（1px ~ 720pxの間で大きさが変わる）
         // X座標, Y座標, width, height
         //       p.rect(360, 360, p.mouseX + 1, p.mouseX + 1);
-
-
-        p.mouseClicked = () => {
-          const H = p.random(0 , 360)
-          const S = p.random(20 , 100)
-          const B = p.random(90 , 100)
+        function drawEllipse() {
+          const H = p.random(0, 360)
+          const S = p.random(20, 100)
+          const B = p.random(90, 100)
           const A = 4;
           const R = p.random(30, 120)
 
           const newData = new drawCircles(p.mouseX, p.mouseY, R, H, S, B, A)
-          // console.log((newData))
           childDrawCircles.push(newData)
-          // console.log("childDrawCircles",(childDrawCircles))
-
-          // pushDrawCircle(newData, childDrawCircles)
-
-          console.log(childDrawCircles.values)
 
           childDrawCircles.forEach((value) => {
             for (let index = 0; index < 5; index++) {
               p.fill(value.h[index], value.s[index], value.b[index], 6);
               p.ellipse(value.x[index], value.y[index], R + 5, R + 5);
-              console.log(value.x[index])              
             }
 
           });
-
-
-
-          // p.ellipse(p.mouseX, p.mouseY, R, R);
-          // for (let i in new drawCircle) {
-          //   console.log(i)
-          // }
-
-          // childDrawCircles.dataArray.push(new drawCircle(p.mouseX, p.mouseY, R, H, S, B, A))
-
         }
 
-        // prevent default
-        // p.filter(p.BLUR, 3);
+        p.touchMoved = () => {
+          counter.value++
+          if(counter.value%15 === 0){
+            drawEllipse()
+
+          }
+        }
+
 
       };
     };
@@ -103,6 +89,7 @@ export default defineComponent({
       positionX,
     };
   },
+
 });
 </script>
 
