@@ -21,7 +21,8 @@ export default defineComponent({
     const childWindowWidth = inject('WindowWidth') as number
     const childWindowHeight = inject('WindowHeight') as number
     const counter = ref(0)
-    const ChildSavedImage = inject('SavedImage') as String
+    const ChildSavedImageURL = inject('SavedImageURL') as String
+    const ChildSavedImageJudge = inject('SavedImageJudge') as Boolean
 
 
 
