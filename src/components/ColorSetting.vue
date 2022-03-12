@@ -2,7 +2,6 @@
       <div class="colorSection">
         <div class="style color">
           <div class="picker">
-            <!-- うんち -->
           </div>
           <div class="toolBar">
             <div class="bar blur">
