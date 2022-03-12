@@ -4,54 +4,54 @@
   <header>
     <h1>WATER CANVAS</h1>
   </header>
-  <div style="text-align: center; width:windowinnerWidth; height:100%;">
+  <!-- <div style="text-align: center; width:windowinnerWidth; height:100%;">
     <DrowCanvas></DrowCanvas>
     <ColorSetting></ColorSetting>
-    <!-- {{CircleData}} -->
-  </div>
+  </div> -->
+  <router-view></router-view>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import { ref, provide, reactive } from 'vue';
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-// import HelloWorld from './components/HelloWorld.vue'
-import DrowCanvas from './components/DrowCanvas.vue'
-import ColorSetting from './components/ColorSetting.vue'
-import drawCircles from './tsfiles/drawCirclesClass'
-import colorSelector from './tsfiles/colorSelector';
+// import { defineComponent } from 'vue';
+// import { ref, provide, reactive } from 'vue';
+// // This starter template is using Vue 3 <script setup> SFCs
+// // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
+// // import HelloWorld from './components/HelloWorld.vue'
+// import DrowCanvas from './components/DrowCanvas.vue'
+// import ColorSetting from './components/ColorSetting.vue'
+// import drawCircles from './tsfiles/drawCirclesClass'
+// import colorSelector from './tsfiles/colorSelector';
 
-export default defineComponent({
-  name: 'Home',
-  components: {
-    DrowCanvas,
-    ColorSetting
-  },
-  setup() {
-    const CircleData = reactive<drawCircles[]>([])
-    const ColorData = reactive<colorSelector>({
-      blur: 0,
-      opacity: 0,
-      h: 0,
-      s: 0,
-      v: 0,
-    })
-    const WindowWidth = ref(window.innerWidth * 0.55)
-    const WindowHeight = ref(window.innerHeight * 0.85)
-    const SavedImage = reactive({ url: "", save: false })
-    function disableScroll(event: any) {
-      event.preventDefault();
-    }
-    document.addEventListener('touchmove', disableScroll, { passive: false });
-    document.addEventListener('mousewheel', disableScroll, { passive: false });
-    provide('CircleData', CircleData)
-    provide('ColorData', ColorData)
-    provide('WindowWidth', WindowWidth.value)
-    provide('WindowHeight', WindowHeight.value)
-    provide('SavedImage', SavedImage.url)
-  },
-})
+// export default defineComponent({
+//   name: 'Home',
+//   components: {
+//     DrowCanvas,
+//     ColorSetting
+//   },
+//   setup() {
+//     const CircleData = reactive<drawCircles[]>([])
+//     const ColorData = reactive<colorSelector>({
+//       blur: 0,
+//       opacity: 0,
+//       h: 0,
+//       s: 0,
+//       v: 0,
+//     })
+//     const WindowWidth = ref(window.innerWidth * 0.55)
+//     const WindowHeight = ref(window.innerHeight * 0.85)
+//     const SavedImage = reactive({ url: "", save: false })
+//     function disableScroll(event: any) {
+//       event.preventDefault();
+//     }
+//     document.addEventListener('touchmove', disableScroll, { passive: false });
+//     document.addEventListener('mousewheel', disableScroll, { passive: false });
+//     provide('CircleData', CircleData)
+//     provide('ColorData', ColorData)
+//     provide('WindowWidth', WindowWidth.value)
+//     provide('WindowHeight', WindowHeight.value)
+//     provide('SavedImage', SavedImage.url)
+//   },
+// })
 </script>
 
 
@@ -63,17 +63,7 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color:#fafaf7;
-}
-
-canvas {
-  float: left;
-  margin: 0 5% 0 5%;
-  border-radius: 1.5rem;
-  background: #fafaf7;
-  box-shadow: 0.9rem 0.9rem 1.25rem #d9d7d4, -0.9rem -0.9rem 1.25rem #fff;
-  /* filter: blur(3px); */
-
+  background-color: #fafaf7;
 }
 
 header {
@@ -84,7 +74,7 @@ header {
   box-shadow: 0.9rem 0.9rem 1.25rem #d9d7d4, -0.9rem -0.9rem 1.25rem #fff;
 }
 
-header h1{
+header h1 {
   padding: 0.5rem;
 }
 </style>
