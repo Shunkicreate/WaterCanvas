@@ -85,7 +85,7 @@ export default defineComponent({
         }
       };
       if (ChildSavedImageJudge.value == true){
-        p.saveCanvas(Canvas,'wWaterCanvas','jpg');
+        // p.saveCanvas(Canvas,'wWaterCanvas','jpg');
       }
     };
 
