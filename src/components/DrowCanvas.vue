@@ -1,6 +1,6 @@
-<template>
+<template><div @abort="console.log('chnges')">{{ mode }}</div>
+  
   <div class="d-flex justify-content-center" id="drawcanvas"></div>
-  {{ timeCounter }}
 </template>
 
 <script lang="ts">
@@ -15,9 +15,9 @@ export default defineComponent({
   setup() {
     const positionY = ref(0);
     const positionX = ref(0);
-    const Drawwidth = ref(window.innerWidth * 0.67);
-    const DrawHeight = ref(window.innerWidth * 0.67);
-    const HeaderHeight = ref(3)
+    // const Drawwidth = ref(window.innerWidth * 0.67);
+    // const DrawHeight = ref(window.innerWidth * 0.67);
+    // const HeaderHeight = ref(3)
     const childDrawCircles = inject('CircleData') as drawCircles[]
     const childWindowWidth = inject('WindowWidth') as number
     const childWindowHeight = inject('WindowHeight') as number
@@ -25,6 +25,8 @@ export default defineComponent({
     const canvasCounter = ref(0)
     const drawing = ref(false)
     const mode = inject('mode') as Ref
+    const canvasReset = inject('canvasReset') as Ref
+    console.log(canvasReset.value)
     // const ChildSavedImage = inject('SavedImage') as Ref
 
 
@@ -34,9 +36,7 @@ export default defineComponent({
       timeCounter.value += 1;
       // timeCounter.value = Math.floor(timeCounter.value)
 
-      if (timeCounter.value > 100) {
-        timeCounter.value = 0;
-      }
+
       // console.log(`output: ${timeCounter.value} 秒`)
     }
     setInterval(output, 50)
@@ -139,8 +139,8 @@ export default defineComponent({
         }
         else if (mode.value == 'canvas') {
           canvasCounter.value++;
-            p.touchMoved = () => {
-              if(canvasCounter.value%10 == 0){
+          p.touchMoved = () => {
+            if (canvasCounter.value % 10 == 0) {
               createNewEllipse()
               drawEllipse()
             };
@@ -156,14 +156,31 @@ export default defineComponent({
       // }
     };
 
-    new p5(sketch)
+    const canvasData = ref(new p5(sketch))
+
+    if (canvasReset.value) {
+      canvasReset.value = !canvasReset.value;
+      // canvasData.value.resetMatrix();
+      console.log('canvasReset')
+    }
+
 
     return {
       positionY,
       positionX,
-      timeCounter
+      timeCounter,
+      canvasReset,
+      canvasData,
+      mode,
     };
   },
+
+      // if (this.canvasReset.value) {
+      //   this.canvasReset.value = !this.canvasReset.value;
+      //   this.canvasData.resetMatrix()
+      //   console.log('canvasReset')
+      // }
+
 
 });
 </script>

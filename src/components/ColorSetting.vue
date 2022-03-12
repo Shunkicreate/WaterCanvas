@@ -3,6 +3,9 @@
     <div class="style color">
       <div class="picker"></div>
       <div class="toolBar">
+        <div class="bar mode" @click="changeMode()">
+          <p>mode: {{ mode }}</p>
+        </div>
         <div class="bar blur">
           <p>Blur</p>
         </div>
@@ -35,16 +38,31 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from "vue";
+import { defineComponent, inject, Ref } from "vue";
 import colorSelector from "../tsfiles/colorSelector";
+import drawCircles from "../tsfiles/drawCirclesClass"
 
 
 export default defineComponent({
   name: "ColorSetting",
   setup() {
     const childColorSelector = inject('ColorData') as colorSelector
+    const mode = inject('mode') as Ref
+    const childDrawCircles = inject('CircleData') as drawCircles[]
+    const canvasReset = inject('canvasReset') as Ref
+    function changeMode() {
+      if (mode.value == 'canvas') mode.value = 'water'
+      else if (mode.value == 'water') mode.value = 'canvas'
+      childDrawCircles.forEach(element => {
+        element.reset()
+        if (canvasReset.value == 'change') canvasReset.value = 'stay'
+        else if (canvasReset.value == 'stay') canvasReset.value = 'change'
+      });
+    }
     return {
-      childColorSelector
+      childColorSelector,
+      changeMode,
+      mode
     }
     // const save = {
     //   data(){
@@ -64,8 +82,8 @@ export default defineComponent({
 }
 
 .colorSection {
-height: 100%;
-width: 32%;
+  height: 100%;
+  width: 32%;
   float: left;
 }
 
@@ -116,10 +134,10 @@ width: 32%;
 }
 
 .SNS {
-width: 80%;
-/* margin: 1.875rem 15%; */
-text-align: center;
-margin: 5% auto;
+  width: 80%;
+  /* margin: 1.875rem 15%; */
+  text-align: center;
+  margin: 5% auto;
 }
 
 .SNS p {
@@ -127,22 +145,22 @@ margin: 5% auto;
 }
 
 .logos {
-margin: 0.625rem auto;
-width: 80%;
-display: flex;
+  margin: 0.625rem auto;
+  width: 80%;
+  display: flex;
 }
 
-.logofolder{
-width: 40%;
-/* height: 10em; */
-margin: auto;
+.logofolder {
+  width: 40%;
+  /* height: 10em; */
+  margin: auto;
 }
 
 .logo {
   height: 3.125rem;
   width: 3.125rem;
-/* float: left; */
-box-shadow: 0.5rem 0.5rem 0.625rem #d9d7d4, -0.5rem -0.5rem 0.625rem #fff;
+  /* float: left; */
+  box-shadow: 0.5rem 0.5rem 0.625rem #d9d7d4, -0.5rem -0.5rem 0.625rem #fff;
   padding: 0.625rem;
   border-radius: 1.25rem;
   margin: auto;
