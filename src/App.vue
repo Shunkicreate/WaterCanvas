@@ -4,7 +4,7 @@
   <header>
     <h1>WATER CANVAS Stable ver </h1>
   </header>
-  <div style="text-align: center;">
+  <div style="text-align: center; height:100%">
     <DrowCanvas></DrowCanvas>
     <ColorSetting></ColorSetting>
     <!-- {{CircleData}} -->
@@ -76,6 +76,12 @@ canvas {
 header {
   text-align: left;
   color: #858585;
-  margin-left: 5%;
+padding-left: 5%;
+border-radius: 0.75rem;
+box-shadow: 0.9rem 0.9rem 1.25rem #d9d7d4, -0.9rem -0.9rem 1.25rem #fff;
+}
+
+header h1 {
+padding: 0.5rem;
 }
 </style>
