@@ -64,8 +64,8 @@ export default defineComponent({
 }
 
 .colorSection {
-  height: 38.75rem;
-  width: 35%;
+  height: 100%;
+  width: 32%;
   float: left;
 }
 

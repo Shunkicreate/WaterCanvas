@@ -98,7 +98,5 @@ export default defineComponent({
 
 
 <style scoped>
-#canvas {
-  filter: blur(3px);
-}
+
 </style>
