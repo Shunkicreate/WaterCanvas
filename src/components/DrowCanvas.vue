@@ -21,7 +21,7 @@ export default defineComponent({
     const childWindowWidth = inject('WindowWidth') as number
     const childWindowHeight = inject('WindowHeight') as number
     const counter = ref(0)
-    const ChildSavedImage = inject('SavedImage') as Ref
+    // const ChildSavedImage = inject('SavedImage') as Ref
 
 
     const ChildSavedImageJudge = inject('SavedImageJudge') as Ref
@@ -33,7 +33,7 @@ export default defineComponent({
         p.colorMode(p.HSB);
         // 矩形を描画方法を指定する
         p.rectMode(p.CENTER);
-        ChildSavedImage.value
+        // ChildSavedImage.value
 
         // 矩形の枠線を隠す
         p.noStroke();
