@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { ref, provide, reactive } from 'vue';
+import { ref, provide, reactive} from 'vue';
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 // import HelloWorld from './components/HelloWorld.vue'
@@ -29,6 +29,9 @@ export default defineComponent({
     ColorSetting
   },
   setup() {
+    // interface SaveJudge{
+    //   save: boolean
+    // }
     const CircleData = reactive<drawCircles[]>([])
     const ColorData = reactive<colorSelector>({
       blur: 0,
@@ -50,8 +53,9 @@ export default defineComponent({
     provide('ColorData', ColorData)
     provide('WindowWidth', WindowWidth.value)
     provide('WindowHeight', WindowHeight.value)
-    provide('SavedImageURL', SavedImageURL.value)
-    provide('SavedImageJudge', SavedImageJudge.value)
+    // provide('SavedImageURL', SavedImageURL.url)
+    provide('SavedImageJudge', SavedImageJudge)
+    console.log(SavedImageJudge)
   },
 })
 </script>

@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from "vue";
+import { defineComponent, ref, reactive, Ref } from "vue";
 import { inject } from 'vue'
 import p5 from "p5";
 import drawCircles from '../tsfiles/drawCirclesClass'
@@ -21,14 +21,11 @@ export default defineComponent({
     const childWindowWidth = inject('WindowWidth') as number
     const childWindowHeight = inject('WindowHeight') as number
     const counter = ref(0)
-    const ChildSavedImageURL = inject('SavedImageURL') as String
-    const ChildSavedImageJudge = inject('SavedImageJudge') as Boolean
-
-
+    const ChildSavedImageJudge = inject('SavedImageJudge') as Ref
 
     const sketch = (p: p5) => {
       p.setup = () => {
-        p.createCanvas(childWindowWidth, childWindowHeight).parent('drawcanvas');
+        let Canvas = p.createCanvas(childWindowWidth, childWindowHeight).parent('drawcanvas');
         // カラーモデルをHSBに
         p.colorMode(p.HSB);
         // 矩形を描画方法を指定する
@@ -83,6 +80,9 @@ export default defineComponent({
           }
         }
       };
+      if (ChildSavedImageJudge.value == true){
+        p.saveCanvas(Canvas,'wWaterCanvas','jpg');
+      }
     };
 
     new p5(sketch)
