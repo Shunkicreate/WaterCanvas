@@ -15,7 +15,6 @@ import DrowCanvas from '../components/DrowCanvas.vue'
 import ColorSetting from '../components/ColorSetting.vue'
 import drawCircles from '../tsfiles/drawCirclesClass'
 import colorSelector from '../tsfiles/colorSelector';
-
 export default defineComponent({
   name: 'Home',
   components: {
@@ -55,7 +54,6 @@ export default defineComponent({
 </script>
 
 <style>
-
 canvas {
   float: left;
   margin: 0 5% 0 5%;

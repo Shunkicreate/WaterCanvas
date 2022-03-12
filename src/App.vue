@@ -2,7 +2,6 @@
   <header>
     <h1>WATER CANVAS</h1>
   </header>
-
   <router-view></router-view>
 </template>
 
