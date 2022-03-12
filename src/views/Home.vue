@@ -1,7 +1,14 @@
 <template>
-    <div style="text-align: center; width:windowinnerWidth; height:100%;">
+    <div style="text-align: center; width:windowinnerWidth; height:100%;"></div>
+    <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
+    <!-- <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
+    <header>
+        <h1>WATER CANVAS Stable ver</h1>
+    </header>
+    <div style="text-align: center;">
         <DrowCanvas></DrowCanvas>
         <ColorSetting></ColorSetting>
+        <!-- {{CircleData}} -->
     </div>
 </template>
 
@@ -16,50 +23,50 @@ import ColorSetting from '../components/ColorSetting.vue'
 import drawCircles from '../tsfiles/drawCirclesClass'
 import colorSelector from '../tsfiles/colorSelector';
 export default defineComponent({
-  name: 'Home',
-  components: {
-    DrowCanvas,
-    ColorSetting
-  },
-  setup() {
-    // interface SaveJudge{
-    //   save: boolean
-    // }
-    const CircleData = reactive<drawCircles[]>([])
-    const ColorData = reactive<colorSelector>({
-      blur: 0,
-      opacity: 0,
-      h: 0,
-      s: 0,
-      v: 0,
-    })
-    const WindowWidth = ref(window.innerWidth * 0.5)
-    const WindowHeight = ref(window.innerHeight * 0.85)
-    const SavedImageURL = ref("")
-    // const SavedImageJudge = ref(false)
-    function disableScroll(event: any) {
-      event.preventDefault();
-    }
-    document.addEventListener('touchmove', disableScroll, { passive: false });
-    document.addEventListener('mousewheel', disableScroll, { passive: false });
-    provide('CircleData', CircleData)
-    provide('ColorData', ColorData)
-    provide('WindowWidth', WindowWidth.value)
-    provide('WindowHeight', WindowHeight.value)
-    // provide('SavedImageURL', SavedImageURL.url)
-    // provide('SavedImageJudge', SavedImageJudge)
-    // console.log(SavedImageJudge)
-  },
+    name: 'Home',
+    components: {
+        DrowCanvas,
+        ColorSetting
+    },
+    setup() {
+        // interface SaveJudge{
+        //   save: boolean
+        // }
+        const CircleData = reactive<drawCircles[]>([])
+        const ColorData = reactive<colorSelector>({
+            blur: 0,
+            opacity: 0,
+            h: 0,
+            s: 0,
+            v: 0,
+        })
+        const WindowWidth = ref(window.innerWidth * 0.5)
+        const WindowHeight = ref(window.innerHeight * 0.85)
+        const SavedImageURL = ref("")
+        // const SavedImageJudge = ref(false)
+        function disableScroll(event: any) {
+            event.preventDefault();
+        }
+        document.addEventListener('touchmove', disableScroll, { passive: false });
+        document.addEventListener('mousewheel', disableScroll, { passive: false });
+        provide('CircleData', CircleData)
+        provide('ColorData', ColorData)
+        provide('WindowWidth', WindowWidth.value)
+        provide('WindowHeight', WindowHeight.value)
+        // provide('SavedImageURL', SavedImageURL.url)
+        // provide('SavedImageJudge', SavedImageJudge)
+        // console.log(SavedImageJudge)
+    },
 })
 </script>
 
 <style>
 canvas {
-  float: left;
-  margin: 0 5% 0 5%;
-  border-radius: 1.5rem;
-  background: #fafaf7;
-  box-shadow: 0.9rem 0.9rem 1.25rem #d9d7d4, -0.9rem -0.9rem 1.25rem #fff;
-  /* filter: blur(3px); */
+    float: left;
+    margin: 0 5% 0 5%;
+    border-radius: 1.5rem;
+    background: #fafaf7;
+    box-shadow: 0.9rem 0.9rem 1.25rem #d9d7d4, -0.9rem -0.9rem 1.25rem #fff;
+    /* filter: blur(3px); */
 }
 </style>
