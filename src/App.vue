@@ -63,6 +63,7 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color:#fafaf7;
 }
 
 canvas {
@@ -70,7 +71,7 @@ canvas {
   margin: 0 5% 0 5%;
   border-radius: 1.5rem;
   background: #fafaf7;
-  box-shadow: 15px 15px 20px #d9d7d4, -15px -15px 20px #fff;
+  box-shadow: 0.9rem 0.9rem 1.25rem #d9d7d4, -0.9rem -0.9rem 1.25rem #fff;
   /* filter: blur(3px); */
 
 }
@@ -78,6 +79,7 @@ canvas {
 header {
   text-align: left;
   color: #858585;
-  margin-left: 5%;
+  padding-left: 5%;
+  margin-top: 0;
 }
 </style>
