@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from "vue";
+import { defineComponent, ref, reactive, Ref } from "vue";
 import { inject } from 'vue'
 import p5 from "p5";
 import drawCircles from '../tsfiles/drawCirclesClass'
@@ -21,7 +21,7 @@ export default defineComponent({
     const childWindowWidth = inject('WindowWidth') as number
     const childWindowHeight = inject('WindowHeight') as number
     const counter = ref(0)
-    const ChildSavedImage = inject('SavedImage') as String
+    const ChildSavedImage = inject('SavedImage') as Ref
 
 
 
@@ -32,6 +32,7 @@ export default defineComponent({
         p.colorMode(p.HSB);
         // 矩形を描画方法を指定する
         p.rectMode(p.CENTER);
+        ChildSavedImage.value
 
         // 矩形の枠線を隠す
         p.noStroke();

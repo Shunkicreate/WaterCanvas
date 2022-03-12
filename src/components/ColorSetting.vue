@@ -117,7 +117,9 @@ export default defineComponent({
 }
 
 .SNS {
-  margin: 1.875rem 15%;
+    width: 80%;
+  /* margin: 1.875rem 15%; */
+  text-align: center;
 }
 
 .SNS p {
@@ -126,6 +128,7 @@ export default defineComponent({
 
 .logos {
   margin-top: 0.625rem;
+  width: 80%;
 }
 
 
@@ -139,13 +142,13 @@ export default defineComponent({
   border-radius: 1.25rem;
 }
 
-.insta {
+/* .insta {
   margin-left: 22%;
 }
 
 .twitter {
   margin-left: 10%;
-}
+} */
 
 p {
   font-size: 1rem;

@@ -4,7 +4,7 @@
   <header>
     <h1>WATER CANVAS</h1>
   </header>
-  <div style="text-align: center;">
+  <div style="text-align: center; width:windowinnerWidth; height:100%;">
     <DrowCanvas></DrowCanvas>
     <ColorSetting></ColorSetting>
     <!-- {{CircleData}} -->
