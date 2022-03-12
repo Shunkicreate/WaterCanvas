@@ -71,7 +71,7 @@ canvas {
   border-radius: 1.5rem;
   background: #fafaf7;
   box-shadow: 15px 15px 20px #d9d7d4, -15px -15px 20px #fff;
-  filter: blur(3px);
+  /* filter: blur(3px); */
 
 }
 
