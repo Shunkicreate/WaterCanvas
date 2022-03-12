@@ -1,5 +1,6 @@
 <template>
   <div class="d-flex justify-content-center" id="drawcanvas"></div>
+  {{ timeCounter }}
 </template>
 
 <script lang="ts">
@@ -20,11 +21,34 @@ export default defineComponent({
     const childDrawCircles = inject('CircleData') as drawCircles[]
     const childWindowWidth = inject('WindowWidth') as number
     const childWindowHeight = inject('WindowHeight') as number
-    const counter = ref(0)
+    const timeCounter = ref(0)
+    const canvasCounter = ref(0)
+    const drawing = ref(false)
+    const mode = inject('mode') as Ref
     // const ChildSavedImage = inject('SavedImage') as Ref
 
 
     // const ChildSavedImageJudge = inject('SavedImageJudge') as Ref
+    const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+    const output = () => {
+      timeCounter.value += 1;
+      // timeCounter.value = Math.floor(timeCounter.value)
+
+      if (timeCounter.value > 100) {
+        timeCounter.value = 0;
+      }
+      // console.log(`output: ${timeCounter.value} 秒`)
+    }
+    setInterval(output, 50)
+
+
+    // console.log(`${new Date().getSeconds()} 秒`)
+    // const countTimer = function () {
+    //   timeCounter.value++;
+    //   sleep(200)
+    //   console.log(timeCounter.value)
+    //   return null;
+    // }
 
     const sketch = (p: p5) => {
       p.setup = () => {
@@ -56,7 +80,7 @@ export default defineComponent({
         // 図形の描画（1px ~ 720pxの間で大きさが変わる）
         // X座標, Y座標, width, height
         //       p.rect(360, 360, p.mouseX + 1, p.mouseX + 1);
-        function drawEllipse() {
+        function createNewEllipse() {
           const H = p.random(0, 360)
           const S = p.random(20, 100)
           const B = p.random(90, 100)
@@ -65,25 +89,66 @@ export default defineComponent({
 
           const newData = new drawCircles(p.mouseX, p.mouseY, R, H, S, B, A)
           childDrawCircles.push(newData)
-
           p.fill(H, S, B, A)
           p.ellipse(p.mouseX, p.mouseY, R, R)
+        };
+
+        function drawEllipse() {
+          // const H = p.random(0, 360)
+          // const S = p.random(20, 100)
+          // const B = p.random(90, 100)
+          // const A = 10;
+          // const R = p.random(30, 120)
+
+          // const newData = new drawCircles(p.mouseX, p.mouseY, R, H, S, B, A)
+          // childDrawCircles.push(newData)
+
+          // p.fill(H, S, B, A)
+          // p.ellipse(p.mouseX, p.mouseY, R, R)
           childDrawCircles.forEach((value) => {
             for (let index = 0; index < 1; index++) {
+              // value.a[index] -=1;
               p.fill(value.h[index], value.s[index], value.b[index], 3);
               value.r[index] += 3;
               p.ellipse(value.x[index], value.y[index], value.r[index], value.r[index]);
             }
-
           });
-        }
+        };
+        // function drawLikeWater() {
+        //   while (timeCounter.value) {
+        //     // drawEllipse()
+        //   }
+        // };
 
-        p.touchMoved = () => {
-          counter.value++
-          if(counter.value%15 === 0){
-            drawEllipse()
-            
+
+        if (mode.value == 'water') {
+          p.touchMoved = () => {
+            // console.log(timeCounter.value)
+            if (!drawing.value) {
+              console.log(drawing.value)
+              drawing.value = true;
+              console.log(drawing.value)
+              // setInterval(output, 2000)
+              // drawLikeWater()
+            }
+            if (timeCounter.value % 5 == 0) {
+              createNewEllipse()
+            }
+            //   console.log(drawing.value)
+          };
+        }
+        else if (mode.value == 'canvas') {
+          canvasCounter.value++;
+            p.touchMoved = () => {
+              if(canvasCounter.value%10 == 0){
+              createNewEllipse()
+              drawEllipse()
+            };
           }
+        }
+        if (drawing.value && timeCounter.value % 2 == 0 && mode.value == 'water') {
+          console.log("drawcircle")
+          drawEllipse()
         }
       };
       // if (ChildSavedImageJudge.value == true){
@@ -96,6 +161,7 @@ export default defineComponent({
     return {
       positionY,
       positionX,
+      timeCounter
     };
   },
 
@@ -104,5 +170,4 @@ export default defineComponent({
 
 
 <style scoped>
-
 </style>

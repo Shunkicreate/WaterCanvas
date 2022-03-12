@@ -40,6 +40,7 @@ export default defineComponent({
     const WindowWidth = ref(window.innerWidth * 0.55)
     const WindowHeight = ref(window.innerHeight * 0.85)
     const SavedImage = reactive({ url: "", save: false })
+    const mode = ref("canvas")
     function disableScroll(event: any) {
       event.preventDefault();
     }
@@ -50,6 +51,7 @@ export default defineComponent({
     provide('WindowWidth', WindowWidth.value)
     provide('WindowHeight', WindowHeight.value)
     provide('SavedImage', SavedImage.url)
+    provide('mode', mode)
   },
 })
 </script>
