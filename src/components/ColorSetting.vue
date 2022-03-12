@@ -15,7 +15,7 @@
           <p>What is this?</p>
         </div>
         <div class="action save">
-          <!-- <a @click="save" href=""><p>Save Image</p></a> -->
+          <a @click="SaveImage"><p>Save Image</p></a>
         </div>
       </div>
       <div class="SNS">
@@ -27,6 +27,7 @@
 
           <div class="logofolder">
             <img src="../assets/Twitter.png" class="logo twitter" />
+
           </div>
         </div>
       </div>
@@ -35,25 +36,27 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from "vue";
+
+import { defineComponent, inject, Ref, ref} from "vue";
 import colorSelector from "../tsfiles/colorSelector";
 
 
 export default defineComponent({
-  name: "ColorSetting",
-  setup() {
-    const childColorSelector = inject('ColorData') as colorSelector
-    return {
-      childColorSelector
-    }
-    // const save = {
-    //   data(){
-    //     count: 0
-    //   }
-    //   return save
-    // }
-  }
 
+    name: "ColorSetting",
+    setup(){
+        const childColorSelector = inject('ColorData') as colorSelector
+        const ChildSavedImageJudge = inject('SavedImageJudge') as Ref
+        console.log(ChildSavedImageJudge)
+        function SaveImage() {
+          ChildSavedImageJudge.value = true
+          console.log(ChildSavedImageJudge.value)
+        }
+        return {
+            childColorSelector,
+            SaveImage
+            }
+    }
 });
 </script>
 

@@ -24,10 +24,11 @@ export default defineComponent({
     const ChildSavedImage = inject('SavedImage') as Ref
 
 
+    const ChildSavedImageJudge = inject('SavedImageJudge') as Ref
 
     const sketch = (p: p5) => {
       p.setup = () => {
-        p.createCanvas(childWindowWidth, childWindowHeight).parent('drawcanvas');
+        let Canvas = p.createCanvas(childWindowWidth, childWindowHeight).parent('drawcanvas');
         // カラーモデルをHSBに
         p.colorMode(p.HSB);
         // 矩形を描画方法を指定する
@@ -83,6 +84,9 @@ export default defineComponent({
           }
         }
       };
+      if (ChildSavedImageJudge.value == true){
+        p.saveCanvas(Canvas,'wWaterCanvas','jpg');
+      }
     };
 
     new p5(sketch)

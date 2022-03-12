@@ -23,6 +23,9 @@ export default defineComponent({
     ColorSetting
   },
   setup() {
+    // interface SaveJudge{
+    //   save: boolean
+    // }
     const CircleData = reactive<drawCircles[]>([])
     const ColorData = reactive<colorSelector>({
       blur: 0,
@@ -31,9 +34,10 @@ export default defineComponent({
       s: 0,
       v: 0,
     })
-    const WindowWidth = ref(window.innerWidth * 0.55)
+    const WindowWidth = ref(window.innerWidth * 0.5)
     const WindowHeight = ref(window.innerHeight * 0.85)
-    const SavedImage = reactive({ url: "", save: false })
+    const SavedImageURL = ref("")
+    const SavedImageJudge = ref(false)
     function disableScroll(event: any) {
       event.preventDefault();
     }
@@ -43,7 +47,9 @@ export default defineComponent({
     provide('ColorData', ColorData)
     provide('WindowWidth', WindowWidth.value)
     provide('WindowHeight', WindowHeight.value)
-    provide('SavedImage', SavedImage.url)
+    // provide('SavedImageURL', SavedImageURL.url)
+    provide('SavedImageJudge', SavedImageJudge)
+    console.log(SavedImageJudge)
   },
 })
 </script>
