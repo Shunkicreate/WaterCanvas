@@ -24,7 +24,7 @@ export default defineComponent({
     // const ChildSavedImage = inject('SavedImage') as Ref
 
 
-    const ChildSavedImageJudge = inject('SavedImageJudge') as Ref
+    // const ChildSavedImageJudge = inject('SavedImageJudge') as Ref
 
     const sketch = (p: p5) => {
       p.setup = () => {
@@ -86,9 +86,9 @@ export default defineComponent({
           }
         }
       };
-      if (ChildSavedImageJudge.value == true){
-        // p.saveCanvas(Canvas,'wWaterCanvas','jpg');
-      }
+      // if (ChildSavedImageJudge.value == true){
+      //   // p.saveCanvas(Canvas,'wWaterCanvas','jpg');
+      // }
     };
 
     new p5(sketch)

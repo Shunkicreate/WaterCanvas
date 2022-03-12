@@ -37,7 +37,7 @@ export default defineComponent({
     const WindowWidth = ref(window.innerWidth * 0.5)
     const WindowHeight = ref(window.innerHeight * 0.85)
     const SavedImageURL = ref("")
-    const SavedImageJudge = ref(false)
+    // const SavedImageJudge = ref(false)
     function disableScroll(event: any) {
       event.preventDefault();
     }
@@ -48,8 +48,8 @@ export default defineComponent({
     provide('WindowWidth', WindowWidth.value)
     provide('WindowHeight', WindowHeight.value)
     // provide('SavedImageURL', SavedImageURL.url)
-    provide('SavedImageJudge', SavedImageJudge)
-    console.log(SavedImageJudge)
+    // provide('SavedImageJudge', SavedImageJudge)
+    // console.log(SavedImageJudge)
   },
 })
 </script>

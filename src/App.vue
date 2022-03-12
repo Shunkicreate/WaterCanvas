@@ -1,56 +1,18 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-  <!-- <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
   <header>
     <h1>WATER CANVAS</h1>
   </header>
-  <!-- <div style="text-align: center; width:windowinnerWidth; height:100%;">
-    <DrowCanvas></DrowCanvas>
-    <ColorSetting></ColorSetting>
-  </div> -->
+
   <router-view></router-view>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-// import { ref, provide, reactive } from 'vue';
-// // This starter template is using Vue 3 <script setup> SFCs
-// // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-// // import HelloWorld from './components/HelloWorld.vue'
-// import DrowCanvas from './components/DrowCanvas.vue'
-// import ColorSetting from './components/ColorSetting.vue'
-// import drawCircles from './tsfiles/drawCirclesClass'
-// import colorSelector from './tsfiles/colorSelector';
+
 
 export default defineComponent({
   name: 'App',
-  // components: {
-  //   DrowCanvas,
-  //   ColorSetting
-  // },
-  // setup() {
-  //   const CircleData = reactive<drawCircles[]>([])
-  //   const ColorData = reactive<colorSelector>({
-  //     blur: 0,
-  //     opacity: 0,
-  //     h: 0,
-  //     s: 0,
-  //     v: 0,
-  //   })
-  //   const WindowWidth = ref(window.innerWidth * 0.55)
-  //   const WindowHeight = ref(window.innerHeight * 0.85)
-  //   const SavedImage = reactive({ url: "", save: false })
-  //   function disableScroll(event: any) {
-  //     event.preventDefault();
-  //   }
-  //   document.addEventListener('touchmove', disableScroll, { passive: false });
-  //   document.addEventListener('mousewheel', disableScroll, { passive: false });
-  //   provide('CircleData', CircleData)
-  //   provide('ColorData', ColorData)
-  //   provide('WindowWidth', WindowWidth.value)
-  //   provide('WindowHeight', WindowHeight.value)
-  //   provide('SavedImage', SavedImage.url)
-  // },
+
 })
 
 </script>

@@ -15,7 +15,8 @@
           <p>What is this?</p>
         </div>
         <div class="action save">
-          <a @click="SaveImage"><p>Save Image</p></a>
+          <p>Save Image</p>
+          <!-- <a @click="SaveImage"><p>Save Image</p></a> -->
         </div>
       </div>
       <div class="SNS">
@@ -45,17 +46,17 @@ export default defineComponent({
 
     name: "ColorSetting",
     setup(){
-        const childColorSelector = inject('ColorData') as colorSelector
-        const ChildSavedImageJudge = inject('SavedImageJudge') as Ref
-        console.log(ChildSavedImageJudge)
-        function SaveImage() {
-          ChildSavedImageJudge.value = true
-          console.log(ChildSavedImageJudge.value)
-        }
-        return {
-            childColorSelector,
-            SaveImage
-            }
+        // const childColorSelector = inject('ColorData') as colorSelector
+        // const ChildSavedImageJudge = inject('SavedImageJudge') as Ref
+        // console.log(ChildSavedImageJudge)
+        // function SaveImage() {
+        //   ChildSavedImageJudge.value = true
+        //   console.log(ChildSavedImageJudge.value)
+        // }
+        // return {
+        //     childColorSelector,
+        //     SaveImage
+        //     }
     }
 });
 </script>
