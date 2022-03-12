@@ -81,6 +81,7 @@ export default defineComponent({
           counter.value++
           if(counter.value%15 === 0){
             drawEllipse()
+            
           }
         }
       };
