@@ -5,7 +5,7 @@
     <h1>WATER CANVAS Stable ver </h1>
   </header>
   <div style="text-align: center; height:100%">
-    <DrowCanvas></DrowCanvas>
+    <DrawCanvas></DrawCanvas>
     <ColorSetting></ColorSetting>
     <!-- {{CircleData}} -->
   </div>
@@ -17,7 +17,7 @@ import { ref, provide, reactive } from 'vue';
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 // import HelloWorld from './components/HelloWorld.vue'
-import DrowCanvas from './components/DrowCanvas.vue'
+import DrawCanvas from './components/DrawCanvas.vue'
 import ColorSetting from './components/ColorSetting.vue'
 import drawCircles from './tsfiles/drawCirclesClass'
 import colorSelector from './tsfiles/colorSelector';
@@ -25,7 +25,7 @@ import { ProductKey } from './tsfiles/symbols';
 export default defineComponent({
   name: 'Home',
   components: {
-    DrowCanvas,
+    DrawCanvas,
     ColorSetting
   },
   setup() {
