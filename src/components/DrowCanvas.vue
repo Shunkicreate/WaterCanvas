@@ -150,9 +150,10 @@ export default defineComponent({
           console.log("drawcircle")
           drawEllipse()
         }
-        if(canvasReset.value == 'change'){
-          canvasReset.value = 'stay';
-          console.log('canvasReset')
+        if(canvasReset.value == true){
+          canvasReset.value = false;
+          p.fill('#ffffff')
+          p.rect(0,0,p.width*2, p.height*2)
         }
       };
       // if (ChildSavedImageJudge.value == true){
