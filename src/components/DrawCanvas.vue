@@ -14,7 +14,7 @@ import { ProductKey } from '../tsfiles/symbols';
 
 
 export default defineComponent({
-  name: "DrowCanvas",
+  name: "DrawCanvas",
   setup() {
     const positionY = ref(0);
     const positionX = ref(0);
@@ -44,7 +44,7 @@ export default defineComponent({
       timeCounter.value += 1;
     }
 
-    //50msごとにカウンターを設置 
+    //50msごとにカウンターを設置
     setInterval(output, 50)
 
 
@@ -142,7 +142,7 @@ export default defineComponent({
 
         //自動描画
         if(autoDraw.value == true){
-          console.log('in drow canvas')
+          console.log('in draw canvas')
             for(var i = 0; i < childDrawCircles.length; i++){
               const elem = childDrawCircles[i]
               for(var j = 0; j <= i; j++){
