@@ -93,6 +93,7 @@ export default defineComponent({
   border-radius: 3.125rem;
   margin: 0 10%;
   padding-top: 3.125rem;
+  user-select: none
 }
 
 .picker {
