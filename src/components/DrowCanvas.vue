@@ -27,6 +27,8 @@ export default defineComponent({
     const drawing = ref(false)
     const mode = inject('mode') as Ref
     const canvasReset = inject('canvasReset') as Ref
+    const autoDraw = inject('autoDraw') as Ref
+
     // const ChildSavedImage = inject('SavedImage') as Ref
 
 
@@ -129,6 +131,21 @@ export default defineComponent({
           canvasReset.value = false;
           p.fill('#fafaf7')
           p.rect(0, 0, p.width * 2, p.height * 2)
+        }
+
+
+        //自動描画
+        if(autoDraw.value == true){
+          for(var i = 0; i < childDrawCircles.length; i++){
+            const elem = childDrawCircles[i]
+            for(var j = 0; j <= i; j++){
+              var k = j
+              p.fill(childDrawCircles[j].h[k], childDrawCircles[j].s[k], childDrawCircles[j].b[k], childDrawCircles[i-j].a[j], )
+              p.ellipse(childDrawCircles[j].x[k], childDrawCircles[j].y[k], childDrawCircles[j].r[k], childDrawCircles[j].r[k], )
+              k--;
+            }
+          }
+          autoDraw.value = !autoDraw.value
         }
       };
     };

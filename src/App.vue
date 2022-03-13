@@ -42,6 +42,7 @@ export default defineComponent({
     const SavedImage = reactive({ url: "", save: false })
     const mode = ref("canvas")
     const canvasReset = ref(false)
+    const autoDraw = ref(false)
     function disableScroll(event: any) {
       event.preventDefault();
     }
@@ -54,6 +55,7 @@ export default defineComponent({
     provide('SavedImage', SavedImage.url)
     provide('mode', mode)
     provide('canvasReset', canvasReset)
+    provide('autoDraw', autoDraw)
   },
 })
 </script>

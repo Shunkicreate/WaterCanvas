@@ -17,6 +17,9 @@
         </div>
       </div>
       <div class="actions">
+        <div class="action generate" @click="generate()">
+          <p>Generate canvas</p>
+        </div>
         <div class="action what">
           <p>What is this?</p>
         </div>
@@ -43,7 +46,8 @@
 <script lang="ts">
 import { defineComponent, inject, Ref } from "vue";
 import colorSelector from "../tsfiles/colorSelector";
-import drawCircles from "../tsfiles/drawCirclesClass"
+import drawCircles from "../tsfiles/drawCirclesClass";
+import { generatePicture } from "../tsfiles/generatePicture";
 
 
 export default defineComponent({
@@ -51,8 +55,18 @@ export default defineComponent({
   setup() {
     const childColorSelector = inject('ColorData') as colorSelector
     const mode = inject('mode') as Ref
-    const childDrawCircles = inject('CircleData') as drawCircles[]
+    let childDrawCircles = inject('CircleData') as drawCircles[]
     const canvasReset = inject('canvasReset') as Ref
+    const childWindowWidth = inject('WindowWidth') as number
+    const childWindowHeight = inject('WindowHeight') as number
+    const autoDraw = inject('autoDraw') as Ref
+
+    function generate(){
+      ResetCanvas()
+      childDrawCircles = generatePicture(childWindowWidth, childWindowHeight)
+      autoDraw.value = !autoDraw.value
+    }
+
     function changeMode() {
       if (mode.value == 'canvas') mode.value = 'water'
       else if (mode.value == 'water') mode.value = 'canvas'
@@ -71,6 +85,7 @@ export default defineComponent({
       childColorSelector,
       changeMode,
       ResetCanvas,
+      generate,
       mode
     }
     // const save = {
