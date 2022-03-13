@@ -48,6 +48,7 @@ import { defineComponent, inject, Ref } from "vue";
 import colorSelector from "../tsfiles/colorSelector";
 import drawCircles from "../tsfiles/drawCirclesClass";
 import { generatePicture } from "../tsfiles/generatePicture";
+import { ProductKey } from '../tsfiles/symbols';
 
 
 export default defineComponent({
@@ -55,15 +56,21 @@ export default defineComponent({
   setup() {
     const childColorSelector = inject('ColorData') as colorSelector
     const mode = inject('mode') as Ref
-    let childDrawCircles = inject('CircleData') as drawCircles[]
+    // let childDrawCircles = inject('CircleData') as drawCircles[]
+    const demodata = new drawCircles(0, 0, 0, 0, 0, 0, 0,)
+    const childDrawCircles = inject(ProductKey, [demodata]);
     const canvasReset = inject('canvasReset') as Ref
     const childWindowWidth = inject('WindowWidth') as number
     const childWindowHeight = inject('WindowHeight') as number
     const autoDraw = inject('autoDraw') as Ref
 
-    function generate(){
+    function generate() {
       ResetCanvas()
-      childDrawCircles = generatePicture(childWindowWidth, childWindowHeight)
+      console.log('in gngerate pictuer', childDrawCircles.length)
+      generatePicture(childWindowWidth, childWindowHeight).forEach((element) => {
+        childDrawCircles.push(element)
+      })
+      console.log('aaaa gngerate pictuer', childDrawCircles.length)
       autoDraw.value = !autoDraw.value
     }
 
@@ -71,15 +78,13 @@ export default defineComponent({
       if (mode.value == 'canvas') mode.value = 'water'
       else if (mode.value == 'water') mode.value = 'canvas'
       canvasReset.value = !canvasReset.value
-      childDrawCircles.forEach(element => {
-        element.reset()
-      });
+      childDrawCircles.length = 0;
     }
     function ResetCanvas() {
       canvasReset.value = !canvasReset.value
-      childDrawCircles.forEach(element => {
-        element.reset()
-      });
+      console.log('in gngerate pictuer', childDrawCircles.length)
+      childDrawCircles.length = 0;
+        console.log('in gngerate pictuer', childDrawCircles.length, childDrawCircles)
     }
     return {
       childColorSelector,
@@ -117,7 +122,7 @@ export default defineComponent({
   border-radius: 3.125rem;
   margin: 0 10%;
   padding-top: 3.125rem;
-  user-select: none
+  user-select: none;
 }
 
 .picker {

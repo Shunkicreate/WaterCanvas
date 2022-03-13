@@ -106,6 +106,9 @@ export default defineComponent({
 
         // モードがwaterの時の処理
         if (mode.value == 'water') {
+          if (drawing.value && timeCounter.value % 2 == 0) {
+            drawEllipse()
+          }
           p.touchMoved = () => {
             if (!drawing.value) {
               console.log(drawing.value)
@@ -116,9 +119,6 @@ export default defineComponent({
               createNewEllipse()
             }
           };
-          if (drawing.value && timeCounter.value % 2 == 0) {
-            drawEllipse()
-          }
         }
 
         // モードがcanvasのときの処理
@@ -142,17 +142,18 @@ export default defineComponent({
 
         //自動描画
         if(autoDraw.value == true){
-          console.log(childDrawCircles)
-          for(var i = 0; i < childDrawCircles.length; i++){
-            const elem = childDrawCircles[i]
-            for(var j = 0; j <= i; j++){
-              var k = j
-              p.fill(childDrawCircles[j].h[k], childDrawCircles[j].s[k], childDrawCircles[j].b[k], childDrawCircles[i-j].a[j], )
-              p.ellipse(childDrawCircles[j].x[k], childDrawCircles[j].y[k], childDrawCircles[j].r[k], childDrawCircles[j].r[k], )
-              k--;
+          console.log('in drow canvas')
+            for(var i = 0; i < childDrawCircles.length; i++){
+              const elem = childDrawCircles[i]
+              for(var j = 0; j <= i; j++){
+                var k = j
+                p.fill(childDrawCircles[j].h[k], childDrawCircles[j].s[k], childDrawCircles[j].b[k], childDrawCircles[i-j].a[j], )
+                p.ellipse(childDrawCircles[j].x[k], childDrawCircles[j].y[k], childDrawCircles[j].r[k], childDrawCircles[j].r[k], )
+                // console.log("araw", j)
+                k--;
+              }
             }
-          }
-          autoDraw.value = !autoDraw.value
+            autoDraw.value = !autoDraw.value
         }
       };
     };
