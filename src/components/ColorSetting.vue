@@ -3,8 +3,11 @@
     <div class="style color">
       <div class="picker"></div>
       <div class="toolBar">
+        <div class="bar mode" @click="ResetCanvas()">
+          <p>Reset</p>
+        </div>
         <div class="bar mode" @click="changeMode()">
-          <p>mode: {{ mode }}</p>
+          <p>Mode: {{ mode }}</p>
         </div>
         <div class="bar blur">
           <p>Blur</p>
@@ -58,9 +61,16 @@ export default defineComponent({
         element.reset()
       });
     }
+    function ResetCanvas() {
+      canvasReset.value = !canvasReset.value
+      childDrawCircles.forEach(element => {
+        element.reset()
+      });
+    }
     return {
       childColorSelector,
       changeMode,
+      ResetCanvas,
       mode
     }
     // const save = {

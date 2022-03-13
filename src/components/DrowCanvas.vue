@@ -1,5 +1,6 @@
-<template><div @abort="console.log('chnges')">{{ canvasReset }}</div>
-  
+<template>
+  <div @abort="console.log('chnges')"></div>
+
   <div class="d-flex justify-content-center" id="drawcanvas"></div>
 </template>
 
@@ -26,7 +27,6 @@ export default defineComponent({
     const drawing = ref(false)
     const mode = inject('mode') as Ref
     const canvasReset = inject('canvasReset') as Ref
-    console.log(canvasReset.value)
     // const ChildSavedImage = inject('SavedImage') as Ref
 
 
@@ -34,21 +34,11 @@ export default defineComponent({
     const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
     const output = () => {
       timeCounter.value += 1;
-      // timeCounter.value = Math.floor(timeCounter.value)
-
-
-      // console.log(`output: ${timeCounter.value} 秒`)
     }
+
+    //50msごとにカウンターを設置 
     setInterval(output, 50)
 
-
-    // console.log(`${new Date().getSeconds()} 秒`)
-    // const countTimer = function () {
-    //   timeCounter.value++;
-    //   sleep(200)
-    //   console.log(timeCounter.value)
-    //   return null;
-    // }
 
     const sketch = (p: p5) => {
       p.setup = () => {
@@ -80,6 +70,8 @@ export default defineComponent({
         // 図形の描画（1px ~ 720pxの間で大きさが変わる）
         // X座標, Y座標, width, height
         //       p.rect(360, 360, p.mouseX + 1, p.mouseX + 1);
+
+        //円を作る関数
         function createNewEllipse() {
           const H = p.random(0, 360)
           const S = p.random(20, 100)
@@ -93,50 +85,35 @@ export default defineComponent({
           p.ellipse(p.mouseX, p.mouseY, R, R)
         };
 
+        //円を更新する関数
         function drawEllipse() {
-          // const H = p.random(0, 360)
-          // const S = p.random(20, 100)
-          // const B = p.random(90, 100)
-          // const A = 10;
-          // const R = p.random(30, 120)
-
-          // const newData = new drawCircles(p.mouseX, p.mouseY, R, H, S, B, A)
-          // childDrawCircles.push(newData)
-
-          // p.fill(H, S, B, A)
-          // p.ellipse(p.mouseX, p.mouseY, R, R)
           childDrawCircles.forEach((value) => {
             for (let index = 0; index < 1; index++) {
-              // value.a[index] -=1;
               p.fill(value.h[index], value.s[index], value.b[index], 3);
               value.r[index] += 3;
               p.ellipse(value.x[index], value.y[index], value.r[index], value.r[index]);
             }
           });
         };
-        // function drawLikeWater() {
-        //   while (timeCounter.value) {
-        //     // drawEllipse()
-        //   }
-        // };
 
-
+        // モードがwaterの時の処理
         if (mode.value == 'water') {
           p.touchMoved = () => {
-            // console.log(timeCounter.value)
             if (!drawing.value) {
               console.log(drawing.value)
               drawing.value = true;
               console.log(drawing.value)
-              // setInterval(output, 2000)
-              // drawLikeWater()
             }
             if (timeCounter.value % 5 == 0) {
               createNewEllipse()
             }
-            //   console.log(drawing.value)
           };
+          if (drawing.value && timeCounter.value % 2 == 0) {
+            drawEllipse()
+          }
         }
+
+        // モードがcanvasのときの処理
         else if (mode.value == 'canvas') {
           canvasCounter.value++;
           p.touchMoved = () => {
@@ -146,28 +123,17 @@ export default defineComponent({
             };
           }
         }
-        if (drawing.value && timeCounter.value % 2 == 0 && mode.value == 'water') {
-          console.log("drawcircle")
-          drawEllipse()
-        }
-        if(canvasReset.value == true){
+
+        //キャンバスの初期化関数
+        if (canvasReset.value == true) {
           canvasReset.value = false;
-          p.fill('#ffffff')
-          p.rect(0,0,p.width*2, p.height*2)
+          p.fill('#fafaf7')
+          p.rect(0, 0, p.width * 2, p.height * 2)
         }
       };
-      // if (ChildSavedImageJudge.value == true){
-      //   // p.saveCanvas(Canvas,'wWaterCanvas','jpg');
-      // }
     };
 
     const canvasData = ref(new p5(sketch))
-
-    // if (canvasReset.value) {
-    //   canvasReset.value = !canvasReset.value;
-    //   // canvasData.value.resetMatrix();
-    //   console.log('canvasReset')
-    // }
 
 
     return {
@@ -180,11 +146,11 @@ export default defineComponent({
     };
   },
 
-      // if (this.canvasReset.value) {
-      //   this.canvasReset.value = !this.canvasReset.value;
-      //   this.canvasData.resetMatrix()
-      //   console.log('canvasReset')
-      // }
+  // if (this.canvasReset.value) {
+  //   this.canvasReset.value = !this.canvasReset.value;
+  //   this.canvasData.resetMatrix()
+  //   console.log('canvasReset')
+  // }
 
 
 });
