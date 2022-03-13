@@ -5,11 +5,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, Ref } from "vue";
+import { defineComponent, ref, reactive, Ref, InjectionKey } from "vue";
 import { inject } from 'vue'
 import p5 from "p5";
 import drawCircles from '../tsfiles/drawCirclesClass'
 import drawCircle from '../tsfiles/drawCircleClass'
+import { ProductKey } from '../tsfiles/symbols';
+
 
 export default defineComponent({
   name: "DrowCanvas",
@@ -19,7 +21,11 @@ export default defineComponent({
     // const Drawwidth = ref(window.innerWidth * 0.67);
     // const DrawHeight = ref(window.innerWidth * 0.67);
     // const HeaderHeight = ref(3)
-    const childDrawCircles = inject('CircleData') as drawCircles[]
+    // const childDrawCircles: InjectionKey<drawCircles[]> = Symbol('CircleData')
+    const demodata = new drawCircles(0,0,0,0,0,0,0,)
+    const childDrawCircles = inject(ProductKey, [demodata]);
+    // const childDrawCircles = inject<drawCircles[]>('CircleData')
+    console.log(typeof childDrawCircles)
     const childWindowWidth = inject('WindowWidth') as number
     const childWindowHeight = inject('WindowHeight') as number
     const timeCounter = ref(0)
@@ -136,6 +142,7 @@ export default defineComponent({
 
         //自動描画
         if(autoDraw.value == true){
+          console.log(childDrawCircles)
           for(var i = 0; i < childDrawCircles.length; i++){
             const elem = childDrawCircles[i]
             for(var j = 0; j <= i; j++){

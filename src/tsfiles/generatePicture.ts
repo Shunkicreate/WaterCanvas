@@ -2,7 +2,7 @@ import drawCircles from "./drawCirclesClass";
 
 export function generatePicture(width:number, height:number){
     const circleNum = Math.random()*50+50;
-    let returnData!: drawCircles[]
+    var returnData: drawCircles[] = []
     for(let i = circleNum; i > 0; i--){
         const newData = new drawCircles(width, height, Math.random()*10, Math.random()*10, Math.random()*255, Math.random()*255, Math.random()*255)
         const count = Math.min(circleNum, 10)
@@ -25,7 +25,6 @@ export function generatePicture(width:number, height:number){
             newData.b.push(newData.b[-1])
             newData.a.push(newData.a[-1] - 3)
         }
-
         returnData.push(newData)
 
     }

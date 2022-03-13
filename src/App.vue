@@ -21,7 +21,7 @@ import DrowCanvas from './components/DrowCanvas.vue'
 import ColorSetting from './components/ColorSetting.vue'
 import drawCircles from './tsfiles/drawCirclesClass'
 import colorSelector from './tsfiles/colorSelector';
-
+import { ProductKey } from './tsfiles/symbols';
 export default defineComponent({
   name: 'Home',
   components: {
@@ -56,6 +56,7 @@ export default defineComponent({
     provide('mode', mode)
     provide('canvasReset', canvasReset)
     provide('autoDraw', autoDraw)
+    provide(ProductKey, CircleData);
   },
 })
 </script>
