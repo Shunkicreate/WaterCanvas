@@ -1,4 +1,4 @@
-<template><div @abort="console.log('chnges')">{{ mode }}</div>
+<template><div @abort="console.log('chnges')">{{ canvasReset }}</div>
   
   <div class="d-flex justify-content-center" id="drawcanvas"></div>
 </template>
@@ -150,6 +150,10 @@ export default defineComponent({
           console.log("drawcircle")
           drawEllipse()
         }
+        if(canvasReset.value == 'change'){
+          canvasReset.value = 'stay';
+          console.log('canvasReset')
+        }
       };
       // if (ChildSavedImageJudge.value == true){
       //   // p.saveCanvas(Canvas,'wWaterCanvas','jpg');
@@ -158,11 +162,11 @@ export default defineComponent({
 
     const canvasData = ref(new p5(sketch))
 
-    if (canvasReset.value) {
-      canvasReset.value = !canvasReset.value;
-      // canvasData.value.resetMatrix();
-      console.log('canvasReset')
-    }
+    // if (canvasReset.value) {
+    //   canvasReset.value = !canvasReset.value;
+    //   // canvasData.value.resetMatrix();
+    //   console.log('canvasReset')
+    // }
 
 
     return {

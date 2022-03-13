@@ -53,10 +53,9 @@ export default defineComponent({
     function changeMode() {
       if (mode.value == 'canvas') mode.value = 'water'
       else if (mode.value == 'water') mode.value = 'canvas'
+      canvasReset.value = !canvasReset.value
       childDrawCircles.forEach(element => {
         element.reset()
-        if (canvasReset.value == 'change') canvasReset.value = 'stay'
-        else if (canvasReset.value == 'stay') canvasReset.value = 'change'
       });
     }
     return {
