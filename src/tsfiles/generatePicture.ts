@@ -22,6 +22,6 @@ export function generatePicture(width: number, height: number) {
     if (selectNum == 6) returnData = algorithm6(width, height)
     if (selectNum == 7) returnData = algorithm7(width, height)
     if (selectNum == 8) returnData = algorithm8(width, height)
-    if (selectNum == 9) returnData = algorithm8(width, height)
+    if (selectNum == 9) returnData = algorithm9(width, height)
     return returnData;
 }
