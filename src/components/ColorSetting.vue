@@ -1,7 +1,15 @@
 <template>
   <div class="colorSection">
     <div class="style color">
-      <div class="picker"></div>
+      <div class="picker">
+        <div class="colorBox">
+          <div class="color sample">
+          </div>
+          <div class="color text">
+            <p>random</p>
+          </div>
+        </div>
+      </div>
       <div class="toolBar">
         <div class="bar blur">
           <p>Blur</p>
@@ -17,11 +25,6 @@
         <div class="mode btn reset" @click="ResetCanvas()">
           <p>Reset</p>
         </div>
-        <!---
-        <div class="mode btn change" >
-          <p>Mode: {{ mode }}</p>
-        </div>
-        --->
       </div>
       <div class="actions">
 
