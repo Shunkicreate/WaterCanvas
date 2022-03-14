@@ -252,14 +252,7 @@ export default defineComponent({
   padding: 0.625rem;
   border-radius: 1.25rem;
   margin: auto;
-}
-
-.instagram {
-  margin-left: 22%;
-}
-
-.twitter {
-  margin-left: 10%;
+  justify-content: center;
 }
 
 p {
@@ -273,8 +266,8 @@ p {
 .toggle {
   position: relative;
   width: 50%;
-  height: 48px;
-  border-radius: 50px;
+  height: 5.5rem;
+  border-radius: 1.25rem;
   overflow: hidden;
   cursor: pointer;
 }
@@ -289,40 +282,39 @@ p {
   width: 100%;
   height: 100%;
   display: block;
-  background: #f45e55;
+  background: #f2b6c5;
   -webkit-transition: 0.2s ease-out;
   transition: 0.2s ease-out;
 }
 .toggle:after {
   content: "CANVAS";
   position: absolute;
-  top: 3px;
+  top: 0.25rem;
   left: 3px;
   width: 50%;
   height: 42px;
   display: block;
-  border-radius: 50px;
+  border-radius: 1.25rem;
   background: #fff;
   box-shadow: 0 9px 28px -6px rgba(0, 0, 0, 0.3);
   -webkit-transition: 0.2s ease-out;
   transition: 0.2s ease-out;
   text-align: center;
   padding: 14px 0 0;
-  line-height: 1;
-  font-size: 14px;
-  font-weight: bold;
-  color: #df4c43;
-  letter-spacing: .5px;
+  line-height: auto;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #f2b6c5;
   box-sizing: border-box;
 }
 .toggle.checked:before {
-  background: #24e89c;
+  background: #9ed5ff;
 }
 .toggle.checked:after {
   content: "WATER";
   left: 50%;
   box-shadow: 0 9px 28px -6px rgba(0, 0, 0, 0.5);
-  color: #16d088;
+  color: #9ed5ff;
   padding: 14px 0 0 1px;
 }
 

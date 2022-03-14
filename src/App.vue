@@ -2,7 +2,7 @@
   <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
   <!-- <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
   <header>
-    <h1>WATER CANVAS Stable ver </h1>
+    <h1>WATER CANVAS </h1>
   </header>
   <div style="text-align: center; height:100%">
     <DrawCanvas></DrawCanvas>
