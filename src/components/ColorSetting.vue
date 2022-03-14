@@ -11,17 +11,20 @@
         </div>
       </div>
       <div class="changeArea">
+        <div class="toggle"  @click="ChangeMode()">
+          <input type="checkbox" name="checked"/>
+        </div>
         <div class="mode btn reset" @click="ResetCanvas()">
           <p>Reset</p>
         </div>
+        <!---
         <div class="mode btn change" >
           <p>Mode: {{ mode }}</p>
         </div>
+        --->
       </div>
       <div class="actions">
-        <div class="toggle"  @click="ChangeMode">
-          <input type="checkbox" name="checked"/>
-        </div>
+        
         <div class="action btn generate" @click="generate()">
           <p>Generate canvas</p>
         </div>
@@ -202,7 +205,7 @@ export default defineComponent({
 }
 
 .mode {
-  width: 47%;
+  width: 40%;
   background-color: #ffefbf;
 }
 
@@ -284,7 +287,6 @@ p {
   overflow: hidden;
   cursor: pointer;
   box-shadow: 0.5rem 0.5rem 0.625rem #d9d7d4, -0.5rem -0.5rem 0.625rem #fff;
-  margin-bottom: 1rem;
 }
 .toggle input[type=checkbox] {
   display: none;
