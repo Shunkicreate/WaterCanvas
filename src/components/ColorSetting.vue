@@ -24,7 +24,6 @@
           <p>What is this?</p>
         </div>
         <div class="action save">
-          <p>Save Image</p>
           <a @click="SaveImage"><p>Save Image</p></a>
         </div>
       </div>
