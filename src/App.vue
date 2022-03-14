@@ -19,9 +19,9 @@ import { ref, provide, reactive } from 'vue';
 // import HelloWorld from './components/HelloWorld.vue'
 import DrawCanvas from './components/DrawCanvas.vue'
 import ColorSetting from './components/ColorSetting.vue'
-import drawCircles from './tsFiles/drawCirclesClass'
-import colorSelector from './tsFiles/colorSelector';
-import { ProductKey } from './tsFiles/symbols';
+import drawCircles from './tsfiles/drawCirclesClass'
+import colorSelector from './tsfiles/colorSelector';
+import { ProductKey } from './tsfiles/symbols';
 export default defineComponent({
   name: 'Home',
   components: {
