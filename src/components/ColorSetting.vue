@@ -2,12 +2,8 @@
   <div class="colorSection">
     <div class="style colors">
       <div class="picker">
-<<<<<<< HEAD
         <div class="colorBox random">
-=======
-        <div class="colorBox">
 
->>>>>>> 0a158b46c5af37076276adb89176a8fff706fbe5
           <img class="color sample" src="../assets/WaterCanvas (1).jpg">
           <div class="color text">
             <p>random</p>
@@ -64,7 +60,7 @@
       </div>
       <div class="toolBar">
         <div class="bar blur">
-          <input type="range" id = "blur" min="0" max="100" step="1" value="50" v-model="blurNum">
+          <input type="range" id = "blur" min="0" max="100" step="1" value="50">
           <p>Blur</p>
         </div>
         <span id="currentValue"></span>
@@ -140,7 +136,6 @@ export default defineComponent({
     const SavedImageJudge = inject('SavedImageJudge') as Ref
     const blurValue = inject('blurValue') as Ref
     const isLoading = inject('isLoading') as Ref
->>>>>>> 0a158b46c5af37076276adb89176a8fff706fbe5
 
     function generate() {
       ResetCanvas()
@@ -213,7 +208,7 @@ export default defineComponent({
     }
 
     function blurChange(){
-      const blurValue.value = blurNum
+      // const blurValue.value = blurNum
     }
 
     return {
