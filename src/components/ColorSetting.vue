@@ -56,8 +56,9 @@ import { defineComponent, inject, Ref } from "vue";
 import colorSelector from "../tsfiles/colorSelector";
 import drawCircles from "../tsfiles/drawCirclesClass";
 import { generatePicture } from "../tsfiles/generatePicture";
-import { ProductKey } from '../tsfiles/symbols';
+import { ProductKey } from '../tsfiles/symbols'
 import $ from 'jquery';
+import axios from 'axios'
 
 
 export default defineComponent({
@@ -72,9 +73,8 @@ export default defineComponent({
     const childWindowWidth = inject('WindowWidth') as number
     const childWindowHeight = inject('WindowHeight') as number
     const autoDraw = inject('autoDraw') as Ref
-    // const SavedImageURL = inject('SavedImageURL') as Ref
     const SavedImageJudge = inject('SavedImageJudge') as Ref
-
+    const pyDataJudge = inject('pyDataJudge') as Ref
 
     function generate() {
       ResetCanvas()
@@ -103,12 +103,13 @@ export default defineComponent({
       childDrawCircles.length = 0;
         // console.log('in generate picture', childDrawCircles.length, childDrawCircles)
     }
-    
+
     function SaveImage (){
       SavedImageJudge.value = !SavedImageJudge.value
+      pyDataJudge.value = !pyDataJudge.value
       console.log(SavedImageJudge.value)
     }
-      
+
     return {
       childColorSelector,
       changeMode,
