@@ -27,7 +27,7 @@
         </div>
         <div class="action btn save">
           <p>Save Image</p>
-          <!-- <a @click="SaveImage"><p>Save Image</p></a> -->
+          <a @click="SaveImage"><p>Save Image</p></a>
         </div>
       </div>
       <div class="SNS">
@@ -59,20 +59,22 @@ export default defineComponent({
     const childColorSelector = inject('ColorData') as colorSelector
     const mode = inject('mode') as Ref
     // let childDrawCircles = inject('CircleData') as drawCircles[]
-    const demodata = new drawCircles(0, 0, 0, 0, 0, 0, 0,)
-    const childDrawCircles = inject(ProductKey, [demodata]);
+    const demoData = new drawCircles(0, 0, 0, 0, 0, 0, 0,)
+    const childDrawCircles = inject(ProductKey, [demoData]);
     const canvasReset = inject('canvasReset') as Ref
     const childWindowWidth = inject('WindowWidth') as number
     const childWindowHeight = inject('WindowHeight') as number
     const autoDraw = inject('autoDraw') as Ref
+    const SavedImageURL = inject('SavedImageURL') as Ref
+    const SavedImageJudge = inject('SavedImageJudge') as Ref
 
     function generate() {
       ResetCanvas()
-      // console.log('in gngerate pictuer', childDrawCircles.length)
+      // console.log('in generate picture', childDrawCircles.length)
       generatePicture(childWindowWidth, childWindowHeight).forEach((element) => {
         childDrawCircles.push(element)
       })
-      // console.log('aaaa gngerate pictuer', childDrawCircles.length)
+      // console.log('aaaa generate picture', childDrawCircles.length)
       if(autoDraw.value == false){
         autoDraw.value = true
       }
@@ -91,21 +93,20 @@ export default defineComponent({
       canvasReset.value = !canvasReset.value
       console.log('reset')
       childDrawCircles.length = 0;
-        // console.log('in gngerate pictuer', childDrawCircles.length, childDrawCircles)
+        // console.log('in generate picture', childDrawCircles.length, childDrawCircles)
+    }
+
+    function SaveImage (){
+      SavedImageJudge.value = true
     }
     return {
       childColorSelector,
       changeMode,
       ResetCanvas,
       generate,
+      SaveImage,
       mode
     }
-    // const save = {
-    //   data(){
-    //     count: 0
-    //   }
-    //   return save
-    // }
   }
 
 });
