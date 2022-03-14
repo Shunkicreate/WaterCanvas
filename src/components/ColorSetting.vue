@@ -35,7 +35,7 @@
           <p>watch</p>
         </div>
       </div>
-      
+
       <div class="SNS">
         <p>Post to SNS</p>
         <div class="logos">
