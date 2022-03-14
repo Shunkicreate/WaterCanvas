@@ -56,7 +56,7 @@ import colorSelector from "../tsfiles/colorSelector";
 import drawCircles from "../tsfiles/drawCirclesClass";
 import { generatePicture } from "../tsfiles/generatePicture";
 import { ProductKey } from '../tsfiles/symbols'
-import $ from '.jquery';
+import $ from 'jquery';
 import axios from 'axios'
 
 

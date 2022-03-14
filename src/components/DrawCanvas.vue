@@ -174,6 +174,7 @@ export default defineComponent({
           }
 
         if (pyDataJudge.value == true){
+          console.log(childDrawCircles)
           axios
           .post('https://watercanvas.herokuapp.com/post',childDrawCircles)
           .catch(function (error) {
