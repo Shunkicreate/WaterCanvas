@@ -51,7 +51,7 @@ export default defineComponent({
     const sketch = (p: p5) => {
       p.setup = () => {
         // let Canvas = p.createCanvas(childWindowWidth, childWindowHeight).parent('drawCanvas');
-        canvas = p.createCanvas(childWindowWidth, childWindowHeight, p.WEBGL).parent('drawCanvas');
+        canvas = p.createCanvas(childWindowWidth, childWindowHeight).parent('drawCanvas');
         // カラーモデルをHSBに
         p.colorMode(p.HSB);
         // 矩形を描画方法を指定する
