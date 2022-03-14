@@ -161,7 +161,6 @@ export default defineComponent({
 
               }
                 console.log("----------------------------------------------------------")
-              // console.log("araw", j)
               k--;
             }
           }
