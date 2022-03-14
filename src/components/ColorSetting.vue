@@ -2,47 +2,67 @@
   <div class="colorSection">
     <div class="style colors">
       <div class="picker">
-        <div class="colorBox">
+        <div class="colorBox random">
+          <img class="color sample" src="../assets/WaterCanvas (1).jpg">
+          <div class="color text">
+            <p>random</p>
+          </div>
+        </div>
+        <div class="colorBox red">
+          <img class="color sample" src="../assets/WaterCanvas (1).jpg">
+          <div class="color text">
+            <p>red</p>
+          </div>
+        </div>
+        <div class="colorBox orange">
+          <img class="color sample" src="../assets/WaterCanvas (1).jpg">
+          <div class="color text">
+            <p>orange</p>
+          </div>
+        </div>
+        <div class="colorBox yellow">
+          <img class="color sample" src="../assets/WaterCanvas (1).jpg">
+          <div class="color text">
+            <p>yellow</p>
+          </div>
+        </div>
+        <div class="colorBox green">
+          <img class="color sample" src="../assets/WaterCanvas (1).jpg">
+          <div class="color text">
+            <p>green</p>
+          </div>
+        </div>
+        <div class="colorBox lightblue">
           <img class="color sample" src="../assets/WaterCanvas (1).jpg">
           <div class="color text">
             <p>lightblue</p>
           </div>
         </div>
-        <div class="colorBox">
+        <div class="colorBox blue">
           <img class="color sample" src="../assets/WaterCanvas (1).jpg">
           <div class="color text">
-            <p>lightblue</p>
+            <p>blue</p>
           </div>
         </div>
-        <div class="colorBox">
+        <div class="colorBox purple">
           <img class="color sample" src="../assets/WaterCanvas (1).jpg">
           <div class="color text">
-            <p>lightblue</p>
+            <p>purple</p>
           </div>
         </div>
-        <div class="colorBox">
+        <div class="colorBox pink">
           <img class="color sample" src="../assets/WaterCanvas (1).jpg">
           <div class="color text">
-            <p>lightblue</p>
-          </div>
-        </div>
-        <div class="colorBox">
-          <img class="color sample" src="../assets/WaterCanvas (1).jpg">
-          <div class="color text">
-            <p>lightblue</p>
-          </div>
-        </div>
-        <div class="colorBox">
-          <img class="color sample" src="../assets/WaterCanvas (1).jpg">
-          <div class="color text">
-            <p>lightblue</p>
+            <p>pink</p>
           </div>
         </div>
       </div>
       <div class="toolBar">
         <div class="bar blur">
+          <input type="range" id = "blur" min="0" max="100" step="1" value="50" v-model="blurNum">
           <p>Blur</p>
         </div>
+        <span id="currentValue"></span>
         <div class="bar opacity">
           <p>Opacity</p>
         </div>
@@ -109,6 +129,7 @@ export default defineComponent({
     const childWindowHeight = inject('WindowHeight') as number
     const autoDraw = inject('autoDraw') as Ref
     const SavedImageJudge = inject('SavedImageJudge') as Ref
+    const blurValue = inject('blurValue') as Ref
 
     function generate() {
       ResetCanvas()
@@ -162,6 +183,10 @@ export default defineComponent({
       .catch(error => console.log(error))
     }
 
+    function blurChange(){
+      const blurValue.value = blurNum
+    }
+
     return {
       childColorSelector,
       ChangeMode,
@@ -213,10 +238,12 @@ export default defineComponent({
   margin: auto;
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
+  align-content: space-around;
 }
 
 .colorBox {
-  
+  flex:1 0 30%;
   border: black solid;
 }
 
