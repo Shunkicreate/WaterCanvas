@@ -15,5 +15,14 @@ export default class drawCircles {
         this.b.push(b);
         this.a.push(a);
     }
+    reset(){
+        this.x.pop();
+        this.x.pop();
+        this.x.pop();
+        this.x.pop();
+        this.x.pop();
+        this.x.pop();
+        this.x.pop();
+    }
 }
 

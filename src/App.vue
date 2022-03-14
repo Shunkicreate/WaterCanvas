@@ -2,10 +2,10 @@
   <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
   <!-- <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
   <header>
-    <h1>WATER CANVAS</h1>
+    <h1>WATER CANVAS </h1>
   </header>
-  <div style="text-align: center;">
-    <DrowCanvas></DrowCanvas>
+  <div style="text-align: center; height:100%">
+    <DrawCanvas></DrawCanvas>
     <ColorSetting></ColorSetting>
     <!-- {{CircleData}} -->
   </div>
@@ -21,34 +21,46 @@ import DrawCanvas from './components/DrawCanvas.vue'
 import ColorSetting from './components/ColorSetting.vue'
 import drawCircles from './tsfiles/drawCirclesClass'
 import colorSelector from './tsfiles/colorSelector';
-
+import { ProductKey } from './tsfiles/symbols';
 export default defineComponent({
   name: 'Home',
   components: {
     DrawCanvas,
     ColorSetting
   },
-  setup(){
+  setup() {
     const CircleData = reactive<drawCircles[]>([])
     const ColorData = reactive<colorSelector>({
-      blur:0,
-      opacity : 0,
+      blur: 0,
+      opacity: 0,
       h: 0,
       s: 0,
       v: 0,
     })
-    const WindowWidth = ref(window.innerWidth*0.50)
-    const WindowHeight = ref(window.innerHeight*0.85)
+    const WindowWidth = ref(window.innerWidth * 0.55)
+    const WindowHeight = ref(window.innerHeight * 0.85)
+    const SavedImageJudge = ref(false)
+    const mode = ref("canvas")
+    const canvasReset = ref(false)
+    const autoDraw = ref(false)
+    // const postError = ref(true)
+    function disableScroll(event: any) {
+      event.preventDefault();
+    }
+    document.addEventListener('touchmove', disableScroll, { passive: false });
+    document.addEventListener('mousewheel', disableScroll, { passive: false });
     provide('CircleData', CircleData)
     provide('ColorData', ColorData)
     provide('WindowWidth', WindowWidth.value)
     provide('WindowHeight', WindowHeight.value)
-  }
-
+    provide('SavedImageJudge', SavedImageJudge)
+    provide('mode', mode)
+    provide('canvasReset', canvasReset)
+    provide('autoDraw', autoDraw)
+    provide(ProductKey, CircleData);
+  },
 })
 </script>
-
-
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -59,21 +71,21 @@ export default defineComponent({
 }
 
 canvas {
-  /* height: 300px; */
-  /* width: 75%; */
   float: left;
-  margin: 0 5% 0 5%;
+  margin: 0 4% 0 5%;
   border-radius: 1.5rem;
   background: #fafaf7;
-  box-shadow: 15px 15px 20px #d9d7d4,
-              -15px -15px 20px #fff;
+  box-shadow: 15px 15px 20px #d9d7d4, -15px -15px 20px #fff;
 }
 
 header {
   text-align: left;
   color: #858585;
-  margin-left: 5%;
+  padding-left: 5%;
 }
 
-
+header h1 {
+  padding: 0.5rem;
+  margin-bottom: 0.6rem;
+}
 </style>
