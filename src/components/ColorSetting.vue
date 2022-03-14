@@ -24,7 +24,7 @@
         --->
       </div>
       <div class="actions">
-        
+
         <div class="action btn generate" @click="generate()">
           <p>Generate canvas</p>
         </div>
@@ -45,7 +45,9 @@
             <img src="../assets/Instagram.png" class="logo instagram" />
           </div>
           <div class="logoFolder">
+            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" target="_blank" rel="noopener">
             <img src="../assets/Twitter.png" class="logo twitter" />
+            </a>
           </div>
         </div>
       </div>
