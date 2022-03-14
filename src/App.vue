@@ -14,9 +14,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { ref, provide, reactive } from 'vue';
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-// import HelloWorld from './components/HelloWorld.vue'
 import DrawCanvas from './components/DrawCanvas.vue'
 import ColorSetting from './components/ColorSetting.vue'
 import drawCircles from './tsfiles/drawCirclesClass'
@@ -43,7 +40,6 @@ export default defineComponent({
     const mode = ref("canvas")
     const canvasReset = ref(false)
     const autoDraw = ref(false)
-    // const postError = ref(true)
     function disableScroll(event: any) {
       event.preventDefault();
     }
