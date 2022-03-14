@@ -102,7 +102,7 @@ export default defineComponent({
           });
         };
 
-        if (!autoDraw.value) {
+        // if (!autoDraw.value) {
           // モードがwaterの時の処理
           if (mode.value == 'water') {
             if (drawing.value && timeCounter.value % 2 == 0) {
@@ -140,12 +140,15 @@ export default defineComponent({
 
 
 
-        }
+        // }
 
 
 
         //自動描画
         if (autoDraw.value == true) {
+          if( mode.value == 'water'  ){
+            drawing.value = true
+          }
           console.log('auto draw', childDrawCircles)
           p.fill('#fafaf7')
           p.rect(0, 0, p.width * 2, p.height * 2)
@@ -168,7 +171,7 @@ export default defineComponent({
 
             }
           }
-          // autoDraw.value = !autoDraw.value
+          autoDraw.value = !autoDraw.value
         }
       };
     };
