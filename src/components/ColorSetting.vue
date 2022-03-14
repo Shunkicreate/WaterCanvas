@@ -14,13 +14,13 @@
         <div class="mode btn reset" @click="ResetCanvas()">
           <p>Reset</p>
         </div>
-        <div class="mode btn change" @click="changeMode()">
+        <div class="mode btn change" >
           <p>Mode: {{ mode }}</p>
         </div>
       </div>
       <div class="actions">
         <div class="toggle">
-          <input type="checkbox" name="checked" placeholder="aaaaa" />
+          <input type="checkbox" name="checked" @click="changeMode()"/>
         </div>
         <div class="action btn generate" @click="generate()">
           <p>Generate canvas</p>
@@ -266,10 +266,12 @@ p {
 .toggle {
   position: relative;
   width: 50%;
-  height: 5.5rem;
+  height: 2rem;
   border-radius: 1.25rem;
   overflow: hidden;
   cursor: pointer;
+  box-shadow: 0.5rem 0.5rem 0.625rem #d9d7d4, -0.5rem -0.5rem 0.625rem #fff;
+  margin-bottom: 1rem;
 }
 .toggle input[type=checkbox] {
   display: none;
@@ -287,22 +289,20 @@ p {
   transition: 0.2s ease-out;
 }
 .toggle:after {
-  content: "CANVAS";
+  content: "WATER";
   position: absolute;
-  top: 0.25rem;
-  left: 3px;
-  width: 50%;
-  height: 42px;
+  top: .2rem;
+  left: 0.18rem;
+  width: 60%;
+  height: 80%;
   display: block;
   border-radius: 1.25rem;
   background: #fff;
-  box-shadow: 0 9px 28px -6px rgba(0, 0, 0, 0.3);
   -webkit-transition: 0.2s ease-out;
   transition: 0.2s ease-out;
   text-align: center;
-  padding: 14px 0 0;
-  line-height: auto;
-  font-size: 1rem;
+  padding: .15rem 0 0;
+  font-size: .9rem;
   font-weight: 700;
   color: #f2b6c5;
   box-sizing: border-box;
@@ -311,11 +311,10 @@ p {
   background: #9ed5ff;
 }
 .toggle.checked:after {
-  content: "WATER";
-  left: 50%;
-  box-shadow: 0 9px 28px -6px rgba(0, 0, 0, 0.5);
+  content: "CANVAS";
+  left: 37%;
   color: #9ed5ff;
-  padding: 14px 0 0 1px;
+  padding: .15rem 0 0;
 }
 
 </style>
