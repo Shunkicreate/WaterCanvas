@@ -66,15 +66,20 @@ export default defineComponent({
 
     function generate() {
       ResetCanvas()
-      console.log('in gngerate pictuer', childDrawCircles.length)
+      // console.log('in gngerate pictuer', childDrawCircles.length)
       generatePicture(childWindowWidth, childWindowHeight).forEach((element) => {
         childDrawCircles.push(element)
       })
-      console.log('aaaa gngerate pictuer', childDrawCircles.length)
-      autoDraw.value = !autoDraw.value
+      // console.log('aaaa gngerate pictuer', childDrawCircles.length)
+      if(autoDraw.value == false){
+        autoDraw.value = true
+      }
     }
 
     function changeMode() {
+      if(autoDraw.value == true){
+        autoDraw.value = false
+      }
       if (mode.value == 'canvas') mode.value = 'water'
       else if (mode.value == 'water') mode.value = 'canvas'
       canvasReset.value = !canvasReset.value
@@ -82,9 +87,9 @@ export default defineComponent({
     }
     function ResetCanvas() {
       canvasReset.value = !canvasReset.value
-      console.log('in gngerate pictuer', childDrawCircles.length)
+      console.log('reset')
       childDrawCircles.length = 0;
-        console.log('in gngerate pictuer', childDrawCircles.length, childDrawCircles)
+        // console.log('in gngerate pictuer', childDrawCircles.length, childDrawCircles)
     }
     return {
       childColorSelector,

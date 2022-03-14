@@ -1,6 +1,4 @@
 <template>
-  <div @abort="console.log('chnges')"></div>
-
   <div class="d-flex justify-content-center" id="drawcanvas"></div>
 </template>
 
@@ -22,10 +20,10 @@ export default defineComponent({
     // const DrawHeight = ref(window.innerWidth * 0.67);
     // const HeaderHeight = ref(3)
     // const childDrawCircles: InjectionKey<drawCircles[]> = Symbol('CircleData')
-    const demodata = new drawCircles(0,0,0,0,0,0,0,)
+    const demodata = new drawCircles(0, 0, 0, 0, 0, 0, 0,)
     const childDrawCircles = inject(ProductKey, [demodata]);
     // const childDrawCircles = inject<drawCircles[]>('CircleData')
-    console.log(typeof childDrawCircles)
+    // console.log(typeof childDrawCircles)
     const childWindowWidth = inject('WindowWidth') as number
     const childWindowHeight = inject('WindowHeight') as number
     const timeCounter = ref(0)
@@ -104,56 +102,70 @@ export default defineComponent({
           });
         };
 
-        // モードがwaterの時の処理
-        if (mode.value == 'water') {
-          if (drawing.value && timeCounter.value % 2 == 0) {
-            drawEllipse()
-          }
-          p.touchMoved = () => {
-            if (!drawing.value) {
-              console.log(drawing.value)
-              drawing.value = true;
-              console.log(drawing.value)
-            }
-            if (timeCounter.value % 5 == 0) {
-              createNewEllipse()
-            }
-          };
-        }
-
-        // モードがcanvasのときの処理
-        else if (mode.value == 'canvas') {
-          canvasCounter.value++;
-          p.touchMoved = () => {
-            if (canvasCounter.value % 10 == 0) {
-              createNewEllipse()
+        if (!autoDraw.value) {
+          // モードがwaterの時の処理
+          if (mode.value == 'water') {
+            if (drawing.value && timeCounter.value % 2 == 0) {
               drawEllipse()
+            }
+            p.touchMoved = () => {
+              if (!drawing.value) {
+                // console.log(drawing.value)
+                drawing.value = true;
+                // console.log(drawing.value)
+              }
+              if (timeCounter.value % 5 == 0) {
+                createNewEllipse()
+              }
             };
           }
+
+          // モードがcanvasのときの処理
+          else if (mode.value == 'canvas') {
+            canvasCounter.value++;
+            p.touchMoved = () => {
+              if (canvasCounter.value % 10 == 0) {
+                createNewEllipse()
+                drawEllipse()
+              };
+            }
+          }
+
+          //キャンバスの初期化関数
+          if (canvasReset.value == true) {
+            canvasReset.value = false;
+            p.fill('#fafaf7')
+            p.rect(0, 0, p.width * 2, p.height * 2)
+          }
+
+
+
         }
 
-        //キャンバスの初期化関数
-        if (canvasReset.value == true) {
-          canvasReset.value = false;
-          p.fill('#fafaf7')
-          p.rect(0, 0, p.width * 2, p.height * 2)
-        }
 
 
         //自動描画
-        if(autoDraw.value == true){
-          console.log('in draw canvas')
-            for(var i = 0; i < childDrawCircles.length; i++){
-              const elem = childDrawCircles[i]
-              for(var j = 0; j <= i; j++){
-                var k = j
-                p.fill(childDrawCircles[j].h[k], childDrawCircles[j].s[k], childDrawCircles[j].b[k], childDrawCircles[i-j].a[j], )
-                p.ellipse(childDrawCircles[j].x[k], childDrawCircles[j].y[k], childDrawCircles[j].r[k], childDrawCircles[j].r[k], )
-                // console.log("araw", j)
-                k--;
+        if (autoDraw.value == true) {
+          console.log('auto draw', childDrawCircles)
+          p.fill('#fafaf7')
+          p.rect(0, 0, p.width * 2, p.height * 2)
+          for (var i = 0; i < childDrawCircles.length; i++) {
+            const elem = childDrawCircles[i]
+            for (var j = 0; j <= i; j++) {
+              for (var k = j; k > 0; k--) {
+                // p.fill("#fafaf710")
+                // p.rect(0, 0, childWindowWidth, childWindowHeight)
+                console.log(childDrawCircles[j])
+                p.fill(childDrawCircles[j].h[k], childDrawCircles[j].s[k], childDrawCircles[j].b[k], childDrawCircles[i - j].a[j],)
+                p.ellipse(childDrawCircles[j].x[k], childDrawCircles[j].y[k], childDrawCircles[j].r[k], childDrawCircles[j].r[k],)
+
               }
+                console.log("----------------------------------------------------------")
+              // console.log("araw", j)
+              k--;
             }
-            autoDraw.value = !autoDraw.value
+          }
+          autoDraw.value = !autoDraw.value
         }
       };
     };

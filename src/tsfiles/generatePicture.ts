@@ -17,15 +17,16 @@ export function generatePicture(width:number, height:number){
                 newData.a.push(0)
                 continue;
             }
-            newData.x.push(newData.x[-1])
-            newData.y.push(newData.y[-1])
-            newData.r.push(newData.r[-1] + 3)
-            newData.h.push(newData.h[-1])
-            newData.s.push(newData.s[-1])
-            newData.b.push(newData.b[-1])
-            newData.a.push(newData.a[-1] - 3)
+            newData.x.push(newData.x[j])
+            newData.y.push(newData.y[j])
+            newData.r.push(newData.r[j] + 3)
+            newData.h.push(newData.h[j])
+            newData.s.push(newData.s[j])
+            newData.b.push(newData.b[j])
+            newData.a.push(newData.a[j] - 3)
         }
         returnData.push(newData)
+        // console.log(newData.a)
 
     }
     return returnData;
