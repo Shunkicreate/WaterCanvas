@@ -3,7 +3,6 @@
     <div class="style colors">
       <div class="picker">
         <div class="colorBox random">
-
           <img class="color sample" src="../assets/WaterCanvas (1).jpg">
           <div class="color text">
             <p>random</p>
