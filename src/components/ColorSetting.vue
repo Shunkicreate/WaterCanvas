@@ -2,13 +2,7 @@
   <div class="colorSection">
     <div class="style color">
       <div class="picker"></div>
-      <div class="toolBar">
-        <div class="bar mode" @click="ResetCanvas()">
-          <p>Reset</p>
-        </div>
-        <div class="bar mode" @click="changeMode()">
-          <p>Mode: {{ mode }}</p>
-        </div>
+      <div class="toolBar">        
         <div class="bar blur">
           <p>Blur</p>
         </div>
@@ -16,14 +10,22 @@
           <p>Opacity</p>
         </div>
       </div>
+      <div class="changeArea">
+        <div class="change btn reset" @click="ResetCanvas()">
+          <p>Reset</p>
+        </div>
+        <div class="change btn change" @click="changeMode()">
+          <p>Mode: {{ mode }}</p>
+        </div>
+      </div>
       <div class="actions">
-        <div class="action generate" @click="generate()">
+        <div class="action btn generate" @click="generate()">
           <p>Generate canvas</p>
         </div>
-        <div class="action what">
+        <div class="action btn what">
           <p>What is this?</p>
         </div>
-        <div class="action save">
+        <div class="action btn save">
           <p>Save Image</p>
           <!-- <a @click="SaveImage"><p>Save Image</p></a> -->
         </div>
@@ -137,7 +139,7 @@ export default defineComponent({
 }
 
 .toolBar {
-  margin: 2.5rem 15% 1.875rem 15%;
+  margin: 0.5rem 15% 0.5rem 15%;
 }
 
 .bar {
@@ -153,16 +155,30 @@ export default defineComponent({
   border-radius: 1.25rem;
 }
 
+.changeArea {
+  margin: 0.5rem 15% 0.5rem 15%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.change {
+  width: 45%;
+  background-color: #fff;
+}
+
 .actions {
-  margin: 0.625rem 15%;
+  margin: 0.5rem 15%;
 }
 
 .action {
   width: 100%;
+  background-color: #ffefbf;
+}
+
+.btn {
   height: auto;
   line-height: 2rem;
   margin-bottom: 0.625rem;
-  background-color: #ffefbf;
   box-shadow: 0.25rem 0.25rem 0.625rem #d9d7d4, -0.25rem -0.25rem 0.625rem #fff;
   text-align: center;
   border-radius: 1.875rem;
