@@ -89,6 +89,7 @@ header {
 }
 
 header h1 {
-padding: 0.5rem;
+  padding: 0.5rem;
+  margin-bottom: 0.6rem;
 }
 </style>
