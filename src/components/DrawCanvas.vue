@@ -32,14 +32,12 @@ export default defineComponent({
     const mode = inject('mode') as Ref
     const canvasReset = inject('canvasReset') as Ref
     const autoDraw = inject('autoDraw') as Ref
-    // const SavedImageURL = inject('SavedImageURL') as Ref
     const SavedImageJudge = inject('SavedImageJudge') as Ref
     var canvas!: p5.Element
 
     // const ChildSavedImage = inject('SavedImage') as Ref
 
 
-    // const ChildSavedImageJudge = inject('SavedImageJudge') as Ref
     const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
     const output = () => {
       timeCounter.value += 1;
@@ -48,13 +46,11 @@ export default defineComponent({
     //50msごとにカウンターを設置
     setInterval(output, 50)
 
-
     const sketch = (p: p5) => {
       p.setup = () => {
         // let Canvas = p.createCanvas(childWindowWidth, childWindowHeight).parent('drawCanvas');
         canvas = p.createCanvas(childWindowWidth, childWindowHeight).parent('drawCanvas');
         // カラーモデルをHSBに
-        p.fill('#fafaf7');
         p.colorMode(p.HSB);
         // 矩形を描画方法を指定する
         p.rectMode(p.CENTER);
@@ -66,6 +62,7 @@ export default defineComponent({
       };
 
       p.draw = () => {
+        p.fill('#fafaf7');
         //        positionY.value = p.mouseY;
         //        positionX.value = p.mouseX;
 
@@ -168,6 +165,7 @@ export default defineComponent({
           }
           autoDraw.value = !autoDraw.value
         }
+
         if (SavedImageJudge.value == true){
           console.log(SavedImageJudge.value)
           p.saveCanvas(canvas,'WaterCanvas','jpg')

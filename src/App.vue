@@ -39,7 +39,6 @@ export default defineComponent({
     })
     const WindowWidth = ref(window.innerWidth * 0.55)
     const WindowHeight = ref(window.innerHeight * 0.85)
-    // const SavedImageURL = ref()
     const SavedImageJudge = ref(false)
     const mode = ref("canvas")
     const canvasReset = ref(false)
@@ -53,7 +52,6 @@ export default defineComponent({
     provide('ColorData', ColorData)
     provide('WindowWidth', WindowWidth.value)
     provide('WindowHeight', WindowHeight.value)
-    // provide('SavedImageURL', SavedImageURL)
     provide('SavedImageJudge', SavedImageJudge)
     provide('mode', mode)
     provide('canvasReset', canvasReset)
@@ -62,9 +60,6 @@ export default defineComponent({
   },
 })
 </script>
-
-
-
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
