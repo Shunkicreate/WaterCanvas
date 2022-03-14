@@ -3,12 +3,6 @@
     <div class="style color">
       <div class="picker"></div>
       <div class="toolBar">
-        <div class="bar mode" @click="ResetCanvas()">
-          <p>Reset</p>
-        </div>
-        <div class="bar mode" @click="changeMode()">
-          <p>Mode: {{ mode }}</p>
-        </div>
         <div class="bar blur">
           <p>Blur</p>
         </div>
@@ -16,25 +10,32 @@
           <p>Opacity</p>
         </div>
       </div>
+      <div class="changeArea">
+        <div class="change btn reset" @click="ResetCanvas()">
+          <p>Reset</p>
+        </div>
+        <div class="change btn change" @click="changeMode()">
+          <p>Mode: {{ mode }}</p>
+        </div>
+      </div>
       <div class="actions">
-        <div class="action generate" @click="generate()">
+        <div class="action btn generate" @click="generate()">
           <p>Generate canvas</p>
         </div>
-        <div class="action what">
+        <div class="action btn what">
           <p>What is this?</p>
         </div>
-        <div class="action save">
-          <p>Save Image</p>
-          <!-- <a @click="SaveImage"><p>Save Image</p></a> -->
+        <div class="action btn save">
+          <a @click="SaveImage"><p>Save Image</p></a>
         </div>
       </div>
       <div class="SNS">
         <p>Post to SNS</p>
         <div class="logos">
-          <div class="logofolder">
-            <img src="../assets/Instagram.png" class="logo insta" />
+          <div class="logoFolder">
+            <img src="../assets/Instagram.png" class="logo instagram" />
           </div>
-          <div class="logofolder">
+          <div class="logoFolder">
             <img src="../assets/Twitter.png" class="logo twitter" />
           </div>
         </div>
@@ -57,20 +58,22 @@ export default defineComponent({
     const childColorSelector = inject('ColorData') as colorSelector
     const mode = inject('mode') as Ref
     // let childDrawCircles = inject('CircleData') as drawCircles[]
-    const demodata = new drawCircles(0, 0, 0, 0, 0, 0, 0,)
-    const childDrawCircles = inject(ProductKey, [demodata]);
+    const demoData = new drawCircles(0, 0, 0, 0, 0, 0, 0,)
+    const childDrawCircles = inject(ProductKey, [demoData]);
     const canvasReset = inject('canvasReset') as Ref
     const childWindowWidth = inject('WindowWidth') as number
     const childWindowHeight = inject('WindowHeight') as number
     const autoDraw = inject('autoDraw') as Ref
+    const SavedImageURL = inject('SavedImageURL') as Ref
+    const SavedImageJudge = inject('SavedImageJudge') as Ref
 
     function generate() {
       ResetCanvas()
-      // console.log('in gngerate pictuer', childDrawCircles.length)
+      // console.log('in generate picture', childDrawCircles.length)
       generatePicture(childWindowWidth, childWindowHeight).forEach((element) => {
         childDrawCircles.push(element)
       })
-      // console.log('aaaa gngerate pictuer', childDrawCircles.length)
+      // console.log('aaaa generate picture', childDrawCircles.length)
       if(autoDraw.value == false){
         autoDraw.value = true
       }
@@ -89,21 +92,20 @@ export default defineComponent({
       canvasReset.value = !canvasReset.value
       console.log('reset')
       childDrawCircles.length = 0;
-        // console.log('in gngerate pictuer', childDrawCircles.length, childDrawCircles)
+        // console.log('in generate picture', childDrawCircles.length, childDrawCircles)
+    }
+
+    function SaveImage (){
+      SavedImageJudge.value = true
     }
     return {
       childColorSelector,
       changeMode,
       ResetCanvas,
       generate,
+      SaveImage,
       mode
     }
-    // const save = {
-    //   data(){
-    //     count: 0
-    //   }
-    //   return save
-    // }
   }
 
 });
@@ -137,7 +139,7 @@ export default defineComponent({
 }
 
 .toolBar {
-  margin: 2.5rem 15% 1.875rem 15%;
+  margin: 0.5rem 15% 0.5rem 15%;
 }
 
 .bar {
@@ -153,16 +155,30 @@ export default defineComponent({
   border-radius: 1.25rem;
 }
 
+.changeArea {
+  margin: 0.5rem 15% 0.5rem 15%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.change {
+  width: 45%;
+  background-color: #fff;
+}
+
 .actions {
-  margin: 0.625rem 15%;
+  margin: 0.5rem 15%;
 }
 
 .action {
   width: 100%;
+  background-color: #ffefbf;
+}
+
+.btn {
   height: auto;
   line-height: 2rem;
   margin-bottom: 0.625rem;
-  background-color: #ffefbf;
   box-shadow: 0.25rem 0.25rem 0.625rem #d9d7d4, -0.25rem -0.25rem 0.625rem #fff;
   text-align: center;
   border-radius: 1.875rem;
@@ -185,7 +201,7 @@ export default defineComponent({
   display: flex;
 }
 
-.logofolder {
+.logoFolder {
   width: 40%;
   /* height: 10em; */
   margin: auto;
@@ -201,7 +217,7 @@ export default defineComponent({
   margin: auto;
 }
 
-.insta {
+.instagram {
   margin-left: 22%;
 }
 
