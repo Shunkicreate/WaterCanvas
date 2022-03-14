@@ -17,6 +17,7 @@ export default defineComponent({
   setup() {
     const positionY = ref(0);
     const positionX = ref(0);
+    
     // const DrawWidth = ref(window.innerWidth * 0.67);
     // const DrawHeight = ref(window.innerWidth * 0.67);
     // const HeaderHeight = ref(3)
