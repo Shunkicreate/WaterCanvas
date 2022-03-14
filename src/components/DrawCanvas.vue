@@ -32,6 +32,8 @@ export default defineComponent({
     const mode = inject('mode') as Ref
     const canvasReset = inject('canvasReset') as Ref
     const autoDraw = inject('autoDraw') as Ref
+    const SavedImageURL = inject('SavedImageURL') as Ref
+    const SavedImageJudge = inject('SavedImageJudge') as Ref
 
     // const ChildSavedImage = inject('SavedImage') as Ref
 
@@ -49,13 +51,12 @@ export default defineComponent({
     const sketch = (p: p5) => {
       p.setup = () => {
         // let Canvas = p.createCanvas(childWindowWidth, childWindowHeight).parent('drawCanvas');
-        p.createCanvas(childWindowWidth, childWindowHeight).parent('drawCanvas');
+        let Canvas = p.createCanvas(childWindowWidth, childWindowHeight).parent('drawCanvas');
         // カラーモデルをHSBに
         p.colorMode(p.HSB);
         // 矩形を描画方法を指定する
         p.rectMode(p.CENTER);
         // ChildSavedImage.value
-
         // 矩形の枠線を隠す
         p.noStroke();
         //hsbモードにする
@@ -142,8 +143,6 @@ export default defineComponent({
 
         }
 
-
-
         //自動描画
         if (autoDraw.value == true) {
           console.log('auto draw', childDrawCircles)
@@ -171,10 +170,15 @@ export default defineComponent({
           // autoDraw.value = !autoDraw.value
         }
       };
+
+      p.saveCanvas = () =>{
+        if (SavedImageJudge.value == true){
+          // SavedImageURL.value = 
+        }
+      }
     };
 
-    const canvasData = ref(new p5(sketch))
-
+    const canvasData = new p5(sketch)
 
     return {
       positionY,

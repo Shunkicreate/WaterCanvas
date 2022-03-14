@@ -97,6 +97,7 @@ export default defineComponent({
 
     function SaveImage (){
       SavedImageJudge.value = true
+      console.log(SavedImageJudge.value)
     }
     return {
       childColorSelector,
