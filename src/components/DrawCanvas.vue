@@ -34,7 +34,6 @@ export default defineComponent({
     const canvasReset = inject('canvasReset') as Ref
     const autoDraw = inject('autoDraw') as Ref
     const SavedImageJudge = inject('SavedImageJudge') as Ref
-    const pyDataJudge = inject('pyDataJudge') as Ref
     var canvas!: p5.Element
 
     // const ChildSavedImage = inject('SavedImage') as Ref
@@ -172,17 +171,6 @@ export default defineComponent({
           p.saveCanvas(canvas,'WaterCanvas','jpg')
           SavedImageJudge.value = !SavedImageJudge.value
           }
-
-        // if (pyDataJudge.value == true){
-        //   console.log(childDrawCircles)
-        //   axios
-        //   .post('https://watercanvas.herokuapp.com/post',childDrawCircles)
-        //   .catch(function (error) {
-        //   console.log(error);
-        // });
-        // pyDataJudge.value == !pyDataJudge.value
-        // console.log(pyDataJudge.value)
-        // }
       };
     };
 

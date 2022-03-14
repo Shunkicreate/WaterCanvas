@@ -19,14 +19,14 @@
         </div>
       </div>
       <div class="actions">
-        <div class="toggle">
-          <input type="checkbox" name="checked" @click="changeMode()"/>
+        <div class="toggle"  @click="ChangeMode">
+          <input type="checkbox" name="checked"/>
         </div>
         <div class="action btn generate" @click="generate()">
           <p>Generate canvas</p>
         </div>
         <div class="action btn what">
-          <p>What is this?</p>
+          <a @click="WhatIsThis"><p>What is this?</p></a>
         </div>
         <div class="action btn save">
           <a @click="SaveImage"><p>Save Image</p></a>
@@ -35,7 +35,6 @@
           <p>watch</p>
         </div>
       </div>
-
       <div class="SNS">
         <p>Post to SNS</p>
         <div class="logos">
@@ -74,7 +73,6 @@ export default defineComponent({
     const childWindowHeight = inject('WindowHeight') as number
     const autoDraw = inject('autoDraw') as Ref
     const SavedImageJudge = inject('SavedImageJudge') as Ref
-    const pyDataJudge = inject('pyDataJudge') as Ref
 
     function generate() {
       ResetCanvas()
@@ -88,15 +86,21 @@ export default defineComponent({
       }
     }
 
-    function changeMode() {
+    function ChangeMode() {
+      console.log("water")
       if(autoDraw.value == true){
         autoDraw.value = false
       }
-      if (mode.value == 'canvas') mode.value = 'water'
-      else if (mode.value == 'water') mode.value = 'canvas'
+      if (mode.value == 'canvas'){
+        mode.value = 'water'
+      }
+      else if (mode.value == 'water'){
+        mode.value = 'canvas'
+      }
       canvasReset.value = !canvasReset.value
       childDrawCircles.length = 0;
     }
+
     function ResetCanvas() {
       canvasReset.value = !canvasReset.value
       console.log('reset')
@@ -106,7 +110,7 @@ export default defineComponent({
 
     function SaveImage (){
       SavedImageJudge.value = !SavedImageJudge.value
-      pyDataJudge.value = !pyDataJudge.value
+      // pyDataJudge.value = !pyDataJudge.value
       console.log(SavedImageJudge.value)
       axios
       .post('https://watercanvas.herokuapp.com/post',childDrawCircles)
@@ -115,12 +119,22 @@ export default defineComponent({
         });
     }
 
+    function WhatIsThis(){
+
+      axios
+      .get('https://watercanvas.herokuapp.com/post')
+      .catch(function (error) {
+        console.log(error);
+        });
+    }
+
     return {
       childColorSelector,
-      changeMode,
+      ChangeMode,
       ResetCanvas,
       generate,
       SaveImage,
+      WhatIsThis,
       mode
     }
   },
