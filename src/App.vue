@@ -19,9 +19,9 @@ import { ref, provide, reactive } from 'vue';
 // import HelloWorld from './components/HelloWorld.vue'
 import DrawCanvas from './components/DrawCanvas.vue'
 import ColorSetting from './components/ColorSetting.vue'
-import drawCircles from './tsfiles/drawCirclesClass'
-import colorSelector from './tsfiles/colorSelector';
-import { ProductKey } from './tsfiles/symbols';
+import drawCircles from './tsFiles/drawCirclesClass'
+import colorSelector from './tsFiles/colorSelector';
+import { ProductKey } from './tsFiles/symbols';
 export default defineComponent({
   name: 'Home',
   components: {
@@ -39,7 +39,8 @@ export default defineComponent({
     })
     const WindowWidth = ref(window.innerWidth * 0.55)
     const WindowHeight = ref(window.innerHeight * 0.85)
-    const SavedImage = reactive({ url: "", save: false })
+    const SavedImageURL = ref("")
+    const SavedImageJudge = ref(false)
     const mode = ref("canvas")
     const canvasReset = ref(false)
     const autoDraw = ref(false)
@@ -52,7 +53,8 @@ export default defineComponent({
     provide('ColorData', ColorData)
     provide('WindowWidth', WindowWidth.value)
     provide('WindowHeight', WindowHeight.value)
-    provide('SavedImage', SavedImage.url)
+    provide('SavedImageURL', SavedImageURL)
+    provide('SavedImageJudge', SavedImageJudge)
     provide('mode', mode)
     provide('canvasReset', canvasReset)
     provide('autoDraw', autoDraw)
