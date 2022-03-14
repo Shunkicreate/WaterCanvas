@@ -200,5 +200,5 @@ export default defineComponent({
 <style scoped>
 </style>
 
-    const blurValue = 0
-        provide('blurValue',blurValue);    const blurValue = inject('blurValue') as Ref
+
+            

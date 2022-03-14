@@ -47,11 +47,9 @@ export default defineComponent({
     const mode = ref("canvas")
     const canvasReset = ref(false)
     const autoDraw = ref(false)
-<<<<<<< HEAD
-
-=======
+    const blurValue = 0
     const isLoading = ref(false)
->>>>>>> 0a158b46c5af37076276adb89176a8fff706fbe5
+    provide('blurValue',blurValue);
     // const postError = ref(true)
     function disableScroll(event: any) {
       event.preventDefault();
@@ -67,15 +65,13 @@ export default defineComponent({
     provide('canvasReset', canvasReset)
     provide('autoDraw', autoDraw)
     provide(ProductKey, CircleData);
-<<<<<<< HEAD
 
-=======
+
     provide('isLoading', isLoading)
 
     return {
       isLoading,
     }
->>>>>>> 0a158b46c5af37076276adb89176a8fff706fbe5
   },
 })
 </script>

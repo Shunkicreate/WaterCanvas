@@ -138,9 +138,7 @@ export default defineComponent({
     const childWindowHeight = inject('WindowHeight') as number
     const autoDraw = inject('autoDraw') as Ref
     const SavedImageJudge = inject('SavedImageJudge') as Ref
-<<<<<<< HEAD
-
-=======
+    const blurValue = inject('blurValue') as Ref
     const isLoading = inject('isLoading') as Ref
 >>>>>>> 0a158b46c5af37076276adb89176a8fff706fbe5
 
