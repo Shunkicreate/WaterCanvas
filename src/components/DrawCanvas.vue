@@ -168,7 +168,6 @@ export default defineComponent({
           }
 
         if (SavedImageJudge.value == true){
-          console.log(SavedImageJudge.value)
           p.saveCanvas(canvas,'WaterCanvas','jpg')
           SavedImageJudge.value = !SavedImageJudge.value
           }
