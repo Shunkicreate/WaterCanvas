@@ -85,9 +85,7 @@ canvas {
 header {
   text-align: left;
   color: #858585;
-padding-left: 5%;
-border-radius: 0.75rem;
-box-shadow: 0.9rem 0.9rem 1.25rem #d9d7d4, -0.9rem -0.9rem 1.25rem #fff;
+  padding-left: 5%;
 }
 
 header h1 {
