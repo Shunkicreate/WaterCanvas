@@ -120,9 +120,8 @@ export default defineComponent({
     }
 
     function WhatIsThis(){
-
       axios
-      .get('https://watercanvas.herokuapp.com/post')
+      .get('https://watercanvas.herokuapp.com/randomget')
       .catch(function (error) {
         console.log(error);
         });
