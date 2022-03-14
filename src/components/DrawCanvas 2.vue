@@ -17,7 +17,6 @@ export default defineComponent({
   setup() {
     const positionY = ref(0);
     const positionX = ref(0);
-
     // const DrawWidth = ref(window.innerWidth * 0.67);
     // const DrawHeight = ref(window.innerWidth * 0.67);
     // const HeaderHeight = ref(3)
@@ -143,7 +142,7 @@ export default defineComponent({
           if( mode.value == 'water'  ){
             drawing.value = true
           }
-          // console.log('auto draw', childDrawCircles)
+          console.log('auto draw', childDrawCircles)
           p.fill('#fafaf7')
           p.rect(0, 0, p.width * 2, p.height * 2)
           for (var i = 0; i < childDrawCircles.length; i++) {
@@ -168,6 +167,7 @@ export default defineComponent({
           }
 
         if (SavedImageJudge.value == true){
+          console.log(SavedImageJudge.value)
           p.saveCanvas(canvas,'WaterCanvas','jpg')
           SavedImageJudge.value = !SavedImageJudge.value
           }
@@ -199,6 +199,3 @@ export default defineComponent({
 
 <style scoped>
 </style>
-
-
-            
