@@ -1,7 +1,15 @@
 <template>
   <div class="colorSection">
     <div class="style color">
-      <div class="picker"></div>
+      <div class="picker">
+        <div class="colorBox">
+          <div class="color sample">
+          </div>
+          <div class="color text">
+            <p>random</p>
+          </div>
+        </div>
+      </div>
       <div class="toolBar">
         <div class="bar blur">
           <p>Blur</p>
@@ -65,6 +73,7 @@ export default defineComponent({
   setup() {
     const childColorSelector = inject('ColorData') as colorSelector
     const mode = inject('mode') as Ref
+    // let childDrawCircles = inject('CircleData') as drawCircles[]
     const demoData = new drawCircles(0, 0, 0, 0, 0, 0, 0,)
     const childDrawCircles = inject(ProductKey, [demoData]);
     const canvasReset = inject('canvasReset') as Ref
@@ -75,9 +84,11 @@ export default defineComponent({
 
     function generate() {
       ResetCanvas()
+      // console.log('in generate picture', childDrawCircles.length)
       generatePicture(childWindowWidth, childWindowHeight).forEach((element) => {
         childDrawCircles.push(element)
       })
+      // console.log('aaaa generate picture', childDrawCircles.length)
       if(autoDraw.value == false){
         autoDraw.value = true
       }
@@ -102,10 +113,12 @@ export default defineComponent({
       canvasReset.value = !canvasReset.value
       console.log('reset')
       childDrawCircles.length = 0;
+        // console.log('in generate picture', childDrawCircles.length, childDrawCircles)
     }
 
     function SaveImage (){
       SavedImageJudge.value = !SavedImageJudge.value
+      // pyDataJudge.value = !pyDataJudge.value
       console.log(SavedImageJudge.value)
       axios
       .post('https://watercanvas.herokuapp.com/post',childDrawCircles)

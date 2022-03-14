@@ -1,10 +1,10 @@
-//ランダム
+//ミドリ
 import drawCircles from "./drawCirclesClass";
-export function algorithm1(width:number, height:number){
+export function algorithm5(width:number, height:number){
   const circleNum = Math.random()*50;
   var returnData: drawCircles[] = []
   for(let i = circleNum; i > 0; i--){
-      const newData = new drawCircles(Math.random()*width, Math.random()*height, Math.random()*90 + 30, Math.random()*360, Math.random()*80 + 20, Math.random()*10 + 90, Math.random()*20)
+      const newData = new drawCircles(Math.random()*width, Math.random()*height, Math.random()*90 + 30, Math.random()*60 + 80, Math.random()*80 + 20, Math.random()*10 + 90, Math.random()*20)
       const count = 1000
       // const count = Math.min(circleNum, 50)
       for(let j = 0; j < count; j++){
