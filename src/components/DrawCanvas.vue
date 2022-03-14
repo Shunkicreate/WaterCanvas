@@ -32,11 +32,12 @@ export default defineComponent({
     const mode = inject('mode') as Ref
     const canvasReset = inject('canvasReset') as Ref
     const autoDraw = inject('autoDraw') as Ref
+    const SavedImageJudge = inject('SavedImageJudge') as Ref
+    var canvas!: p5.Element
 
     // const ChildSavedImage = inject('SavedImage') as Ref
 
 
-    // const ChildSavedImageJudge = inject('SavedImageJudge') as Ref
     const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
     const output = () => {
       timeCounter.value += 1;
@@ -45,25 +46,23 @@ export default defineComponent({
     //50msごとにカウンターを設置
     setInterval(output, 50)
 
-
     const sketch = (p: p5) => {
       p.setup = () => {
         // let Canvas = p.createCanvas(childWindowWidth, childWindowHeight).parent('drawCanvas');
-        p.createCanvas(childWindowWidth, childWindowHeight).parent('drawCanvas');
+        canvas = p.createCanvas(childWindowWidth, childWindowHeight).parent('drawCanvas');
         // カラーモデルをHSBに
         p.colorMode(p.HSB);
         // 矩形を描画方法を指定する
         p.rectMode(p.CENTER);
         // ChildSavedImage.value
-
         // 矩形の枠線を隠す
         p.noStroke();
         //hsbモードにする
         p.colorMode(p.HSB, 360, 100, 100, 100);
       };
 
-
       p.draw = () => {
+        p.fill('#fafaf7');
         //        positionY.value = p.mouseY;
         //        positionX.value = p.mouseX;
 
@@ -102,7 +101,6 @@ export default defineComponent({
           });
         };
 
-        // if (!autoDraw.value) {
           // モードがwaterの時の処理
           if (mode.value == 'water') {
             if (drawing.value && timeCounter.value % 2 == 0) {
@@ -138,12 +136,6 @@ export default defineComponent({
             p.rect(0, 0, p.width * 2, p.height * 2)
           }
 
-
-
-        // }
-
-
-
         //自動描画
         if (autoDraw.value == true) {
           if( mode.value == 'water'  ){
@@ -168,16 +160,20 @@ export default defineComponent({
             for (var j = 0; j < elem.a.length; j++) {
               p.fill(elem.h[j], elem.s[j], elem.b[j], elem.a[j],)
               p.ellipse(elem.x[j], elem.y[j], elem.r[j], elem.r[j],)
-
+              }
             }
-          }
           autoDraw.value = !autoDraw.value
-        }
+          }
+
+        if (SavedImageJudge.value == true){
+          console.log(SavedImageJudge.value)
+          p.saveCanvas(canvas,'WaterCanvas','jpg')
+          SavedImageJudge.value = !SavedImageJudge.value
+          }
       };
     };
 
-    const canvasData = ref(new p5(sketch))
-
+    const canvasData = new p5(sketch)
 
     return {
       positionY,
