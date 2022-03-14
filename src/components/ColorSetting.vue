@@ -2,7 +2,7 @@
   <div class="colorSection">
     <div class="style color">
       <div class="picker"></div>
-      <div class="toolBar">        
+      <div class="toolBar">
         <div class="bar blur">
           <p>Blur</p>
         </div>
@@ -32,10 +32,10 @@
       <div class="SNS">
         <p>Post to SNS</p>
         <div class="logos">
-          <div class="logofolder">
-            <img src="../assets/Instagram.png" class="logo insta" />
+          <div class="logoFolder">
+            <img src="../assets/Instagram.png" class="logo instagram" />
           </div>
-          <div class="logofolder">
+          <div class="logoFolder">
             <img src="../assets/Twitter.png" class="logo twitter" />
           </div>
         </div>
@@ -201,7 +201,7 @@ export default defineComponent({
   display: flex;
 }
 
-.logofolder {
+.logoFolder {
   width: 40%;
   /* height: 10em; */
   margin: auto;
@@ -217,7 +217,7 @@ export default defineComponent({
   margin: auto;
 }
 
-.insta {
+.instagram {
   margin-left: 22%;
 }
 

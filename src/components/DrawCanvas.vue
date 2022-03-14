@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-center" id="drawcanvas"></div>
+  <div class="d-flex justify-content-center" id="drawCanvas"></div>
 </template>
 
 <script lang="ts">
@@ -20,8 +20,8 @@ export default defineComponent({
     // const DrawHeight = ref(window.innerWidth * 0.67);
     // const HeaderHeight = ref(3)
     // const childDrawCircles: InjectionKey<drawCircles[]> = Symbol('CircleData')
-    const demodata = new drawCircles(0, 0, 0, 0, 0, 0, 0,)
-    const childDrawCircles = inject(ProductKey, [demodata]);
+    const demoData = new drawCircles(0, 0, 0, 0, 0, 0, 0,)
+    const childDrawCircles = inject(ProductKey, [demoData]);
     // const childDrawCircles = inject<drawCircles[]>('CircleData')
     // console.log(typeof childDrawCircles)
     const childWindowWidth = inject('WindowWidth') as number
@@ -48,8 +48,8 @@ export default defineComponent({
 
     const sketch = (p: p5) => {
       p.setup = () => {
-        // let Canvas = p.createCanvas(childWindowWidth, childWindowHeight).parent('drawcanvas');
-        p.createCanvas(childWindowWidth, childWindowHeight).parent('drawcanvas');
+        // let Canvas = p.createCanvas(childWindowWidth, childWindowHeight).parent('drawCanvas');
+        p.createCanvas(childWindowWidth, childWindowHeight).parent('drawCanvas');
         // カラーモデルをHSBに
         p.colorMode(p.HSB);
         // 矩形を描画方法を指定する
