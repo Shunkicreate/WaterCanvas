@@ -302,7 +302,7 @@ p {
   transition: 0.2s ease-out;
 }
 .toggle:after {
-  content: "WATER";
+  content: "CANVAS";
   position: absolute;
   top: .2rem;
   left: 0.18rem;
@@ -324,7 +324,7 @@ p {
   background: #9ed5ff;
 }
 .toggle.checked:after {
-  content: "CANVAS";
+  content: "WATER";
   left: 37%;
   color: #9ed5ff;
   padding: .15rem 0 0;
