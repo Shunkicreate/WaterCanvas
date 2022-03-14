@@ -173,14 +173,16 @@ export default defineComponent({
           SavedImageJudge.value = !SavedImageJudge.value
           }
 
-        if (pyDataJudge.value == true){
-          console.log(childDrawCircles)
-          axios
-          .post('https://watercanvas.herokuapp.com/post',childDrawCircles)
-          .catch(function (error) {
-          console.log(error);
-        });
-        }
+        // if (pyDataJudge.value == true){
+        //   console.log(childDrawCircles)
+        //   axios
+        //   .post('https://watercanvas.herokuapp.com/post',childDrawCircles)
+        //   .catch(function (error) {
+        //   console.log(error);
+        // });
+        // pyDataJudge.value == !pyDataJudge.value
+        // console.log(pyDataJudge.value)
+        // }
       };
     };
 
