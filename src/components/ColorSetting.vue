@@ -1,12 +1,41 @@
 <template>
   <div class="colorSection">
-    <div class="style color">
+    <div class="style colors">
       <div class="picker">
         <div class="colorBox">
-          <div class="color sample">
-          </div>
+          <img class="color sample" src="../assets/WaterCanvas (1).jpg">
           <div class="color text">
-            <p>random</p>
+            <p>lightblue</p>
+          </div>
+        </div>
+        <div class="colorBox">
+          <img class="color sample" src="../assets/WaterCanvas (1).jpg">
+          <div class="color text">
+            <p>lightblue</p>
+          </div>
+        </div>
+        <div class="colorBox">
+          <img class="color sample" src="../assets/WaterCanvas (1).jpg">
+          <div class="color text">
+            <p>lightblue</p>
+          </div>
+        </div>
+        <div class="colorBox">
+          <img class="color sample" src="../assets/WaterCanvas (1).jpg">
+          <div class="color text">
+            <p>lightblue</p>
+          </div>
+        </div>
+        <div class="colorBox">
+          <img class="color sample" src="../assets/WaterCanvas (1).jpg">
+          <div class="color text">
+            <p>lightblue</p>
+          </div>
+        </div>
+        <div class="colorBox">
+          <img class="color sample" src="../assets/WaterCanvas (1).jpg">
+          <div class="color text">
+            <p>lightblue</p>
           </div>
         </div>
       </div>
@@ -27,7 +56,6 @@
         </div>
       </div>
       <div class="actions">
-
         <div class="action btn generate" @click="generate()">
           <p>Generate canvas</p>
         </div>
@@ -171,7 +199,7 @@ export default defineComponent({
   float: left;
 }
 
-.color {
+.colors {
   height: 94%;
   width: 80%;
   border-radius: 3.125rem;
@@ -184,6 +212,23 @@ export default defineComponent({
   width: 75%;
   height: 15rem;
   margin: auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+.colorBox {
+  
+  border: black solid;
+}
+
+.sample {
+  width: 2.8rem;
+  height: 1rem;
+  object-fit: cover;
+}
+
+.color p {
+  font-size: 0.5rem;
 }
 
 .toolBar {
