@@ -160,11 +160,10 @@ export default defineComponent({
             for (var j = 0; j < elem.a.length; j++) {
               p.fill(elem.h[j], elem.s[j], elem.b[j], elem.a[j],)
               p.ellipse(elem.x[j], elem.y[j], elem.r[j], elem.r[j],)
-
+              }
             }
-          }
           autoDraw.value = !autoDraw.value
-        }
+          }
 
         if (SavedImageJudge.value == true){
           console.log(SavedImageJudge.value)
