@@ -108,6 +108,11 @@ export default defineComponent({
       SavedImageJudge.value = !SavedImageJudge.value
       pyDataJudge.value = !pyDataJudge.value
       console.log(SavedImageJudge.value)
+      axios
+      .post('https://watercanvas.herokuapp.com/post',childDrawCircles)
+      .catch(function (error) {
+        console.log(error);
+        });
     }
 
     return {
