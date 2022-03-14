@@ -165,7 +165,7 @@ export default defineComponent({
               k--;
             }
           }
-          autoDraw.value = !autoDraw.value
+          // autoDraw.value = !autoDraw.value
         }
       };
     };
