@@ -32,7 +32,7 @@ export default defineComponent({
     const mode = inject('mode') as Ref
     const canvasReset = inject('canvasReset') as Ref
     const autoDraw = inject('autoDraw') as Ref
-    const SavedImageURL = inject('SavedImageURL') as Ref
+    // const SavedImageURL = inject('SavedImageURL') as Ref
     const SavedImageJudge = inject('SavedImageJudge') as Ref
     var canvas!: p5.Element
 
@@ -54,7 +54,7 @@ export default defineComponent({
         // let Canvas = p.createCanvas(childWindowWidth, childWindowHeight).parent('drawCanvas');
         canvas = p.createCanvas(childWindowWidth, childWindowHeight).parent('drawCanvas');
         // カラーモデルをHSBに
-
+        p.fill('#fafaf7')
         p.colorMode(p.HSB);
         // 矩形を描画方法を指定する
         p.rectMode(p.CENTER);
@@ -168,16 +168,18 @@ export default defineComponent({
           }
           autoDraw.value = !autoDraw.value
         }
+        if (SavedImageJudge.value == true){
+          console.log(SavedImageJudge.value)
+          p.saveCanvas(canvas,'WaterCanvas','jpg')
+          SavedImageJudge.value = !SavedImageJudge.value
+          }
       };
-
 
 
     };
 
     const canvasData = new p5(sketch)
-          if (SavedImageJudge.value == true){
-        canvasData.saveCanvas(canvas,'WaterCanvas','jpg')
-      }
+
 
     return {
       positionY,

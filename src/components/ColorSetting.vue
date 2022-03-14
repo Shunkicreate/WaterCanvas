@@ -64,7 +64,7 @@ export default defineComponent({
     const childWindowWidth = inject('WindowWidth') as number
     const childWindowHeight = inject('WindowHeight') as number
     const autoDraw = inject('autoDraw') as Ref
-    const SavedImageURL = inject('SavedImageURL') as Ref
+    // const SavedImageURL = inject('SavedImageURL') as Ref
     const SavedImageJudge = inject('SavedImageJudge') as Ref
 
     function generate() {
@@ -96,7 +96,7 @@ export default defineComponent({
     }
 
     function SaveImage (){
-      SavedImageJudge.value = true
+      SavedImageJudge.value = !SavedImageJudge.value
       console.log(SavedImageJudge.value)
     }
     return {
