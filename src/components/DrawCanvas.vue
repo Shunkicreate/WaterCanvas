@@ -151,17 +151,21 @@ export default defineComponent({
           p.rect(0, 0, p.width * 2, p.height * 2)
           for (var i = 0; i < childDrawCircles.length; i++) {
             const elem = childDrawCircles[i]
-            for (var j = 0; j <= i; j++) {
-              for (var k = j; k > 0; k--) {
-                // p.fill("#fafaf710")
-                // p.rect(0, 0, childWindowWidth, childWindowHeight)
-                console.log(childDrawCircles[j])
-                p.fill(childDrawCircles[j].h[k], childDrawCircles[j].s[k], childDrawCircles[j].b[k], childDrawCircles[i - j].a[j],)
-                p.ellipse(childDrawCircles[j].x[k], childDrawCircles[j].y[k], childDrawCircles[j].r[k], childDrawCircles[j].r[k],)
+            // for (var j = 0; j <= i; j++) {
+            //   for (var k = j; k > 0; k--) {
+            //     // p.fill("#fafaf710")
+            //     // p.rect(0, 0, childWindowWidth, childWindowHeight)
+            //     console.log(childDrawCircles[j])
+            //     p.fill(childDrawCircles[j].h[k], childDrawCircles[j].s[k], childDrawCircles[j].b[k], childDrawCircles[i - j].a[j],)
+            //     p.ellipse(childDrawCircles[j].x[k], childDrawCircles[j].y[k], childDrawCircles[j].r[k], childDrawCircles[j].r[k],)
+            //   }
+            //     console.log("----------------------------------------------------------")
+            //   k--;
+            // }
+            for (var j = 0; j < elem.a.length; j++) {
+              p.fill(elem.h[j], elem.s[j], elem.b[j], elem.a[j],)
+              p.ellipse(elem.x[j], elem.y[j], elem.r[j], elem.r[j],)
 
-              }
-                console.log("----------------------------------------------------------")
-              k--;
             }
           }
           // autoDraw.value = !autoDraw.value
