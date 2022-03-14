@@ -19,6 +19,9 @@
         </div>
       </div>
       <div class="actions">
+        <div class="toggle">
+          <input type="checkbox" name="checked" placeholder="aaaaa" />
+        </div>
         <div class="action btn generate" @click="generate()">
           <p>Generate canvas</p>
         </div>
@@ -32,9 +35,7 @@
           <p>watch</p>
         </div>
       </div>
-      <div class="toggle">
-        <input type="checkbox" name="checked" placeholder="aaaaa"/>
-      </div>
+      
       <div class="SNS">
         <p>Post to SNS</p>
         <div class="logos">
@@ -221,7 +222,6 @@ export default defineComponent({
   margin: 5% auto;
 }
 
-
 .SNS p {
   font-size: 0.75rem;
 }
@@ -266,9 +266,8 @@ p {
 
 .toggle {
   position: relative;
-  width: 78px;
+  width: 50%;
   height: 48px;
-  margin: 40px 60px;
   border-radius: 50px;
   overflow: hidden;
   cursor: pointer;
@@ -289,11 +288,11 @@ p {
   transition: 0.2s ease-out;
 }
 .toggle:after {
-  content: "OFF";
+  content: "CANVAS";
   position: absolute;
   top: 3px;
   left: 3px;
-  width: 42px;
+  width: 50%;
   height: 42px;
   display: block;
   border-radius: 50px;
@@ -314,8 +313,8 @@ p {
   background: #24e89c;
 }
 .toggle.checked:after {
-  content: "ON";
-  left: 33px;
+  content: "WATER";
+  left: 50%;
   box-shadow: 0 9px 28px -6px rgba(0, 0, 0, 0.5);
   color: #16d088;
   padding: 14px 0 0 1px;
