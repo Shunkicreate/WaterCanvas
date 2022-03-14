@@ -34,6 +34,7 @@ export default defineComponent({
     const autoDraw = inject('autoDraw') as Ref
     const SavedImageURL = inject('SavedImageURL') as Ref
     const SavedImageJudge = inject('SavedImageJudge') as Ref
+    var canvas!: p5.Element
 
     // const ChildSavedImage = inject('SavedImage') as Ref
 
@@ -51,8 +52,9 @@ export default defineComponent({
     const sketch = (p: p5) => {
       p.setup = () => {
         // let Canvas = p.createCanvas(childWindowWidth, childWindowHeight).parent('drawCanvas');
-        let Canvas = p.createCanvas(childWindowWidth, childWindowHeight).parent('drawCanvas');
+        canvas = p.createCanvas(childWindowWidth, childWindowHeight).parent('drawCanvas');
         // カラーモデルをHSBに
+
         p.colorMode(p.HSB);
         // 矩形を描画方法を指定する
         p.rectMode(p.CENTER);
@@ -62,7 +64,6 @@ export default defineComponent({
         //hsbモードにする
         p.colorMode(p.HSB, 360, 100, 100, 100);
       };
-
 
       p.draw = () => {
         //        positionY.value = p.mouseY;
@@ -103,7 +104,6 @@ export default defineComponent({
           });
         };
 
-        // if (!autoDraw.value) {
           // モードがwaterの時の処理
           if (mode.value == 'water') {
             if (drawing.value && timeCounter.value % 2 == 0) {
@@ -139,10 +139,6 @@ export default defineComponent({
             p.rect(0, 0, p.width * 2, p.height * 2)
           }
 
-
-
-        // }
-
         //自動描画
         if (autoDraw.value == true) {
           if( mode.value == 'water'  ){
@@ -174,14 +170,14 @@ export default defineComponent({
         }
       };
 
-      p.saveCanvas = () =>{
-        if (SavedImageJudge.value == true){
-          // SavedImageURL.value = 
-        }
-      }
+
+
     };
 
     const canvasData = new p5(sketch)
+          if (SavedImageJudge.value == true){
+        canvasData.saveCanvas(canvas,'WaterCanvas','jpg')
+      }
 
     return {
       positionY,

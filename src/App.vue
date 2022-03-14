@@ -39,7 +39,7 @@ export default defineComponent({
     })
     const WindowWidth = ref(window.innerWidth * 0.55)
     const WindowHeight = ref(window.innerHeight * 0.85)
-    const SavedImageURL = ref("")
+    const SavedImageURL = ref()
     const SavedImageJudge = ref(false)
     const mode = ref("canvas")
     const canvasReset = ref(false)
