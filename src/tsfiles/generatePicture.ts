@@ -4,7 +4,7 @@ export function generatePicture(width:number, height:number){
     const circleNum = Math.random()*50;
     var returnData: drawCircles[] = []
     for(let i = circleNum; i > 0; i--){
-        const newData = new drawCircles(Math.random()*width, Math.random()*height, Math.random()*30, Math.random()*10, Math.random()*255, Math.random()*255, Math.random()*255)
+        const newData = new drawCircles(Math.random()*width, Math.random()*height, Math.random()*90 + 30, Math.random()*360, Math.random()*80 + 20, Math.random()*10 + 90, Math.random()*20)
         const count = Math.min(circleNum, 10)
         for(let j = 0; j < count; j++){
             if(j>count){
