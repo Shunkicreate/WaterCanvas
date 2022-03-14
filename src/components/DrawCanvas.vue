@@ -143,7 +143,7 @@ export default defineComponent({
           if( mode.value == 'water'  ){
             drawing.value = true
           }
-          console.log('auto draw', childDrawCircles)
+          // console.log('auto draw', childDrawCircles)
           p.fill('#fafaf7')
           p.rect(0, 0, p.width * 2, p.height * 2)
           for (var i = 0; i < childDrawCircles.length; i++) {
