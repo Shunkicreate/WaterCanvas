@@ -117,9 +117,8 @@ export default defineComponent({
     function WhatIsThis(){
       axios
       .get('https://watercanvas.herokuapp.com/randomget')
-      .catch(function (error) {
-        console.log(error);
-        });
+      .then(response => console.log(response))
+      .catch(error => console.log(error))
     }
 
     return {
