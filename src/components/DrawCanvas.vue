@@ -172,12 +172,9 @@ export default defineComponent({
           SavedImageJudge.value = !SavedImageJudge.value
           }
       };
-
-
     };
 
     const canvasData = new p5(sketch)
-
 
     return {
       positionY,
