@@ -28,6 +28,12 @@
         <div class="action btn save">
           <a @click="SaveImage"><p>Save Image</p></a>
         </div>
+        <div class="action btn watch">
+          <p>watch</p>
+        </div>
+      </div>
+      <div class="toggle">
+        <input type="checkbox" name="checked" placeholder="aaaaa"/>
       </div>
       <div class="SNS">
         <p>Post to SNS</p>
@@ -50,6 +56,7 @@ import colorSelector from "../tsfiles/colorSelector";
 import drawCircles from "../tsfiles/drawCirclesClass";
 import { generatePicture } from "../tsfiles/generatePicture";
 import { ProductKey } from '../tsfiles/symbols';
+import $ from 'jquery';
 
 
 export default defineComponent({
@@ -64,8 +71,9 @@ export default defineComponent({
     const childWindowWidth = inject('WindowWidth') as number
     const childWindowHeight = inject('WindowHeight') as number
     const autoDraw = inject('autoDraw') as Ref
-    const SavedImageURL = inject('SavedImageURL') as Ref
+    // const SavedImageURL = inject('SavedImageURL') as Ref
     const SavedImageJudge = inject('SavedImageJudge') as Ref
+
 
     function generate() {
       ResetCanvas()
@@ -94,10 +102,12 @@ export default defineComponent({
       childDrawCircles.length = 0;
         // console.log('in generate picture', childDrawCircles.length, childDrawCircles)
     }
-
+    
     function SaveImage (){
-      SavedImageJudge.value = true
+      SavedImageJudge.value = !SavedImageJudge.value
+      console.log(SavedImageJudge.value)
     }
+      
     return {
       childColorSelector,
       changeMode,
@@ -106,6 +116,17 @@ export default defineComponent({
       SaveImage,
       mode
     }
+  },
+
+  mounted(){
+    $(".toggle").on("click", function() {
+      $(".toggle").toggleClass("checked");
+      if(!$('input[name="check"]').prop("checked")) {
+        $(".toggle input").prop("checked", true);
+      } else {
+        $(".toggle input").prop("checked", false);
+      }
+    });
   }
 
 });
@@ -161,7 +182,7 @@ export default defineComponent({
 }
 
 .mode {
-  width: 45%;
+  width: 47%;
   background-color: #ffefbf;
 }
 
@@ -199,6 +220,7 @@ export default defineComponent({
   text-align: center;
   margin: 5% auto;
 }
+
 
 .SNS p {
   font-size: 0.75rem;
@@ -240,4 +262,63 @@ p {
   color: #858585;
   margin: 0;
 }
+
+
+.toggle {
+  position: relative;
+  width: 78px;
+  height: 48px;
+  margin: 40px 60px;
+  border-radius: 50px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.toggle input[type=checkbox] {
+  display: none;
+}
+.toggle:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #f45e55;
+  -webkit-transition: 0.2s ease-out;
+  transition: 0.2s ease-out;
+}
+.toggle:after {
+  content: "OFF";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 42px;
+  height: 42px;
+  display: block;
+  border-radius: 50px;
+  background: #fff;
+  box-shadow: 0 9px 28px -6px rgba(0, 0, 0, 0.3);
+  -webkit-transition: 0.2s ease-out;
+  transition: 0.2s ease-out;
+  text-align: center;
+  padding: 14px 0 0;
+  line-height: 1;
+  font-size: 14px;
+  font-weight: bold;
+  color: #df4c43;
+  letter-spacing: .5px;
+  box-sizing: border-box;
+}
+.toggle.checked:before {
+  background: #24e89c;
+}
+.toggle.checked:after {
+  content: "ON";
+  left: 33px;
+  box-shadow: 0 9px 28px -6px rgba(0, 0, 0, 0.5);
+  color: #16d088;
+  padding: 14px 0 0 1px;
+}
+
 </style>
