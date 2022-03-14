@@ -11,10 +11,10 @@
         </div>
       </div>
       <div class="changeArea">
-        <div class="change btn reset" @click="ResetCanvas()">
+        <div class="mode btn reset" @click="ResetCanvas()">
           <p>Reset</p>
         </div>
-        <div class="change btn change" @click="changeMode()">
+        <div class="mode btn change" @click="changeMode()">
           <p>Mode: {{ mode }}</p>
         </div>
       </div>
@@ -118,7 +118,6 @@ export default defineComponent({
 }
 
 .colorSection {
-  height: 100%;
   width: 32%;
   float: left;
 }
@@ -128,7 +127,7 @@ export default defineComponent({
   width: 80%;
   border-radius: 3.125rem;
   margin: 0 10%;
-  padding-top: 3.125rem;
+  padding-top: 2.75rem;
   user-select: none;
 }
 
@@ -161,8 +160,14 @@ export default defineComponent({
   justify-content: space-between;
 }
 
-.change {
+.mode {
   width: 45%;
+  background-color: #ffefbf;
+}
+
+.change:hover {
+  box-shadow: inset 0.5rem 0.5rem 0.625rem #d9d7d4,
+    inset -0.5rem -0.5rem 0.625rem #fff;
   background-color: #fff;
 }
 
@@ -182,6 +187,10 @@ export default defineComponent({
   box-shadow: 0.25rem 0.25rem 0.625rem #d9d7d4, -0.25rem -0.25rem 0.625rem #fff;
   text-align: center;
   border-radius: 1.875rem;
+}
+
+.btn:hover {
+  cursor: pointer;
 }
 
 .SNS {
