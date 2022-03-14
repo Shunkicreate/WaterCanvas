@@ -10,7 +10,7 @@ import drawCircles from '../tsfiles/drawCirclesClass'
 import drawCircle from '../tsfiles/drawCircleClass'
 
 export default defineComponent({
-  name: "DrowCanvas",
+  name: "DrawCanvas",
   setup() {
     const positionY = ref(0);
     const positionX = ref(0);
