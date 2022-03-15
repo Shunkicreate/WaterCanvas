@@ -63,9 +63,9 @@
           <p>Blur</p>
         </div>
         <span id="currentValue"></span>
-        <div class="bar opacity">
+        <!-- <div class="bar opacity">
           <p>Opacity</p>
-        </div>
+        </div> -->
       </div>
       <div class="changeArea">
         <div class="toggle" @click="ChangeMode()">
@@ -87,7 +87,7 @@
         </div>
         <div class="action btn save">
           <a @click="SaveImage">
-            <p>Save Image</p>
+            <p>Save Image<img src="../assets/download.png" class="download"></p>
           </a>
         </div>
         <div class="action btn watch" @click="Watch()">
@@ -95,7 +95,9 @@
         </div>
       </div>
       <div class="SNS">
-        <p>Post to SNS</p>
+        <div class="post">
+          <p>Post to SNS</p>
+        </div>
         <div class="logos">
           <div class="logoFolder">
             <img src="../assets/Instagram.png" class="logo instagram" />
@@ -305,220 +307,4 @@ export default defineComponent({
 });
 </script>
 
-<style>
-.colorSection {
-  display: inline-flex;
-  /* max-width: ; */
-}
 
-.style {
-  background: #f5f5f5;
-  box-shadow: 0.5rem 0.5rem 1.5rem #cccccc, -0.5rem -0.5rem 1.5rem #ffffff;
-}
-
-.colors {
-  height: auto;
-  width: 80%;
-  border-radius: 3.125rem;
-  margin: 0 10%;
-  /* padding-top: 2.8rem; */
-  user-select: none;
-}
-
-.picker {
-  height: 10rem;
-  margin: 2rem 15% 2rem 15%;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  align-content: space-around;
-}
-
-.colorBox {
-  flex: 1 0 30%;
-
-  border-radius: 0.5rem;
-}
-
-.sample {
-  width: 2.8rem;
-  height: 1rem;
-  object-fit: cover;
-
-  margin-top: 0.5rem;
-  border-radius: 0.5rem;
-  box-shadow: 0.2rem 0.2rem 0.5rem #ccc, -0.2rem -0.2rem 0.5rem #ffffff;
-}
-
-.color p {
-  font-size: 0.8rem;
-  text-shadow: 0.2rem 0.2rem 0.5rem #cccccc;
-}
-
-.toolBar {
-  margin: 0.5rem 15% 0.5rem 15%;
-}
-
-.bar {
-  width: 80%;
-  height: auto;
-  line-height: 2.125rem;
-  padding-left: 1.25rem;
-  margin-bottom: 1.25rem;
-  background-color: #f5f5f5;
-  box-shadow: inset 0.5rem 0.5rem 1.5rem #cccccc,
-    inset -0.5rem -0.5rem 1.5rem #ffffff;
-  text-align: left;
-  border-radius: 1.25rem;
-}
-
-.changeArea {
-  margin: 0.5rem 15% 0.5rem 15%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.mode {
-  width: 40%;
-  background-color: #f5f5f5;
-}
-
-.change:hover {
-  box-shadow: inset 0.5rem 0.5rem 1.5rem #cccccc,
-    inset -0.5rem -0.5rem 1.5rem #ffffff;
-  background-color: #fff;
-}
-
-.actions {
-  margin: 0.5rem 15%;
-}
-
-.action {
-  width: 100%;
-  background-color: #f5f5f5;
-}
-
-.btn {
-  height: auto;
-  line-height: 2rem;
-  margin-bottom: 0.625rem;
-  box-shadow: 0.5rem 0.5rem 1.5rem #cccccc, -0.5rem -0.5rem 1.5rem #ffffff;
-  text-align: center;
-  border-radius: 1.875rem;
-}
-
-.btn:hover {
-  cursor: pointer;
-}
-
-.SNS {
-  width: 80%;
-  /* margin: 1.875rem 15%; */
-  text-align: center;
-  margin: 5% auto;
-}
-
-.SNS p {
-  font-size: 0.5rem;
-}
-
-.logos {
-  margin: 0.625rem auto;
-  width: 80%;
-  display: flex;
-}
-
-.logoFolder {
-  width: 40%;
-  /* height: 10em; */
-  margin: auto;
-}
-
-.logo {
-  height: 3.125rem;
-  width: 3.125rem;
-  /* float: left; */
-  box-shadow: 0.5rem 0.5rem 1.5rem #cccccc, -0.5rem -0.5rem 1.5rem #ffffff;
-  padding: 0.625rem;
-  border-radius: 1.25rem;
-  margin: auto;
-  justify-content: center;
-}
-
-p {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #858585;
-  margin: 0;
-}
-
-.toggle {
-  position: relative;
-  width: 50%;
-  height: 2rem;
-  border-radius: 1.25rem;
-  overflow: hidden;
-  cursor: pointer;
-  box-shadow: 0.5rem 0.5rem 1.5rem #cccccc, -0.5rem -0.5rem 1.5rem #ffffff;
-}
-.toggle input[type="checkbox"] {
-  display: none;
-}
-.toggle:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  background: #f2b6c5;
-  -webkit-transition: 0.2s ease-out;
-  transition: 0.2s ease-out;
-}
-.toggle:after {
-  content: "CANVAS";
-  position: absolute;
-  top: 0.2rem;
-  left: 0.18rem;
-  width: 60%;
-  height: 80%;
-  display: block;
-  border-radius: 1.25rem;
-  background: #fff;
-  -webkit-transition: 0.2s ease-out;
-  transition: 0.2s ease-out;
-  text-align: center;
-  padding: 0.15rem 0 0;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #f2b6c5;
-  box-sizing: border-box;
-}
-.toggle.checked:before {
-  background: #9ed5ff;
-}
-.toggle.checked:after {
-  content: "WATER";
-  left: 37%;
-  color: #9ed5ff;
-  padding: 0.15rem 0 0;
-}
-
-input[type="range"] {
-  -webkit-appearance: none;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  background-color: red;
-  height: 2.125rem;
-  width: 5px;
-}
-
-@media only screen and (max-width: 599px) {
-  .colorSection {
-    display: none;
-  }
-}
-</style>
