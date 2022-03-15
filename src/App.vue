@@ -1,8 +1,11 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-  <!-- <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
   <header>
     <h1>WATER CANVAS</h1>
+    <div class="menuBtn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </header>
   <div style="text-align: center; height:100%">
     <div v-show="isLoading">
@@ -18,14 +21,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { ref, provide, reactive } from 'vue';
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-// import HelloWorld from './components/HelloWorld.vue'
 import DrawCanvas from './components/DrawCanvas.vue'
 import ColorSetting from './components/ColorSetting.vue'
 import drawCircles from './tsfiles/drawCirclesClass'
 import colorSelector from './tsfiles/colorSelector';
 import { ProductKey } from './tsfiles/symbols';
+import $ from 'jquery';
+
 export default defineComponent({
   name: 'Home',
   components: {
@@ -77,6 +79,11 @@ export default defineComponent({
       isLoading,
     }
   },
+  mounted(){
+    $(".menuBtn").click(function () {
+    $(".menuBtn").toggleClass('active');
+});
+  }
 })
 </script>
 <style>
@@ -100,11 +107,65 @@ header {
   text-align: left;
   color: #858585;
   padding-left: 5%;
+  background-color: #fafaf7;
 }
 
 header h1 {
   padding: 0.5rem;
   margin-bottom: 0.6rem;
+}
+
+.menuBtn{
+position: relative;/*ボタン内側の基点となるためrelativeを指定*/
+background:#57a2c7;
+cursor: pointer;
+width: 50px;
+height:50px;
+border-radius: 5px;
+}
+
+/*ボタン内側*/
+.menuBtn span{
+    display: inline-block;
+    transition: all .4s;/*アニメーションの設定*/
+    position: absolute;
+    left: 14px;
+    height: 3px;
+    border-radius: 2px;
+background: #fff;
+  width: 45%;
+  }
+
+.menuBtn span:nth-of-type(1) {
+top:15px;
+}
+
+.menuBtn span:nth-of-type(2) {
+top:23px;
+}
+
+.menuBtn span:nth-of-type(3) {
+top:31px;
+}
+
+/*activeクラスが付与されると線が回転して×に*/
+
+.menuBtn.active span:nth-of-type(1) {
+    top: 18px;
+    left: 18px;
+    transform: translateY(6px) rotate(-45deg);
+    width: 30%;
+}
+
+.menuBtn.active span:nth-of-type(2) {
+opacity: 0;/*真ん中の線は透過*/
+}
+
+.menuBtn.active span:nth-of-type(3){
+    top: 30px;
+    left: 18px;
+    transform: translateY(-6px) rotate(45deg);
+    width: 30%;
 }
 
 .loader {
@@ -121,6 +182,7 @@ header h1 {
   -ms-transform: translateZ(0);
   transform: translateZ(0);
 }
+
 @-webkit-keyframes load5 {
   0%,
   100% {
@@ -197,6 +259,7 @@ header h1 {
       -2.6em 0em 0 0em rgba(255, 255, 255, 0.7), -1.8em -1.8em 0 0em #7715c6aa;
   }
 }
+
 @keyframes load5 {
   0%,
   100% {
@@ -273,4 +336,5 @@ header h1 {
       -2.6em 0em 0 0em rgba(255, 255, 255, 0.7), -1.8em -1.8em 0 0em #7715c6aa;
   }
 }
+
 </style>
