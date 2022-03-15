@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1>WATER CANVAS</h1>
+    <div class="title">WATER CANVAS</div>
     <div class="menuBtn">
       <span></span>
       <span></span>
@@ -104,66 +104,22 @@ canvas {
 header {
   text-align: left;
   color: #858585;
-  padding-left: 5%;
   background-color: #fafaf7;
+  height: 5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-header h1 {
-  padding: 0.5rem;
-  margin-bottom: 0.6rem;
+.title {
+  padding-left: 1rem;
+  /* margin-bottom: 0.6rem; */
+  font-size: 2em;
+  display:inline-flex;
 }
 
 .menuBtn{
-position: relative;/*ボタン内側の基点となるためrelativeを指定*/
-background:#57a2c7;
-cursor: pointer;
-width: 50px;
-height:50px;
-border-radius: 5px;
-}
-
-/*ボタン内側*/
-.menuBtn span{
-    display: inline-block;
-    transition: all .4s;/*アニメーションの設定*/
-    position: absolute;
-    left: 14px;
-    height: 3px;
-    border-radius: 2px;
-background: #fff;
-  width: 45%;
-  }
-
-.menuBtn span:nth-of-type(1) {
-top:15px;
-}
-
-.menuBtn span:nth-of-type(2) {
-top:23px;
-}
-
-.menuBtn span:nth-of-type(3) {
-top:31px;
-}
-
-/*activeクラスが付与されると線が回転して×に*/
-
-.menuBtn.active span:nth-of-type(1) {
-    top: 18px;
-    left: 18px;
-    transform: translateY(6px) rotate(-45deg);
-    width: 30%;
-}
-
-.menuBtn.active span:nth-of-type(2) {
-opacity: 0;/*真ん中の線は透過*/
-}
-
-.menuBtn.active span:nth-of-type(3){
-    top: 30px;
-    left: 18px;
-    transform: translateY(-6px) rotate(45deg);
-    width: 30%;
+  display: none;
 }
 
 .loader {
@@ -332,6 +288,66 @@ opacity: 0;/*真ん中の線は透過*/
       0em 2.5em 0 0em rgba(255, 255, 255, 0.2),
       -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.5),
       -2.6em 0em 0 0em rgba(255, 255, 255, 0.7), -1.8em -1.8em 0 0em #7715c6aa;
+  }
+}
+
+@media only screen and ( max-width:599px) {
+
+  .title{
+    font-size: 1.5em;
+  }
+
+  .menuBtn{
+    position: relative;
+    cursor: pointer;
+    width: 50px;
+    height:50px;
+    border-radius: 5px;
+    display: inline-flex;
+    margin-right: 1em;
+  }
+  /*ボタン内側*/
+  .menuBtn span{
+    display: inline-block;
+    transition: all .4s;
+    position: absolute;
+    left: 14px;
+    height: 3px;
+    border-radius: 2px;
+    background: #858585;
+    width: 45%;
+  }
+
+  .menuBtn span:nth-of-type(1) {
+    top:15px;
+  }
+
+  .menuBtn span:nth-of-type(2) {
+    top:23px;
+  }
+
+  .menuBtn span:nth-of-type(3) {
+    top:31px;
+  }
+
+/*activeクラスが付与されると線が回転して×に*/
+
+  .menuBtn.active span:nth-of-type(1) {
+    top: 18px;
+    left: 18px;
+    transform: translateY(6px) rotate(-45deg);
+    width: 30%;
+  }
+
+  .menuBtn.active span:nth-of-type(2) {
+    opacity: 0;/*真ん中の線は透過*/
+  }
+
+  .menuBtn.active span:nth-of-type(3){
+    top: 30px;
+    left: 18px;
+    transform: translateY(-6px) rotate(45deg);
+    width: 30%;
   }
 }
 
