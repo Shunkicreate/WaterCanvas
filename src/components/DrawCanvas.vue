@@ -36,6 +36,7 @@ export default defineComponent({
     const autoDraw = inject('autoDraw') as Ref
     const SavedImageJudge = inject('SavedImageJudge') as Ref
     const drawAnotherPicture = inject('drawAnotherPicture') as Ref
+    const CanDraw = inject('CanDraw') as Ref
     var canvas!: p5.Element
 
     // const ChildSavedImage = inject('SavedImage') as Ref
@@ -105,34 +106,6 @@ export default defineComponent({
           });
         };
 
-        // モードがwaterの時の処理
-        if (mode.value == 'water') {
-          if (drawing.value && timeCounter.value % 2 == 0) {
-            drawEllipse()
-          }
-          p.touchMoved = () => {
-            if (!drawing.value) {
-              // console.log(drawing.value)
-              drawing.value = true;
-              // console.log(drawing.value)
-            }
-            if (timeCounter.value % 5 == 0) {
-              createNewEllipse()
-            }
-          };
-        }
-
-        // モードがcanvasのときの処理
-        else if (mode.value == 'canvas') {
-          canvasCounter.value++;
-          p.touchMoved = () => {
-            if (canvasCounter.value % 10 == 0) {
-              createNewEllipse()
-              drawEllipse()
-            };
-          }
-        }
-
         //キャンバスの初期化関数
         if (canvasReset.value == true) {
           canvasReset.value = false;
@@ -140,40 +113,7 @@ export default defineComponent({
           p.rect(0, 0, p.width * 2, p.height * 2)
         }
 
-        //自動描画
-        if (autoDraw.value == true) {
-          if (mode.value == 'water') {
-            drawing.value = true
-          }
-          // console.log('auto draw', childDrawCircles)
-          p.fill('#fafaf7')
-          p.rect(0, 0, p.width * 2, p.height * 2)
-          for (var i = 0; i < childDrawCircles.length; i++) {
-            const elem = childDrawCircles[i]
-            // for (var j = 0; j <= i; j++) {
-            //   for (var k = j; k > 0; k--) {
-            //     // p.fill("#fafaf710")
-            //     // p.rect(0, 0, childWindowWidth, childWindowHeight)
-            //     console.log(childDrawCircles[j])
-            //     p.fill(childDrawCircles[j].h[k], childDrawCircles[j].s[k], childDrawCircles[j].b[k], childDrawCircles[i - j].a[j],)
-            //     p.ellipse(childDrawCircles[j].x[k], childDrawCircles[j].y[k], childDrawCircles[j].r[k], childDrawCircles[j].r[k],)
-            //   }
-            //     console.log("----------------------------------------------------------")
-            //   k--;
-            // }
-            for (var j = 0; j < elem.a.length; j++) {
-              p.fill(elem.h[j], elem.s[j], elem.b[j], elem.a[j],)
-              p.ellipse(elem.x[j], elem.y[j], elem.r[j], elem.r[j],)
-            }
-          }
-          autoDraw.value = !autoDraw.value
-        }
-
-        if (SavedImageJudge.value == true) {
-          p.saveCanvas(canvas, 'WaterCanvas', 'jpg')
-          SavedImageJudge.value = !SavedImageJudge.value
-        }
-
+        //自動描画関数
         async function waitAndDraw(t: number) {
           // console.log('before', timeCounter.value)
           await new Promise(resolve => setTimeout(resolve, t))
@@ -189,23 +129,75 @@ export default defineComponent({
           // console.log('after', timeCounter.value, drawAnotherPicture.value)
         }
 
-        //取ってきたデータの自動描画
-        if (drawAnotherPicture.value == true) {
-          drawAnotherPicture.value = false
-          if (timeCounter.value % 2 == 0) {
-            // for (var i = 0; i < childDrawCircles.length; i++) {
-            // for (j = 0; j < i; j++) {
-            // var k = i - j
-            // p.fill(childDrawCircles[j].h[k], childDrawCircles[j].s[k], childDrawCircles[j].b[k], childDrawCircles[j].a[k],)
-            // p.ellipse(childDrawCircles[j].x[k], childDrawCircles[j].y[k], childDrawCircles[j].r[k], childDrawCircles[j].r[k],)
-            waitAndDraw(10000) //ms
-            // }
-            // }
+        //CanDrawの分岐 描けないとき
+        if (CanDraw.value == false) {
+
+          //取ってきたデータの自動描画
+          if (drawAnotherPicture.value == true) {
+            drawAnotherPicture.value = false
+            if (timeCounter.value % 2 == 0) {
+              waitAndDraw(100) //ms
+            }
           }
-          // console.log('before', timeCounter.value)
-          // waitAndDraw(5000) //ms
-          // console.log('after', timeCounter.value)
         }
+
+        //CanDrawの分岐 描けるとき
+        else if (CanDraw.value == true) {
+
+          //waterモードの時
+          if (mode.value == 'water') {
+            if (drawing.value && timeCounter.value % 2 == 0) {
+              drawEllipse()
+            }
+            p.touchMoved = () => {
+              if (!drawing.value) {
+                // console.log(drawing.value)
+                drawing.value = true;
+                // console.log(drawing.value)
+              }
+              if (timeCounter.value % 5 == 0) {
+                createNewEllipse()
+              }
+            };
+            //自動描画
+            if (autoDraw.value == true) {
+              drawing.value = true
+            }
+          }
+
+          //canvasモードの時
+          else if (mode.value == 'canvas') {
+            canvasCounter.value++;
+            p.touchMoved = () => {
+              if (canvasCounter.value % 10 == 0) {
+                createNewEllipse()
+                drawEllipse()
+              };
+            }
+          }
+
+          //自動描画
+          if (autoDraw.value == true) {
+            p.fill('#fafaf7')
+            p.rect(0, 0, p.width * 2, p.height * 2)
+            for (var i = 0; i < childDrawCircles.length; i++) {
+              const elem = childDrawCircles[i]
+              for (var j = 0; j < elem.a.length; j++) {
+                p.fill(elem.h[j], elem.s[j], elem.b[j], elem.a[j],)
+                p.ellipse(elem.x[j], elem.y[j], elem.r[j], elem.r[j],)
+              }
+            }
+            autoDraw.value = !autoDraw.value
+          }
+        }
+
+
+
+        if (SavedImageJudge.value == true) {
+          p.saveCanvas(canvas, 'WaterCanvas', 'jpg')
+          SavedImageJudge.value = !SavedImageJudge.value
+        }
+
       };
     };
 
