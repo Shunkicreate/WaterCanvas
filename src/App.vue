@@ -13,7 +13,9 @@
     </div>
     <div  class="home" v-show="!isLoading">
       <DrawCanvas></DrawCanvas>
-      <ColorSetting></ColorSetting>
+      <div class="menu">
+        <ColorSetting></ColorSetting>
+      </div>
     </div>
   </div>
 </template>
@@ -79,8 +81,9 @@ export default defineComponent({
   },
   mounted(){
     $(".menuBtn").click(function () {
-    $(".menuBtn").toggleClass('active');
-});
+      $(".menuBtn").toggleClass('active');
+      $('.menu').toggleClass('fade')
+    });
   }
 })
 </script>
@@ -96,7 +99,7 @@ export default defineComponent({
 header {
   text-align: left;
   color: #858585;
-  background-color: #fafaf7;
+  background-color: #f5f5f5;
   height: 4em;
   display: flex;
   justify-content: space-between;
@@ -135,8 +138,9 @@ header {
 
 canvas {
   border-radius: 1.5rem;
-  background: #fafaf7;
-  box-shadow: 15px 15px 20px #d9d7d4, -15px -15px 20px #fff;
+  background: #f5f5f5;
+  box-shadow: 0.75rem 0.75rem 1.5rem #cccccc,-0.75rem -0.75rem 1.5rem #ffffff;
+  display: inline-flex;
 }
 
 @-webkit-keyframes load5 {
@@ -352,6 +356,23 @@ canvas {
 
   .home {
     justify-content: center;
+  }
+
+  .menu {
+    visibility: hidden;
+    opacity: 0;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: all .5s;
+    z-index: 2;
+  }
+
+  .menu.fade {
+    visibility: visible;
+    opacity: 1;
   }
 }
 

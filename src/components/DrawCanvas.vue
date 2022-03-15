@@ -1,5 +1,5 @@
 <template>
-  <div id="drawCanvas" style="width:80%;"></div>
+  <div id="drawCanvas" ></div>
 </template>
 
 <script lang="ts">
