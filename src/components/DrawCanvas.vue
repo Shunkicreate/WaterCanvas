@@ -130,7 +130,7 @@ export default defineComponent({
 
         //CanDrawの分岐 描けないとき
         if (CanDraw.value == false) {
-      console.log('candraw is true')
+      // console.log('candraw is true')
 
 
           //取ってきたデータの自動描画
