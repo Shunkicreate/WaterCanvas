@@ -103,44 +103,44 @@ export default defineComponent({
           });
         };
 
-          // モードがwaterの時の処理
-          if (mode.value == 'water') {
-            if (drawing.value && timeCounter.value % 2 == 0) {
-              drawEllipse()
+        // モードがwaterの時の処理
+        if (mode.value == 'water') {
+          if (drawing.value && timeCounter.value % 2 == 0) {
+            drawEllipse()
+          }
+          p.touchMoved = () => {
+            if (!drawing.value) {
+              // console.log(drawing.value)
+              drawing.value = true;
+              // console.log(drawing.value)
             }
-            p.touchMoved = () => {
-              if (!drawing.value) {
-                // console.log(drawing.value)
-                drawing.value = true;
-                // console.log(drawing.value)
-              }
-              if (timeCounter.value % 5 == 0) {
-                createNewEllipse()
-              }
+            if (timeCounter.value % 5 == 0) {
+              createNewEllipse()
+            }
+          };
+        }
+
+        // モードがcanvasのときの処理
+        else if (mode.value == 'canvas') {
+          canvasCounter.value++;
+          p.touchMoved = () => {
+            if (canvasCounter.value % 10 == 0) {
+              createNewEllipse()
+              drawEllipse()
             };
           }
+        }
 
-          // モードがcanvasのときの処理
-          else if (mode.value == 'canvas') {
-            canvasCounter.value++;
-            p.touchMoved = () => {
-              if (canvasCounter.value % 10 == 0) {
-                createNewEllipse()
-                drawEllipse()
-              };
-            }
-          }
-
-          //キャンバスの初期化関数
-          if (canvasReset.value == true) {
-            canvasReset.value = false;
-            p.fill('#fafaf7')
-            p.rect(0, 0, p.width * 2, p.height * 2)
-          }
+        //キャンバスの初期化関数
+        if (canvasReset.value == true) {
+          canvasReset.value = false;
+          p.fill('#fafaf7')
+          p.rect(0, 0, p.width * 2, p.height * 2)
+        }
 
         //自動描画
         if (autoDraw.value == true) {
-          if( mode.value == 'water'  ){
+          if (mode.value == 'water') {
             drawing.value = true
           }
           // console.log('auto draw', childDrawCircles)
@@ -162,15 +162,15 @@ export default defineComponent({
             for (var j = 0; j < elem.a.length; j++) {
               p.fill(elem.h[j], elem.s[j], elem.b[j], elem.a[j],)
               p.ellipse(elem.x[j], elem.y[j], elem.r[j], elem.r[j],)
-              }
             }
+          }
           autoDraw.value = !autoDraw.value
-          }
+        }
 
-        if (SavedImageJudge.value == true){
-          p.saveCanvas(canvas,'WaterCanvas','jpg')
+        if (SavedImageJudge.value == true) {
+          p.saveCanvas(canvas, 'WaterCanvas', 'jpg')
           SavedImageJudge.value = !SavedImageJudge.value
-          }
+        }
       };
     };
 

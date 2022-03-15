@@ -3,55 +3,55 @@
     <div class="style colors">
       <div class="picker">
         <div class="colorBox random">
-          <img class="color sample" src="../assets/WaterCanvas (1).jpg">
+          <img class="color sample" src="../assets/WaterCanvas (1).jpg" />
           <div class="color text">
             <p>random</p>
           </div>
         </div>
         <div class="colorBox red">
-          <img class="color sample" src="../assets/WaterCanvas (1).jpg">
+          <img class="color sample" src="../assets/WaterCanvas (1).jpg" />
           <div class="color text">
             <p>red</p>
           </div>
         </div>
         <div class="colorBox orange">
-          <img class="color sample" src="../assets/WaterCanvas (1).jpg">
+          <img class="color sample" src="../assets/WaterCanvas (1).jpg" />
           <div class="color text">
             <p>orange</p>
           </div>
         </div>
         <div class="colorBox yellow">
-          <img class="color sample" src="../assets/WaterCanvas (1).jpg">
+          <img class="color sample" src="../assets/WaterCanvas (1).jpg" />
           <div class="color text">
             <p>yellow</p>
           </div>
         </div>
         <div class="colorBox green">
-          <img class="color sample" src="../assets/WaterCanvas (1).jpg">
+          <img class="color sample" src="../assets/WaterCanvas (1).jpg" />
           <div class="color text">
             <p>green</p>
           </div>
         </div>
         <div class="colorBox lightblue">
-          <img class="color sample" src="../assets/WaterCanvas (1).jpg">
+          <img class="color sample" src="../assets/WaterCanvas (1).jpg" />
           <div class="color text">
             <p>lightblue</p>
           </div>
         </div>
         <div class="colorBox blue">
-          <img class="color sample" src="../assets/WaterCanvas (1).jpg">
+          <img class="color sample" src="../assets/WaterCanvas (1).jpg" />
           <div class="color text">
             <p>blue</p>
           </div>
         </div>
         <div class="colorBox purple">
-          <img class="color sample" src="../assets/WaterCanvas (1).jpg">
+          <img class="color sample" src="../assets/WaterCanvas (1).jpg" />
           <div class="color text">
             <p>purple</p>
           </div>
         </div>
         <div class="colorBox pink">
-          <img class="color sample" src="../assets/WaterCanvas (1).jpg">
+          <img class="color sample" src="../assets/WaterCanvas (1).jpg" />
           <div class="color text">
             <p>pink</p>
           </div>
@@ -59,7 +59,7 @@
       </div>
       <div class="toolBar">
         <div class="bar blur">
-          <input type="range" id = "blur" min="0" max="100" step="1" value="50">
+          <input type="range" id="blur" min="0" max="100" step="1" value="50" />
           <p>Blur</p>
         </div>
         <span id="currentValue"></span>
@@ -135,6 +135,7 @@ export default defineComponent({
     const SavedImageJudge = inject('SavedImageJudge') as Ref
     const blurValue = inject('blurValue') as Ref
     const isLoading = inject('isLoading') as Ref
+    const drawAnotherPicture = inject('drawAnotherPicture') as Ref
 
     function generate() {
       ResetCanvas()
@@ -191,10 +192,11 @@ export default defineComponent({
       axios
         .get('https://watercanvas.herokuapp.com/randomget')
         .then((res: AxiosResponse<drawCircles[]>) => {
-          console.log("data",res.data)
+          console.log("data", res.data)
           res.data.forEach((element) => {
             childDrawCircles.push(element)
             isLoading.value = false
+            drawAnotherPicture.value = true
           })
         })
         .catch(
@@ -206,7 +208,7 @@ export default defineComponent({
       generate()
     }
 
-    function blurChange(){
+    function blurChange() {
       // const blurValue.value = blurNum
     }
 
@@ -218,6 +220,7 @@ export default defineComponent({
       SaveImage,
       WhatIsThis,
       Watch,
+      drawAnotherPicture,
       mode
     }
   },
@@ -267,7 +270,7 @@ export default defineComponent({
 }
 
 .colorBox {
-  flex:1 0 30%;
+  flex: 1 0 30%;
   border: black solid;
 }
 

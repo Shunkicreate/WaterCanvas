@@ -49,6 +49,7 @@ export default defineComponent({
     const autoDraw = ref(false)
     const blurValue = 0
     const isLoading = ref(false)
+    const drawAnotherPicture = ref(false)
     provide('blurValue',blurValue);
     // const postError = ref(true)
     function disableScroll(event: any) {
