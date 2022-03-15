@@ -77,7 +77,7 @@
       </div>
       <div class="actions">
         <div class="action btn candraw" @click="ChangeCanDraw()">
-          <p>Can Draw: {{CanDraw}}</p>
+          <p>Can Draw: {{ CanDraw }}</p>
         </div>
         <div class="action btn what">
           <a @click="WhatIsThis">
@@ -118,6 +118,7 @@ import { generatePicture } from "../tsfiles/generatePicture";
 import { ProductKey } from '../tsfiles/symbols'
 import $ from 'jquery';
 import axios, { AxiosResponse } from 'axios'
+import GetFromDB from '../tsfiles/getFromDb'
 
 
 export default defineComponent({
@@ -139,7 +140,7 @@ export default defineComponent({
     const drawAnotherPicture = inject('drawAnotherPicture') as Ref
     const CanDraw = inject('CanDraw') as Ref
 
-    function generate(color:number) {
+    function generate(color: number) {
       console.log('watch')
       ResetCanvas()
       generatePicture(childWindowWidth.value, childWindowHeight.value, color).forEach((element) => {
@@ -195,34 +196,57 @@ export default defineComponent({
       CanDraw.value = false
       ResetCanvas()
       isLoading.value = true  //load circle and disable display
-      // axios
-      //   .get('https://watercanvas.herokuapp.com/randomget')
-      //   .then((res: AxiosResponse<drawCircles[]>) => {
-      //     console.log("data", res.data, typeof (res.data))
-      //     res.data.forEach((element) => {
+      // const axiosBase = require('axios');
+      // const axios = axiosBase.create({
+      //   baseURL: 'https://watercanvas.herokuapp.com', // バックエンドB のURL:port を指定する
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   responseType: 'json'
+      // });
+      axios
+        .get<GetFromDB>(`https://watercanvas.herokuapp.com/randomgets`, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        // .get<drawCircles[]>('https://watercanvas.herokuapp.com/randomget')
+        .then((res: AxiosResponse<GetFromDB>) => {
+          console.log("data", typeof (res.data.data), res.data.data)
+          var newData: drawCircles[] = res.data.data
+          // if (typeof res.data == 'string') {
+          //   // const newData = res.data<drawCircles[]>
+          //   // newData = res.data.replace()
+          // }
+          // else {
+          //   newData = res.data
+          // }
+          // console.log(res)
+          newData.forEach((element) => {
 
-      //       childDrawCircles.push(element)
-      //       isLoading.value = false
+            childDrawCircles.push(element)
 
-      //       drawAnotherPicture.value = true
-      //     })
-      //       // generate(2)
-      //   })
-      //   .catch(
-      //     error => {
-      //       console.log(error)
+          })
+          console.log(childDrawCircles)
+          isLoading.value = false
+          drawAnotherPicture.value = true
+          // generate(2)
+        })
+        .catch(
+          error => {
+            console.log(error)
 
-      //       // generate(2)
-      //       drawAnotherPicture.value = true
-      //       isLoading.value = false
-      //     }
-      //   )
-            generate(1)
+            // generate(2)
             drawAnotherPicture.value = true
             isLoading.value = false
+          }
+        )
+      // generate(1)
+      // drawAnotherPicture.value = true
+      // isLoading.value = false
     }
 
-    function ChangeCanDraw(){
+    function ChangeCanDraw() {
       ResetCanvas()
       CanDraw.value = !CanDraw.value
     }
@@ -292,14 +316,14 @@ export default defineComponent({
 .colorBox {
   flex: 1 0 30%;
   box-shadow: 0.9rem 0.9rem 1.25rem #d9d7d4, -0.9rem -0.9rem 1.25rem #fff;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
 }
 
 .sample {
   width: 2.8rem;
   height: 1rem;
   object-fit: cover;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
 .color p {
@@ -456,22 +480,20 @@ p {
   padding: 0.15rem 0 0;
 }
 
-input[type=range]{
+input[type="range"] {
   -webkit-appearance: none;
 }
 
-input[type=range]::-webkit-slider-thumb {
+input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   background-color: red;
   height: 2.125rem;
   width: 5px;
 }
 
-
-@media only screen and (max-width: 599px){
+@media only screen and (max-width: 599px) {
   .colorSection {
-  display: none;
-
-}
+    display: none;
+  }
 }
 </style>
