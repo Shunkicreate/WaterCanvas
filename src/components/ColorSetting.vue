@@ -129,8 +129,8 @@ export default defineComponent({
     const demoData = new drawCircles(0, 0, 0, 0, 0, 0, 0,)
     const childDrawCircles = inject(ProductKey, [demoData]);
     const canvasReset = inject('canvasReset') as Ref
-    const childWindowWidth = inject('WindowWidth') as number
-    const childWindowHeight = inject('WindowHeight') as number
+    const childWindowWidth = inject('WindowWidth') as Ref
+    const childWindowHeight = inject('WindowHeight') as Ref
     // const childWindowColor= inject('WindowColor') as number
     const autoDraw = inject('autoDraw') as Ref
     const SavedImageJudge = inject('SavedImageJudge') as Ref
@@ -141,7 +141,7 @@ export default defineComponent({
 
     function generate(color:number) {
       ResetCanvas()
-      generatePicture(childWindowWidth, childWindowHeight, color).forEach((element) => {
+      generatePicture(childWindowWidth.value, childWindowHeight.value, color).forEach((element) => {
         childDrawCircles.push(element)
       })
       if (autoDraw.value == false) {
