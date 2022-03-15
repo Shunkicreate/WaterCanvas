@@ -20,7 +20,7 @@ export function algorithm4(width:number, height:number){
           }
           newData.x.push(newData.x[j])
           newData.y.push(newData.y[j])
-          newData.r.push(newData.r[j] + Math.random() * 3)
+          newData.r.push(newData.r[j] + Math.random() * 20)
           newData.h.push(newData.h[j])
           newData.s.push(newData.s[j])
           newData.b.push(newData.b[j])

@@ -40,11 +40,12 @@ export default defineComponent({
 
     // const ChildSavedImage = inject('SavedImage') as Ref
 
-
+    const wait = async (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
     const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
     const output = () => {
       timeCounter.value += 1;
     }
+
 
     //50msごとにカウンターを設置
     setInterval(output, 50)
@@ -173,14 +174,37 @@ export default defineComponent({
           SavedImageJudge.value = !SavedImageJudge.value
         }
 
+        async function waitAndDraw(t: number) {
+          // console.log('before', timeCounter.value)
+          await new Promise(resolve => setTimeout(resolve, t))
+          for (var i = 0; i < childDrawCircles.length; i++) {
+            await new Promise(resolve => setTimeout(resolve, t))
+            for (j = 0; j < i; j++) {
+              var k = i - j
+              p.fill(childDrawCircles[j].h[k], childDrawCircles[j].s[k], childDrawCircles[j].b[k], childDrawCircles[j].a[k],)
+              p.ellipse(childDrawCircles[j].x[k], childDrawCircles[j].y[k], childDrawCircles[j].r[k], childDrawCircles[j].r[k],)
+            }
+            console.log('write')
+          }
+          // console.log('after', timeCounter.value, drawAnotherPicture.value)
+        }
+
         //取ってきたデータの自動描画
         if (drawAnotherPicture.value == true) {
+          drawAnotherPicture.value = false
           if (timeCounter.value % 2 == 0) {
-            console.log('before',timeCounter.value)
-            sleep(100)
-            console.log('after',timeCounter.value)
+            // for (var i = 0; i < childDrawCircles.length; i++) {
+            // for (j = 0; j < i; j++) {
+            // var k = i - j
+            // p.fill(childDrawCircles[j].h[k], childDrawCircles[j].s[k], childDrawCircles[j].b[k], childDrawCircles[j].a[k],)
+            // p.ellipse(childDrawCircles[j].x[k], childDrawCircles[j].y[k], childDrawCircles[j].r[k], childDrawCircles[j].r[k],)
+            waitAndDraw(10000) //ms
+            // }
+            // }
           }
-
+          // console.log('before', timeCounter.value)
+          // waitAndDraw(5000) //ms
+          // console.log('after', timeCounter.value)
         }
       };
     };
