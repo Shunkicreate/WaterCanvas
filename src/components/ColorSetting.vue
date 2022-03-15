@@ -122,21 +122,17 @@ import { ProductKey } from '../tsfiles/symbols'
 import $ from 'jquery';
 import axios, { AxiosResponse } from 'axios'
 import GetFromDB from '../tsfiles/getFromDb'
-import unlockUrl from '../assets/unlock.jpg?url'
-
 
 export default defineComponent({
   name: "ColorSetting",
   setup() {
     const childColorSelector = inject('ColorData') as colorSelector
     const mode = inject('mode') as Ref
-    // let childDrawCircles = inject('CircleData') as drawCircles[]
     const demoData = new drawCircles(0, 0, 0, 0, 0, 0, 0,)
     const childDrawCircles = inject(ProductKey, [demoData]);
     const canvasReset = inject('canvasReset') as Ref
     const childWindowWidth = inject('WindowWidth') as Ref
     const childWindowHeight = inject('WindowHeight') as Ref
-    // const childWindowColor= inject('WindowColor') as number
     const autoDraw = inject('autoDraw') as Ref
     const SavedImageJudge = inject('SavedImageJudge') as Ref
     const blurValue = inject('blurValue') as Ref
@@ -180,7 +176,6 @@ export default defineComponent({
 
     function SaveImage() {
       SavedImageJudge.value = !SavedImageJudge.value
-      // pyDataJudge.value = !pyDataJudge.value
       console.log(SavedImageJudge.value)
       axios
         .post('https://watercanvas.herokuapp.com/post', childDrawCircles)
@@ -201,80 +196,37 @@ export default defineComponent({
       CanDraw.value = false
       ResetCanvas()
       isLoading.value = true  //load circle and disable display
-      // const axiosBase = require('axios');
-      // const axios = axiosBase.create({
-      //   baseURL: 'https://watercanvas.herokuapp.com', // バックエンドB のURL:port を指定する
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   responseType: 'json'
-      // });
       axios
         .get<GetFromDB>(`https://watercanvas.herokuapp.com/randomgets`, {
           headers: {
             'Content-Type': 'application/json',
           },
         })
-        // .get<drawCircles[]>('https://watercanvas.herokuapp.com/randomget')
         .then((res: AxiosResponse<GetFromDB>) => {
           console.log("data", typeof (res.data.data), res.data.data)
           const newData: drawCircles[] = res.data.data
-          // if (typeof res.data == 'string') {
-          //   // const newData = res.data<drawCircles[]>
-          //   // newData = res.data.replace()
-          // }
-          // else {
-          //   newData = res.data
-          // }
-          // console.log(res)
           newData.forEach((element) => {
 
             childDrawCircles.push(element)
 
           })
-          console.log("childDrawCircles is: ", childDrawCircles)
-          var str1 = childDrawCircles.toString();
-          // alert(str1);
-
-          //セッションストレージに変数str1をkey名「tostr」で書き込む
-          sessionStorage.setItem("tostr", str1);
-
-          //ストレージからkey名「tostr」のデータを変数str2に読み込む
-          var str2 = sessionStorage.getItem("tostr");
-
-          //配列arrを作成し、読み込んだデータを分割して格納する
-          var arr = new Array();
-          // arr = str2.split(",")
           isLoading.value = false
           drawAnotherPicture.value = true
-          // generate(2)
+          generate(Math.floor(Math.random()*9))
         })
         .catch(
           error => {
             console.log(error)
-
-            // generate(2)
+            generate(Math.floor(Math.random()*9))
             drawAnotherPicture.value = true
             isLoading.value = false
           }
         )
-      // generate(1)
-      // drawAnotherPicture.value = true
-      // isLoading.value = false
     }
 
     function ChangeCanDraw() {
       ResetCanvas()
       CanDraw.value = !CanDraw.value
-      // if (CanDraw.value) {
-      //   changeTwoPic.value = "src/assets/unlock.png"
-      // } else if(!CanDraw.value){
-      //   changeTwoPic.value = "src/assets/lock.png"
-      // }
-    }
-
-    function blurChange() {
-      // const blurValue.value = blurNum
     }
 
     return {
@@ -307,5 +259,3 @@ export default defineComponent({
 
 });
 </script>
-
-
