@@ -217,12 +217,12 @@ export default defineComponent({
 
             drawAnotherPicture.value = true
           })
-            generate()
+            // generate()
         })
         .catch(
           error => {
             console.log(error)
-            generate()
+            // generate()
 
             drawAnotherPicture.value = true
             isLoading.value = false
@@ -273,11 +273,13 @@ export default defineComponent({
 .style {
   background: #fafaf7;
   box-shadow: 0.9rem 0.9rem 1.25rem #d9d7d4, -0.9rem -0.9rem 1.25rem #fff;
+  display: inline-flex;
 }
 
 .colorSection {
   width: 32%;
   float: left;
+  display: inline-flex;
 }
 
 .colors {

@@ -7,11 +7,11 @@
       <span></span>
     </div>
   </header>
-  <div class="home" style="text-align: center; height:100%">
+  <div  style="text-align: center; height:100%">
     <div v-show="isLoading">
       <div class="loader"></div>
     </div>
-    <div v-show="!isLoading">
+    <div  class="home" v-show="!isLoading">
       <DrawCanvas></DrawCanvas>
       <ColorSetting></ColorSetting>
     </div>
@@ -95,13 +95,6 @@ export default defineComponent({
   color: #2c3e50;
 }
 
-canvas {
-  display: inline-flex;
-  border-radius: 1.5rem;
-  background: #fafaf7;
-  box-shadow: 15px 15px 20px #d9d7d4, -15px -15px 20px #fff;
-}
-
 header {
   text-align: left;
   color: #858585;
@@ -110,10 +103,6 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.home {
-  display: flex;
 }
 
 .title {
@@ -140,6 +129,18 @@ header {
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
+}
+
+.home {
+  display: flex;
+  justify-content: space-around;
+}
+
+canvas {
+  display: inline-flex;
+  border-radius: 1.5rem;
+  background: #fafaf7;
+  box-shadow: 15px 15px 20px #d9d7d4, -15px -15px 20px #fff;
 }
 
 @-webkit-keyframes load5 {
@@ -334,8 +335,6 @@ header {
   .menuBtn span:nth-of-type(3) {
     top:31px;
   }
-
-/*activeクラスが付与されると線が回転して×に*/
 
   .menuBtn.active span:nth-of-type(1) {
     top: 18px;
