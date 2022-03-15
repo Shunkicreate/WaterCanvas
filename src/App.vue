@@ -134,11 +134,9 @@ header {
 }
 
 canvas {
-  display: inline-flex;
   border-radius: 1.5rem;
   background: #fafaf7;
   box-shadow: 15px 15px 20px #d9d7d4, -15px -15px 20px #fff;
-  display: inline-flex;
 }
 
 @-webkit-keyframes load5 {

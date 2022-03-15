@@ -1,5 +1,5 @@
 <template>
-  <div id="drawCanvas" style="display:flex; align-item:stretch;"></div>
+  <div id="drawCanvas" style="height"></div>
 </template>
 
 <script lang="ts">

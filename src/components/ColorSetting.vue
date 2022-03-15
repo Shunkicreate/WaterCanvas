@@ -1,5 +1,5 @@
 <template>
-  <div class="colorSection">
+  <div class="colorSection" id="colorSection">
     <div class="style colors">
       <div class="picker">
         <div class="colorBox random" @click="generate(1)">
@@ -59,7 +59,7 @@
       </div>
       <div class="toolBar">
         <div class="bar blur">
-          <input type="range" id="blur" min="0" max="100" step="1" value="50" />
+          <input class="blurChange" type="range" id="blur" min="0" max="100" step="1" value="50" />
           <p>Blur</p>
         </div>
         <span id="currentValue"></span>
@@ -258,6 +258,7 @@ export default defineComponent({
 <style>
 .colorSection {
   display: inline-flex;
+  /* max-width: ; */
 }
 
 .style {
@@ -450,9 +451,22 @@ p {
   padding: 0.15rem 0 0;
 }
 
+input[type=range]{
+  -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-color: red;
+  height: 2.125rem;
+  width: 5px;
+}
+
+
 @media only screen and (max-width: 599px){
   .colorSection {
   display: none;
+
 }
 }
 </style>
