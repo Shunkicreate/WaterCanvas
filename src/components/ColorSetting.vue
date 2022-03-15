@@ -100,7 +100,9 @@
         </div>
         <div class="logos">
           <div class="logoFolder">
-            <img src="../assets/Instagram.png" class="logo instagram" />
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener">
+              <img src="../assets/Instagram.png" class="logo instagram" />
+            </a>
           </div>
           <div class="logoFolder">
             <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" target="_blank" rel="noopener">
