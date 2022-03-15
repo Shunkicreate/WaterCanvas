@@ -130,13 +130,15 @@ export default defineComponent({
 
         //CanDrawの分岐 描けないとき
         if (CanDraw.value == false) {
+      console.log('candraw is true')
+
 
           //取ってきたデータの自動描画
           if (drawAnotherPicture.value == true) {
             drawAnotherPicture.value = false
-            if (timeCounter.value % 2 == 0) {
+            // if (timeCounter.value % 2 == 0) {
               waitAndDraw(100) //ms
-            }
+            // }
           }
         }
 
