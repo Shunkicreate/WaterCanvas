@@ -63,9 +63,9 @@
           <p>Blur</p>
         </div>
         <span id="currentValue"></span>
-        <div class="bar opacity">
+        <!-- <div class="bar opacity">
           <p>Opacity</p>
-        </div>
+        </div> -->
       </div>
       <div class="changeArea">
         <div class="toggle" @click="ChangeMode()">
@@ -86,7 +86,7 @@
         </div>
         <div class="action btn save">
           <a @click="SaveImage">
-            <p>Save Image</p>
+            <p>Save Image<img src="../assets/download.png" class="download"></p>  
           </a>
         </div>
         <div class="action btn watch" @click="Watch()">
@@ -94,7 +94,9 @@
         </div>
       </div>
       <div class="SNS">
-        <p>Post to SNS</p>
+        <div class="post">
+          <p>Post to SNS</p>
+        </div>
         <div class="logos">
           <div class="logoFolder">
             <img src="../assets/Instagram.png" class="logo instagram" />
@@ -312,19 +314,19 @@ export default defineComponent({
   justify-content: space-around;
   flex-wrap: wrap;
   align-content: space-around;
+  border-radius: 1.25rem;
+  
 }
 
 .colorBox {
-  flex: 1 0 30%;
-  
+  flex: 1 0 33%;
   border-radius: .5rem;
 }
 
 .sample {
   width: 2.8rem;
-  height: 1rem;
+  height: 1.8rem;
   object-fit: cover;
-
   margin-top: .5rem;
   border-radius: .5rem;
   box-shadow: 0.2rem 0.2rem .5rem #ccc,
@@ -347,8 +349,8 @@ export default defineComponent({
   padding-left: 1.25rem;
   margin-bottom: 1.25rem;
   background-color: #f5f5f5;
-  box-shadow: inset 0.5rem 0.5rem 1.5rem #cccccc,
-             inset -0.5rem -0.5rem 1.5rem #ffffff;
+  box-shadow: inset 0.2rem 0.2rem 1rem #cccccc,
+             inset -0.2rem -0.2rem 1rem #ffffff;
   text-align: left;
   border-radius: 1.25rem;
 }
@@ -393,9 +395,14 @@ export default defineComponent({
   cursor: pointer;
 }
 
+.download {
+  width: 1rem;
+  height: auto;
+  margin-left: .5rem;
+}
+
 .SNS {
   width: 80%;
-  /* margin: 1.875rem 15%; */
   text-align: center;
   margin: 5% auto;
 }
@@ -411,15 +418,13 @@ export default defineComponent({
 }
 
 .logoFolder {
-  width: 40%;
-  /* height: 10em; */
+  width: 30%;
   margin: auto;
 }
 
 .logo {
-  height: 3.125rem;
-  width: 3.125rem;
-  /* float: left; */
+  height: 2.8rem;
+  width: 2.8rem;
   box-shadow: 0.5rem 0.5rem 1.5rem #cccccc,
              -0.5rem -0.5rem 1.5rem #ffffff;
   padding: 0.625rem;
@@ -456,7 +461,7 @@ p {
   width: 100%;
   height: 100%;
   display: block;
-  background: #f2b6c5;
+  background: #f5f5f5;
   -webkit-transition: 0.2s ease-out;
   transition: 0.2s ease-out;
 }
@@ -469,23 +474,24 @@ p {
   height: 80%;
   display: block;
   border-radius: 1.25rem;
-  background: #fff;
+  background: #aaaab3;
   -webkit-transition: 0.2s ease-out;
   transition: 0.2s ease-out;
   text-align: center;
   padding: 0.15rem 0 0;
   font-size: 0.9rem;
   font-weight: 700;
-  color: #f2b6c5;
+  color: #f5f5f5;
   box-sizing: border-box;
 }
 .toggle.checked:before {
-  background: #9ed5ff;
+  background: #f5f5f5;
 }
 .toggle.checked:after {
   content: "WATER";
   left: 37%;
-  color: #9ed5ff;
+  color: #f5f5f5;
+  background: #98bbd9;
   padding: 0.15rem 0 0;
 }
 

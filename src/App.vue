@@ -104,12 +104,14 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: .1rem;
 }
 
 .title {
   padding-left: 1.7em;
   font-size: 2em;
   display:inline-flex;
+  font-weight: 700;
 }
 
 .menuBtn{
