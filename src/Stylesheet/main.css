@@ -58,15 +58,17 @@ canvas {
 /* 元APP.vueここまで */
 
 /* 元ColorSetting.vue */
+.wrapper {
+  height: 100vh;
+}
 .colorSection {
   display: inline-flex;
-  height: 80%;
+  height: 85%;
   /* max-width: ; */
 }
 
 .style {
   background: #f5f5f5;
-  box-shadow: 0.5rem 0.5rem 1.5rem #cccccc,-0.5rem -0.5rem 1.5rem #ffffff;
 }
 
 .colors {
@@ -502,19 +504,25 @@ input[type="range"]::-webkit-slider-thumb {
     left: 0;
     transition: all .5s;
     z-index: 2;
-    background-color: black;
+    background-color: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    align-content: center;
   }
 
   .wrapper.fade {
     visibility: visible;
-    opacity: 0.5;
+    opacity: 1;
   }
 
   .colorSection {
-    display: none;
+    visibility: hidden;
+    z-index: 3;
   }
-  .colorSection.fade {
 
+  .colorSection.fade {
+    visibility: visible;
+    opacity: 1;
   }
 
   .home{
@@ -528,5 +536,11 @@ input[type="range"]::-webkit-slider-thumb {
     margin:auto;
     margin-top: 0.5em;
   }
+}
+
+@media only screen and (min-width:1025px) {
+  .style {
+  box-shadow: 0.5rem 0.5rem 1.5rem #cccccc,-0.5rem -0.5rem 1.5rem #ffffff;
+}
 }
 /* 元ColorSetteing.vueここまで */
