@@ -2,55 +2,55 @@
   <div class="colorSection">
     <div class="style colors">
       <div class="picker">
-        <div class="colorBox random" @click="generate()">
+        <div class="colorBox random" @click="generate(1)">
           <img class="color sample" src="../assets/random.jpeg" />
           <div class="color text">
             <p>mix</p>
           </div>
         </div>
-        <div class="colorBox red" @click="generate()">
+        <div class="colorBox red" @click="generate(2)">
           <img class="color sample" src="../assets/red.jpeg" />
           <div class="color text">
             <p>red</p>
           </div>
         </div>
-        <div class="colorBox orange">
+        <div class="colorBox orange" @click="generate(3)">
           <img class="color sample" src="../assets/orange.jpeg" />
           <div class="color text">
             <p>orange</p>
           </div>
         </div>
-        <div class="colorBox yellow">
+        <div class="colorBox yellow" @click="generate(4)">
           <img class="color sample" src="../assets/yellow.jpeg" />
           <div class="color text">
             <p>yellow</p>
           </div>
         </div>
-        <div class="colorBox green">
+        <div class="colorBox green" @click="generate(5)">
           <img class="color sample" src="../assets/green.jpeg" />
           <div class="color text">
             <p>green</p>
           </div>
         </div>
-        <div class="colorBox lightblue">
+        <div class="colorBox lightblue" @click="generate(6)">
           <img class="color sample" src="../assets/lightblue.jpeg" />
           <div class="color text">
             <p>lightblue</p>
           </div>
         </div>
-        <div class="colorBox blue">
+        <div class="colorBox blue" @click="generate(7)">
           <img class="color sample" src="../assets/blue.jpeg" />
           <div class="color text">
             <p>blue</p>
           </div>
         </div>
-        <div class="colorBox purple">
+        <div class="colorBox purple" @click="generate(8)">
           <img class="color sample" src="../assets/purple.jpeg" />
           <div class="color text">
             <p>purple</p>
           </div>
         </div>
-        <div class="colorBox pink">
+        <div class="colorBox pink" @click="generate(9)">
           <img class="color sample" src="../assets/pink.jpeg" />
           <div class="color text">
             <p>pink</p>
@@ -115,7 +115,6 @@ import { defineComponent, inject, Ref } from "vue";
 import colorSelector from "../tsfiles/colorSelector";
 import drawCircles from "../tsfiles/drawCirclesClass";
 import { generatePicture } from "../tsfiles/generatePicture";
-//import { generatePictureRed } from "../tsfiles/generatePictureRed";
 import { ProductKey } from '../tsfiles/symbols'
 import $ from 'jquery';
 import axios, { AxiosResponse } from 'axios'
@@ -140,9 +139,9 @@ export default defineComponent({
     const drawAnotherPicture = inject('drawAnotherPicture') as Ref
     const CanDraw = inject('CanDraw') as Ref
 
-    function generate(childWindowColor:number) {
+    function generate(color:number) {
       ResetCanvas()
-      generatePicture(childWindowWidth, childWindowHeight, childWindowColor).forEach((element) => {
+      generatePicture(childWindowWidth, childWindowHeight, color).forEach((element) => {
         childDrawCircles.push(element)
       })
       if (autoDraw.value == false) {
@@ -150,18 +149,6 @@ export default defineComponent({
       }
       
     }
-
-    /*
-    function generateRed() {
-      ResetCanvas()
-      generatePicture(childWindowWidth, childWindowHeight).forEach((element) => {
-        childDrawCircles.push(element)
-      })
-      if (autoDraw.value == false) {
-        autoDraw.value = true
-      }
-    }
-    */
 
     function ChangeMode() {
       console.log("water")
@@ -244,7 +231,6 @@ export default defineComponent({
       ChangeMode,
       ResetCanvas,
       generate,
-      //generateRed,
       SaveImage,
       WhatIsThis,
       Watch,
