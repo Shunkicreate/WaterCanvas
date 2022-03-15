@@ -52,11 +52,11 @@ export default defineComponent({
     const mode = ref("canvas")
     const canvasReset = ref(false)
     const autoDraw = ref(false)
-    const blurValue = 0
     const isLoading = ref(false)
     const drawAnotherPicture = ref(false)
     const CanDraw = ref(true)
     const changeTwoPic = ref("")
+    const blurValue = ref(3)
     changeTwoPic.value = 'src/assets/unlock.png'
     provide('blurValue',blurValue);
     // const postError = ref(true)
@@ -81,6 +81,7 @@ export default defineComponent({
 
     return {
       isLoading,
+      blurValue,
     }
   },
   mounted(){

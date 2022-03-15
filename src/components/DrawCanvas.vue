@@ -1,5 +1,5 @@
 <template>
-  <div id="drawCanvas"></div>
+  <div id="drawCanvas" style="filter:blur({blurValue})"></div>
 </template>
 
 <script lang="ts">
@@ -41,6 +41,7 @@ export default defineComponent({
     const CanDraw = inject('CanDraw') as Ref
     var canvas!: p5.Element
     const changeTwoPic = inject("changeTwoPic") as Ref
+    const blurValue = inject("blurValue") as Ref
 
     // const ChildSavedImage = inject('SavedImage') as Ref
 
@@ -226,6 +227,7 @@ export default defineComponent({
       canvasReset,
       canvasData,
       mode,
+      blurValue,
     };
   },
 

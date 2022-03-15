@@ -58,11 +58,11 @@
         </div>
       </div>
       <div class="toolBar">
-        <div class="bar blur">
-          <input class="blurChange" type="range" id="blur" min="0" max="100" step="1" value="50" />
+        <!--<div class="bar blur">
+          <input class="blurChange" type="range" id="blur" min="0" max="60" step="0.1" :value="blurValue" />
           <p>Blur</p>
         </div>
-        <span id="currentValue"></span>
+        <span id="currentValue"></span>-->
         <!-- <div class="bar opacity">
           <p>Opacity</p>
         </div> -->
@@ -80,11 +80,11 @@
           <img :src="changeTwoPic" alt="" />
           <!--<p>Can Draw: {{ CanDraw }}</p>-->
         </div>
-        <div class="action btn what">
+        <!--<div class="action btn what">
           <a @click="WhatIsThis">
             <p>What is this?</p>
           </a>
-        </div>
+        </div>-->
         <div class="action btn save">
           <a @click="SaveImage">
             <p>Save Image<img src="../assets/download.png" class="download"></p>
@@ -290,6 +290,7 @@ export default defineComponent({
       CanDraw,
       ChangeCanDraw,
       changeTwoPic,
+      blurValue,
     }
   },
 
