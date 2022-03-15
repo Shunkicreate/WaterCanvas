@@ -50,6 +50,7 @@ export default defineComponent({
     const blurValue = 0
     const isLoading = ref(false)
     const drawAnotherPicture = ref(false)
+    const CanDraw = ref(true)
     provide('blurValue',blurValue);
     // const postError = ref(true)
     function disableScroll(event: any) {
@@ -66,6 +67,7 @@ export default defineComponent({
     provide('canvasReset', canvasReset)
     provide('autoDraw', autoDraw)
     provide('drawAnotherPicture', drawAnotherPicture)
+    provide('CanDraw', CanDraw)
     provide(ProductKey, CircleData);
 
 
