@@ -193,7 +193,7 @@ export default defineComponent({
         .get('https://watercanvas.herokuapp.com/randomget')
         .then((res: AxiosResponse<drawCircles[]>) => {
           console.log("data", res.data)
-          res.data.forEach((element) => {
+                    res.data.forEach((element) => {
             childDrawCircles.push(element)
             isLoading.value = false
             drawAnotherPicture.value = true
