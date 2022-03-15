@@ -2,13 +2,13 @@
   <div class="colorSection">
     <div class="style colors">
       <div class="picker">
-        <div class="colorBox random">
+        <div class="colorBox random" @click="generate()">
           <img class="color sample" src="../assets/random.jpeg" />
           <div class="color text">
-            <p>random</p>
+            <p>mix</p>
           </div>
         </div>
-        <div class="colorBox red">
+        <div class="colorBox red" @click="generateRed()">
           <img class="color sample" src="../assets/red.jpeg" />
           <div class="color text">
             <p>red</p>
@@ -115,6 +115,7 @@ import { defineComponent, inject, Ref } from "vue";
 import colorSelector from "../tsfiles/colorSelector";
 import drawCircles from "../tsfiles/drawCirclesClass";
 import { generatePicture } from "../tsfiles/generatePicture";
+import { generatePictureRed } from "../tsfiles/generatePictureRed";
 import { ProductKey } from '../tsfiles/symbols'
 import $ from 'jquery';
 import axios, { AxiosResponse } from 'axios'
@@ -140,6 +141,16 @@ export default defineComponent({
     function generate() {
       ResetCanvas()
       generatePicture(childWindowWidth, childWindowHeight).forEach((element) => {
+        childDrawCircles.push(element)
+      })
+      if (autoDraw.value == false) {
+        autoDraw.value = true
+      }
+    }
+
+    function generateRed() {
+      ResetCanvas()
+      generatePictureRed(childWindowWidth, childWindowHeight).forEach((element) => {
         childDrawCircles.push(element)
       })
       if (autoDraw.value == false) {
@@ -222,6 +233,7 @@ export default defineComponent({
       ChangeMode,
       ResetCanvas,
       generate,
+      generateRed,
       SaveImage,
       WhatIsThis,
       Watch,
@@ -265,29 +277,26 @@ export default defineComponent({
 }
 
 .picker {
-  width: 75%;
   height: 10rem;
-  margin: auto;
+  margin: 0.5rem 15% 0.5rem 15%;
   margin-bottom: 2rem;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   align-content: space-around;
-  
 }
 
 .colorBox {
   flex: 1 0 30%;
-
   box-shadow: 0.9rem 0.9rem 1.25rem #d9d7d4, -0.9rem -0.9rem 1.25rem #fff;
   border-radius: .5rem;
-  
 }
 
 .sample {
   width: 2.8rem;
   height: 1rem;
   object-fit: cover;
+  margin-top: .5rem;
 }
 
 .color p {
