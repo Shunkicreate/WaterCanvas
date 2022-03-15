@@ -213,12 +213,12 @@ export default defineComponent({
 
             drawAnotherPicture.value = true
           })
-            generate()
+            // generate()
         })
         .catch(
           error => {
             console.log(error)
-            generate()
+            // generate()
 
             drawAnotherPicture.value = true
             isLoading.value = false
