@@ -13,7 +13,9 @@
     </div>
     <div  class="home" v-show="!isLoading">
       <DrawCanvas></DrawCanvas>
-      <ColorSetting></ColorSetting>
+      <div class="menu">
+        <ColorSetting></ColorSetting>
+      </div>
     </div>
   </div>
 </template>
@@ -79,8 +81,9 @@ export default defineComponent({
   },
   mounted(){
     $(".menuBtn").click(function () {
-    $(".menuBtn").toggleClass('active');
-});
+      $(".menuBtn").toggleClass('active');
+      $('.menu').toggleClass('fade')
+    });
   }
 })
 </script>
@@ -352,6 +355,23 @@ canvas {
 
   .home {
     justify-content: center;
+  }
+
+  .menu {
+    visibility: hidden;
+    opacity: 0;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: all .5s;
+    z-index: 2;
+  }
+
+  .menu.fade {
+    visibility: visible;
+    opacity: 1;
   }
 }
 
