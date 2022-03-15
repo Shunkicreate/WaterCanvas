@@ -3,55 +3,55 @@
     <div class="style colors">
       <div class="picker">
         <div class="colorBox random">
-          <img class="color sample" src="../assets/WaterCanvas (1).jpg" />
+          <img class="color sample" src="../assets/random.jpeg" />
           <div class="color text">
             <p>random</p>
           </div>
         </div>
         <div class="colorBox red">
-          <img class="color sample" src="../assets/WaterCanvas (1).jpg" />
+          <img class="color sample" src="../assets/red.jpeg" />
           <div class="color text">
             <p>red</p>
           </div>
         </div>
         <div class="colorBox orange">
-          <img class="color sample" src="../assets/orange.jpg" />
+          <img class="color sample" src="../assets/orange.jpeg" />
           <div class="color text">
             <p>orange</p>
           </div>
         </div>
         <div class="colorBox yellow">
-          <img class="color sample" src="../assets/yellow.jpg" />
+          <img class="color sample" src="../assets/yellow.jpeg" />
           <div class="color text">
             <p>yellow</p>
           </div>
         </div>
         <div class="colorBox green">
-          <img class="color sample" src="../assets/green.jpg" />
+          <img class="color sample" src="../assets/green.jpeg" />
           <div class="color text">
             <p>green</p>
           </div>
         </div>
         <div class="colorBox lightblue">
-          <img class="color sample" src="../assets/lightblue.jpg" />
+          <img class="color sample" src="../assets/lightblue.jpeg" />
           <div class="color text">
             <p>lightblue</p>
           </div>
         </div>
         <div class="colorBox blue">
-          <img class="color sample" src="../assets/WaterCanvas (1).jpg" />
+          <img class="color sample" src="../assets/blue.jpeg" />
           <div class="color text">
             <p>blue</p>
           </div>
         </div>
         <div class="colorBox purple">
-          <img class="color sample" src="../assets/purple.jpg" />
+          <img class="color sample" src="../assets/purple.jpeg" />
           <div class="color text">
             <p>purple</p>
           </div>
         </div>
         <div class="colorBox pink">
-          <img class="color sample" src="../assets/pink.jpg" />
+          <img class="color sample" src="../assets/pink.jpeg" />
           <div class="color text">
             <p>pink</p>
           </div>
@@ -194,6 +194,7 @@ export default defineComponent({
         .then((res: AxiosResponse<drawCircles[]>) => {
           console.log("data", res.data, typeof (res.data))
           res.data.forEach((element) => {
+
             childDrawCircles.push(element)
             isLoading.value = false
             generate()
@@ -259,7 +260,7 @@ export default defineComponent({
   width: 80%;
   border-radius: 3.125rem;
   margin: 0 10%;
-  padding-top: 2rem;
+  padding-top: 2.8rem;
   user-select: none;
 }
 
@@ -267,16 +268,20 @@ export default defineComponent({
   width: 75%;
   height: 10rem;
   margin: auto;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   align-content: space-around;
-  border: black solid;
+  
 }
 
 .colorBox {
   flex: 1 0 30%;
+
+  box-shadow: 0.9rem 0.9rem 1.25rem #d9d7d4, -0.9rem -0.9rem 1.25rem #fff;
+  border-radius: .5rem;
+  
 }
 
 .sample {
