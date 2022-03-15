@@ -268,8 +268,7 @@ export default defineComponent({
 
 .style {
   background: #f5f5f5;
-  box-shadow: 0.5rem 0.5rem 1.5rem #cccccc,
-             -0.5rem -0.5rem 1.5rem #ffffff;
+  box-shadow: 0.5rem 0.5rem 1.5rem #cccccc,-0.5rem -0.5rem 1.5rem #ffffff;
 }
 
 .colors {
@@ -292,7 +291,7 @@ export default defineComponent({
 
 .colorBox {
   flex: 1 0 30%;
-  
+
   border-radius: .5rem;
 }
 
@@ -322,8 +321,7 @@ export default defineComponent({
   padding-left: 1.25rem;
   margin-bottom: 1.25rem;
   background-color: #f5f5f5;
-  box-shadow: inset 0.5rem 0.5rem 1.5rem #cccccc,
-             inset -0.5rem -0.5rem 1.5rem #ffffff;
+  box-shadow: inset 0.5rem 0.5rem 1.5rem #cccccc,inset -0.5rem -0.5rem 1.5rem #ffffff;
   text-align: left;
   border-radius: 1.25rem;
 }
@@ -340,8 +338,7 @@ export default defineComponent({
 }
 
 .change:hover {
-  box-shadow: inset 0.5rem 0.5rem 1.5rem #cccccc,
-             inset -0.5rem -0.5rem 1.5rem #ffffff;
+  box-shadow: inset 0.5rem 0.5rem 1.5rem #cccccc,inset -0.5rem -0.5rem 1.5rem #ffffff;
   background-color: #fff;
 }
 
@@ -358,8 +355,7 @@ export default defineComponent({
   height: auto;
   line-height: 2rem;
   margin-bottom: 0.625rem;
-  box-shadow: 0.5rem 0.5rem 1.5rem #cccccc,
-             -0.5rem -0.5rem 1.5rem #ffffff;
+  box-shadow: 0.5rem 0.5rem 1.5rem #cccccc,-0.5rem -0.5rem 1.5rem #ffffff;
   text-align: center;
   border-radius: 1.875rem;
 }
@@ -395,8 +391,7 @@ export default defineComponent({
   height: 3.125rem;
   width: 3.125rem;
   /* float: left; */
-  box-shadow: 0.5rem 0.5rem 1.5rem #cccccc,
-             -0.5rem -0.5rem 1.5rem #ffffff;
+  box-shadow: 0.5rem 0.5rem 1.5rem #cccccc,-0.5rem -0.5rem 1.5rem #ffffff;
   padding: 0.625rem;
   border-radius: 1.25rem;
   margin: auto;
@@ -417,8 +412,7 @@ p {
   border-radius: 1.25rem;
   overflow: hidden;
   cursor: pointer;
-  box-shadow: 0.5rem 0.5rem 1.5rem #cccccc,
-             -0.5rem -0.5rem 1.5rem #ffffff;
+  box-shadow: 0.5rem 0.5rem 1.5rem #cccccc,-0.5rem -0.5rem 1.5rem #ffffff;
 }
 .toggle input[type="checkbox"] {
   display: none;
@@ -479,7 +473,6 @@ input[type=range]::-webkit-slider-thumb {
 @media only screen and (max-width: 599px){
   .colorSection {
   display: none;
-
 }
 }
 </style>
