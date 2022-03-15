@@ -106,7 +106,7 @@ header {
 }
 
 .title {
-  padding-left: 1rem;
+  padding-left: 1.7em;
   /* margin-bottom: 0.6rem; */
   font-size: 2em;
   display:inline-flex;

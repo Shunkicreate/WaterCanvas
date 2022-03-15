@@ -270,14 +270,13 @@ export default defineComponent({
   width: 80%;
   border-radius: 3.125rem;
   margin: 0 10%;
-  padding-top: 2.8rem;
+  /* padding-top: 2.8rem; */
   user-select: none;
 }
 
 .picker {
   height: 10rem;
-  margin: 0.5rem 15% 0.5rem 15%;
-  margin-bottom: 2rem;
+  margin: 2rem 15% 2rem 15%;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
