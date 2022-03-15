@@ -76,8 +76,8 @@
         </div>
       </div>
       <div class="actions">
-        <div class="action btn generate" @click="generate()">
-          <p>Generate canvas</p>
+        <div class="action btn candraw" @click="ChangeCanDraw()">
+          <p>Can Draw: {{CanDraw}}</p>
         </div>
         <div class="action btn what">
           <a @click="WhatIsThis">
@@ -138,6 +138,7 @@ export default defineComponent({
     const blurValue = inject('blurValue') as Ref
     const isLoading = inject('isLoading') as Ref
     const drawAnotherPicture = inject('drawAnotherPicture') as Ref
+    const CanDraw = inject('CanDraw') as Ref
 
     function generate() {
       ResetCanvas()
@@ -202,8 +203,9 @@ export default defineComponent({
     }
 
     function Watch() {
-      isLoading.value = true  //load circle and disable display
+      CanDraw.value = false
       ResetCanvas()
+      isLoading.value = true  //load circle and disable display
       axios
         .get('https://watercanvas.herokuapp.com/randomget')
         .then((res: AxiosResponse<drawCircles[]>) => {
@@ -212,10 +214,10 @@ export default defineComponent({
 
             childDrawCircles.push(element)
             isLoading.value = false
-            generate()
 
             drawAnotherPicture.value = true
           })
+            generate()
         })
         .catch(
           error => {
@@ -226,6 +228,11 @@ export default defineComponent({
             isLoading.value = false
           }
         )
+    }
+
+    function ChangeCanDraw(){
+      ResetCanvas()
+      CanDraw.value = !CanDraw.value
     }
 
     function blurChange() {
@@ -242,7 +249,9 @@ export default defineComponent({
       WhatIsThis,
       Watch,
       drawAnotherPicture,
-      mode
+      mode,
+      CanDraw,
+      ChangeCanDraw,
     }
   },
 
