@@ -9,7 +9,7 @@ import { algorithm7 } from "./algorithm7";
 import { algorithm8 } from "./algorithm8";
 import { algorithm9 } from "./algorithm9";
 
-export function generatePicture(width: number, height: number) {
+export function generatePicture(width: number, height: number, color: number) {
     // const circleNum = Math.random()*50;
     var returnData: drawCircles[] = []
     const algorithmNum = 9
