@@ -1,5 +1,5 @@
 <template>
-  <div id="drawCanvas"></div>
+  <div id="drawCanvas" style="display:flex; align-item:stretch;"></div>
 </template>
 
 <script lang="ts">
@@ -53,7 +53,6 @@ export default defineComponent({
 
     const sketch = (p: p5) => {
       p.setup = () => {
-        // let Canvas = p.createCanvas(childWindowWidth, childWindowHeight).parent('drawCanvas');
         canvas = p.createCanvas(childWindowWidth.value, childWindowHeight.value).parent('drawCanvas');
         // カラーモデルをHSBに
         p.colorMode(p.HSB);
@@ -222,7 +221,5 @@ export default defineComponent({
 
 });
 </script>
-
-
 <style scoped>
 </style>

@@ -71,8 +71,6 @@ export default defineComponent({
     provide('drawAnotherPicture', drawAnotherPicture)
     provide('CanDraw', CanDraw)
     provide(ProductKey, CircleData);
-
-
     provide('isLoading', isLoading)
 
     return {
@@ -107,7 +105,6 @@ header {
 
 .title {
   padding-left: 1.7em;
-  /* margin-bottom: 0.6rem; */
   font-size: 2em;
   display:inline-flex;
 }
@@ -141,6 +138,7 @@ canvas {
   border-radius: 1.5rem;
   background: #fafaf7;
   box-shadow: 15px 15px 20px #d9d7d4, -15px -15px 20px #fff;
+  display: inline-flex;
 }
 
 @-webkit-keyframes load5 {
