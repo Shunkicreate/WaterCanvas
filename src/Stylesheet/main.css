@@ -95,6 +95,8 @@ canvas {
     flex-wrap: wrap;
     align-content: space-around;
     border-radius: 1.25rem;
+    margin-top: 20%;
+    margin-bottom: 15%;
 }
 
 .colorBox {
@@ -136,6 +138,7 @@ canvas {
     margin: 0.5rem 15% 0.5rem 15%;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 1.5rem;
 }
 
 .mode {
@@ -160,7 +163,7 @@ canvas {
 .btn {
     height: auto;
     line-height: 2rem;
-    margin-bottom: 0.625rem;
+    margin-bottom: 0.9rem;
     box-shadow: 0.5rem 0.5rem 1.5rem #cccccc, -0.5rem -0.5rem 1.5rem #ffffff;
     text-align: center;
     border-radius: 1.875rem;
@@ -174,6 +177,20 @@ canvas {
     width: 1rem;
     height: auto;
     margin-left: .5rem;
+}
+
+.save {
+    margin-bottom: 2rem;
+}
+
+.candraw {
+    height: 2.5rem;
+    width: 30%;
+}
+
+.candraw img {
+    height: 1.8rem;
+    margin-top: .2rem;
 }
 
 .SNS {

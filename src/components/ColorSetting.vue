@@ -76,6 +76,14 @@
         </div>
       </div>
       <div class="actions">
+        <div class="action btn save">
+          <a @click="SaveImage">
+            <p>Save Image<img src="../assets/download.png" class="download"></p>
+          </a>
+        </div>
+        <div class="action btn watch" @click="Watch()">
+          <p>watch</p>
+        </div>
         <div class="action btn candraw" @click="ChangeCanDraw()">
           <img :src="changeTwoPic" alt="" />
           <!--<p>Can Draw: {{ CanDraw }}</p>-->
@@ -85,14 +93,6 @@
             <p>What is this?</p>
           </a>
         </div>-->
-        <div class="action btn save">
-          <a @click="SaveImage">
-            <p>Save Image<img src="../assets/download.png" class="download"></p>
-          </a>
-        </div>
-        <div class="action btn watch" @click="Watch()">
-          <p>watch</p>
-        </div>
       </div>
       <div class="SNS">
         <div class="post">
