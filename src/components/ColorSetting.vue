@@ -198,25 +198,30 @@ export default defineComponent({
     }
 
     function Watch() {
-      isLoading.value = true
+      isLoading.value = true  //load circle and disable display
       ResetCanvas()
       axios
         .get('https://watercanvas.herokuapp.com/randomget')
         .then((res: AxiosResponse<drawCircles[]>) => {
-          console.log("data", res.data)
-                    res.data.forEach((element) => {
+          console.log("data", res.data, typeof (res.data))
+          res.data.forEach((element) => {
+
             childDrawCircles.push(element)
             isLoading.value = false
+            generate()
+
             drawAnotherPicture.value = true
           })
         })
         .catch(
           error => {
             console.log(error)
+            generate()
+
+            drawAnotherPicture.value = true
             isLoading.value = false
           }
         )
-      generate()
     }
 
     function blurChange() {
@@ -283,7 +288,7 @@ export default defineComponent({
 
 .colorBox {
   flex: 1 0 30%;
-  box-shadow: 0.4rem 0.4rem 1.25rem #d9d7d4, -0.4rem -0.4rem 1.25rem #fff;
+  box-shadow: 0.9rem 0.9rem 1.25rem #d9d7d4, -0.9rem -0.9rem 1.25rem #fff;
   border-radius: .5rem;
 }
 
