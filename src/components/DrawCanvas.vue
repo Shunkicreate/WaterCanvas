@@ -20,14 +20,8 @@ export default defineComponent({
     const positionY = ref(0);
     const positionX = ref(0);
 
-    // const DrawWidth = ref(window.innerWidth * 0.67);
-    // const DrawHeight = ref(window.innerWidth * 0.67);
-    // const HeaderHeight = ref(3)
-    // const childDrawCircles: InjectionKey<drawCircles[]> = Symbol('CircleData')
     const demoData = new drawCircles(0, 0, 0, 0, 0, 0, 0,)
     const childDrawCircles = inject(ProductKey, [demoData]);
-    // const childDrawCircles = inject<drawCircles[]>('CircleData')
-    // console.log(typeof childDrawCircles)
     const childWindowWidth = inject('WindowWidth') as Ref
     const childWindowHeight = inject('WindowHeight') as Ref
     const timeCounter = ref(0)
@@ -42,25 +36,19 @@ export default defineComponent({
     var canvas!: p5.Element
     const changeTwoPic = inject("changeTwoPic") as Ref
     const blurValue = inject("blurValue") as Ref
-
-    // const ChildSavedImage = inject('SavedImage') as Ref
-
-    const wait = async (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-    const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
     const output = () => {
       timeCounter.value += 1;
     }
-
 
     //50msごとにカウンターを設置
     setInterval(output, 50)
 
     const sketch = (p: p5) => {
       p.setup = () => {
-        if (childWindowWidth.value <= 1024){
+        if (childWindowWidth.value <= 1024) {
           canvas = p.createCanvas(childWindowWidth.value * 0.7, childWindowHeight.value * 0.85).parent('drawCanvas');
-        }else{
-          canvas = p.createCanvas(childWindowWidth.value * 0.55 , childWindowHeight.value * 0.85).parent('drawCanvas');
+        } else {
+          canvas = p.createCanvas(childWindowWidth.value * 0.55, childWindowHeight.value * 0.85).parent('drawCanvas');
         }
         // カラーモデルをHSBに
         p.colorMode(p.HSB);
@@ -75,18 +63,6 @@ export default defineComponent({
 
       p.draw = () => {
         p.fill('#fafaf7');
-        //        positionY.value = p.mouseY;
-        //        positionX.value = p.mouseX;
-
-        // 背景色を現在のカラーモードで指定
-        // 色相、再度、明度
-        //       p.background(p.mouseY / 2, 100, 100);
-        // 図形の色を現在のカラーモードで指定
-        // 背景の反転色を表現する
-        //       p.fill(360 - p.mouseY / 2, 100, 100);
-        // 図形の描画（1px ~ 720pxの間で大きさが変わる）
-        // X座標, Y座標, width, height
-        //       p.rect(360, 360, p.mouseX + 1, p.mouseX + 1);
 
         //円を作る関数
         function createNewEllipse() {
@@ -122,7 +98,6 @@ export default defineComponent({
 
         //自動描画関数
         async function waitAndDraw(t: number) {
-          // console.log('before', timeCounter.value)
           await new Promise(resolve => setTimeout(resolve, t))
           for (var i = 0; i < childDrawCircles.length; i++) {
             await new Promise(resolve => setTimeout(resolve, t))
@@ -133,11 +108,9 @@ export default defineComponent({
             }
             console.log('write')
           }
-          // console.log('after', timeCounter.value, drawAnotherPicture.value)
         }
 
         //ロック写真
-        // CanDraw.value = !CanDraw.value
         if (CanDraw.value) {
           changeTwoPic.value = unlockUrl
         } else if (!CanDraw.value) {
@@ -146,15 +119,12 @@ export default defineComponent({
 
         //CanDrawの分岐 描けないとき
         if (CanDraw.value == false) {
-          // console.log('candraw is true')
 
 
           //取ってきたデータの自動描画
           if (drawAnotherPicture.value == true) {
             drawAnotherPicture.value = false
-            // if (timeCounter.value % 2 == 0) {
             waitAndDraw(100) //ms
-            // }
           }
         }
 
@@ -168,9 +138,7 @@ export default defineComponent({
             }
             p.touchMoved = () => {
               if (!drawing.value) {
-                // console.log(drawing.value)
                 drawing.value = true;
-                // console.log(drawing.value)
               }
               if (timeCounter.value % 5 == 0) {
                 createNewEllipse()
@@ -230,13 +198,5 @@ export default defineComponent({
       blurValue,
     };
   },
-
-  // if (this.canvasReset.value) {
-  //   this.canvasReset.value = !this.canvasReset.value;
-  //   this.canvasData.resetMatrix()
-  //   console.log('canvasReset')
-  // }
-
-
 });
 </script>
