@@ -96,7 +96,7 @@ export default defineComponent({
 header {
   text-align: left;
   color: #858585;
-  background-color: #fafaf7;
+  background-color: #f5f5f5;
   height: 4em;
   display: flex;
   justify-content: space-between;
@@ -136,8 +136,9 @@ header {
 canvas {
   display: inline-flex;
   border-radius: 1.5rem;
-  background: #fafaf7;
-  box-shadow: 15px 15px 20px #d9d7d4, -15px -15px 20px #fff;
+  background: #f5f5f5;
+  box-shadow: 0.75rem 0.75rem 1.5rem #cccccc,
+             -0.75rem -0.75rem 1.5rem #ffffff;
   display: inline-flex;
 }
 
