@@ -77,7 +77,8 @@
       </div>
       <div class="actions">
         <div class="action btn candraw" @click="ChangeCanDraw()">
-          <p>Can Draw: {{ CanDraw }}</p>
+          <img :src="changeTwoPic" alt="" />
+          <!--<p>Can Draw: {{ CanDraw }}</p>-->
         </div>
         <div class="action btn what">
           <a @click="WhatIsThis">
@@ -111,7 +112,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, Ref } from "vue";
+import { defineComponent, inject, Ref, ref } from "vue";
 import colorSelector from "../tsfiles/colorSelector";
 import drawCircles from "../tsfiles/drawCirclesClass";
 import { generatePicture } from "../tsfiles/generatePicture";
@@ -119,6 +120,7 @@ import { ProductKey } from '../tsfiles/symbols'
 import $ from 'jquery';
 import axios, { AxiosResponse } from 'axios'
 import GetFromDB from '../tsfiles/getFromDb'
+import unlockUrl from '../assets/unlock.jpg?url'
 
 
 export default defineComponent({
@@ -139,6 +141,7 @@ export default defineComponent({
     const isLoading = inject('isLoading') as Ref
     const drawAnotherPicture = inject('drawAnotherPicture') as Ref
     const CanDraw = inject('CanDraw') as Ref
+    const changeTwoPic = inject('changeTwoPic') as Ref
 
     function generate(color: number) {
       console.log('watch')
@@ -213,7 +216,7 @@ export default defineComponent({
         // .get<drawCircles[]>('https://watercanvas.herokuapp.com/randomget')
         .then((res: AxiosResponse<GetFromDB>) => {
           console.log("data", typeof (res.data.data), res.data.data)
-          var newData: drawCircles[] = res.data.data
+          const newData: drawCircles[] = res.data.data
           // if (typeof res.data == 'string') {
           //   // const newData = res.data<drawCircles[]>
           //   // newData = res.data.replace()
@@ -227,7 +230,19 @@ export default defineComponent({
             childDrawCircles.push(element)
 
           })
-          console.log(childDrawCircles)
+          console.log("childDrawCircles is: ", childDrawCircles)
+          var str1 = childDrawCircles.toString();
+          // alert(str1);
+
+          //セッションストレージに変数str1をkey名「tostr」で書き込む
+          sessionStorage.setItem("tostr", str1);
+
+          //ストレージからkey名「tostr」のデータを変数str2に読み込む
+          var str2 = sessionStorage.getItem("tostr");
+
+          //配列arrを作成し、読み込んだデータを分割して格納する
+          var arr = new Array();
+          // arr = str2.split(",")
           isLoading.value = false
           drawAnotherPicture.value = true
           // generate(2)
@@ -249,6 +264,11 @@ export default defineComponent({
     function ChangeCanDraw() {
       ResetCanvas()
       CanDraw.value = !CanDraw.value
+      // if (CanDraw.value) {
+      //   changeTwoPic.value = "src/assets/unlock.png"
+      // } else if(!CanDraw.value){
+      //   changeTwoPic.value = "src/assets/lock.png"
+      // }
     }
 
     function blurChange() {
@@ -267,6 +287,7 @@ export default defineComponent({
       mode,
       CanDraw,
       ChangeCanDraw,
+      changeTwoPic,
     }
   },
 
@@ -292,8 +313,7 @@ export default defineComponent({
 
 .style {
   background: #f5f5f5;
-  box-shadow: 0.5rem 0.5rem 1.5rem #cccccc,
-             -0.5rem -0.5rem 1.5rem #ffffff;
+  box-shadow: 0.5rem 0.5rem 1.5rem #cccccc, -0.5rem -0.5rem 1.5rem #ffffff;
 }
 
 .colors {
@@ -316,8 +336,8 @@ export default defineComponent({
 
 .colorBox {
   flex: 1 0 30%;
-  
-  border-radius: .5rem;
+
+  border-radius: 0.5rem;
 }
 
 .sample {
@@ -325,15 +345,14 @@ export default defineComponent({
   height: 1rem;
   object-fit: cover;
 
-  margin-top: .5rem;
-  border-radius: .5rem;
-  box-shadow: 0.2rem 0.2rem .5rem #ccc,
-            -0.2rem -0.2rem .5rem #ffffff;
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0.2rem 0.2rem 0.5rem #ccc, -0.2rem -0.2rem 0.5rem #ffffff;
 }
 
 .color p {
   font-size: 0.8rem;
-  text-shadow: .2rem .2rem .5rem #cccccc,
+  text-shadow: 0.2rem 0.2rem 0.5rem #cccccc;
 }
 
 .toolBar {
@@ -348,7 +367,7 @@ export default defineComponent({
   margin-bottom: 1.25rem;
   background-color: #f5f5f5;
   box-shadow: inset 0.5rem 0.5rem 1.5rem #cccccc,
-             inset -0.5rem -0.5rem 1.5rem #ffffff;
+    inset -0.5rem -0.5rem 1.5rem #ffffff;
   text-align: left;
   border-radius: 1.25rem;
 }
@@ -366,7 +385,7 @@ export default defineComponent({
 
 .change:hover {
   box-shadow: inset 0.5rem 0.5rem 1.5rem #cccccc,
-             inset -0.5rem -0.5rem 1.5rem #ffffff;
+    inset -0.5rem -0.5rem 1.5rem #ffffff;
   background-color: #fff;
 }
 
@@ -383,8 +402,7 @@ export default defineComponent({
   height: auto;
   line-height: 2rem;
   margin-bottom: 0.625rem;
-  box-shadow: 0.5rem 0.5rem 1.5rem #cccccc,
-             -0.5rem -0.5rem 1.5rem #ffffff;
+  box-shadow: 0.5rem 0.5rem 1.5rem #cccccc, -0.5rem -0.5rem 1.5rem #ffffff;
   text-align: center;
   border-radius: 1.875rem;
 }
@@ -420,8 +438,7 @@ export default defineComponent({
   height: 3.125rem;
   width: 3.125rem;
   /* float: left; */
-  box-shadow: 0.5rem 0.5rem 1.5rem #cccccc,
-             -0.5rem -0.5rem 1.5rem #ffffff;
+  box-shadow: 0.5rem 0.5rem 1.5rem #cccccc, -0.5rem -0.5rem 1.5rem #ffffff;
   padding: 0.625rem;
   border-radius: 1.25rem;
   margin: auto;
@@ -442,8 +459,7 @@ p {
   border-radius: 1.25rem;
   overflow: hidden;
   cursor: pointer;
-  box-shadow: 0.5rem 0.5rem 1.5rem #cccccc,
-             -0.5rem -0.5rem 1.5rem #ffffff;
+  box-shadow: 0.5rem 0.5rem 1.5rem #cccccc, -0.5rem -0.5rem 1.5rem #ffffff;
 }
 .toggle input[type="checkbox"] {
   display: none;
