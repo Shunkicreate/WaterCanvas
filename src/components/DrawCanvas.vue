@@ -35,6 +35,7 @@ export default defineComponent({
     const canvasReset = inject('canvasReset') as Ref
     const autoDraw = inject('autoDraw') as Ref
     const SavedImageJudge = inject('SavedImageJudge') as Ref
+    const drawAnotherPicture = inject('drawAnotherPicture') as Ref
     var canvas!: p5.Element
 
     // const ChildSavedImage = inject('SavedImage') as Ref
@@ -170,6 +171,16 @@ export default defineComponent({
         if (SavedImageJudge.value == true) {
           p.saveCanvas(canvas, 'WaterCanvas', 'jpg')
           SavedImageJudge.value = !SavedImageJudge.value
+        }
+
+        //取ってきたデータの自動描画
+        if (drawAnotherPicture.value == true) {
+          if (timeCounter.value % 2 == 0) {
+            console.log('before',timeCounter.value)
+            sleep(100)
+            console.log('after',timeCounter.value)
+          }
+
         }
       };
     };

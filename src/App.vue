@@ -65,6 +65,7 @@ export default defineComponent({
     provide('mode', mode)
     provide('canvasReset', canvasReset)
     provide('autoDraw', autoDraw)
+    provide('drawAnotherPicture', drawAnotherPicture)
     provide(ProductKey, CircleData);
 
 
