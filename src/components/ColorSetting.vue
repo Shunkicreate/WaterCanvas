@@ -132,7 +132,7 @@ export default defineComponent({
     const canvasReset = inject('canvasReset') as Ref
     const childWindowWidth = inject('WindowWidth') as number
     const childWindowHeight = inject('WindowHeight') as number
-    const childWindowColor= inject('WindowColor') as number
+    // const childWindowColor= inject('WindowColor') as number
     const autoDraw = inject('autoDraw') as Ref
     const SavedImageJudge = inject('SavedImageJudge') as Ref
     const blurValue = inject('blurValue') as Ref
@@ -140,7 +140,7 @@ export default defineComponent({
     const drawAnotherPicture = inject('drawAnotherPicture') as Ref
     const CanDraw = inject('CanDraw') as Ref
 
-    function generate() {
+    function generate(childWindowColor:number) {
       ResetCanvas()
       generatePicture(childWindowWidth, childWindowHeight, childWindowColor).forEach((element) => {
         childDrawCircles.push(element)
