@@ -15,25 +15,25 @@
           </div>
         </div>
         <div class="colorBox orange">
-          <img class="color sample" src="../assets/WaterCanvas (1).jpg" />
+          <img class="color sample" src="../assets/orange.jpg" />
           <div class="color text">
             <p>orange</p>
           </div>
         </div>
         <div class="colorBox yellow">
-          <img class="color sample" src="../assets/WaterCanvas (1).jpg" />
+          <img class="color sample" src="../assets/yellow.jpg" />
           <div class="color text">
             <p>yellow</p>
           </div>
         </div>
         <div class="colorBox green">
-          <img class="color sample" src="../assets/WaterCanvas (1).jpg" />
+          <img class="color sample" src="../assets/green.jpg" />
           <div class="color text">
             <p>green</p>
           </div>
         </div>
         <div class="colorBox lightblue">
-          <img class="color sample" src="../assets/WaterCanvas (1).jpg" />
+          <img class="color sample" src="../assets/lightblue.jpg" />
           <div class="color text">
             <p>lightblue</p>
           </div>
@@ -45,13 +45,13 @@
           </div>
         </div>
         <div class="colorBox purple">
-          <img class="color sample" src="../assets/WaterCanvas (1).jpg" />
+          <img class="color sample" src="../assets/purple.jpg" />
           <div class="color text">
             <p>purple</p>
           </div>
         </div>
         <div class="colorBox pink">
-          <img class="color sample" src="../assets/WaterCanvas (1).jpg" />
+          <img class="color sample" src="../assets/pink.jpg" />
           <div class="color text">
             <p>pink</p>
           </div>
@@ -251,27 +251,29 @@ export default defineComponent({
 }
 
 .colors {
-  height: 94%;
+  height: auto;
   width: 80%;
   border-radius: 3.125rem;
   margin: 0 10%;
-  padding-top: 2.75rem;
+  padding-top: 2rem;
   user-select: none;
 }
 
 .picker {
   width: 75%;
-  height: 15rem;
+  height: 10rem;
   margin: auto;
+  margin-bottom: 3rem;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   align-content: space-around;
+  border: black solid;
 }
 
 .colorBox {
   flex: 1 0 30%;
-  border: black solid;
+  
 }
 
 .sample {
@@ -281,7 +283,7 @@ export default defineComponent({
 }
 
 .color p {
-  font-size: 0.5rem;
+  font-size: 0.8rem;
 }
 
 .toolBar {
