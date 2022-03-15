@@ -1,5 +1,5 @@
 <template>
-  <div id="drawCanvas" style="display:flex; align-item:stretch;"></div>
+  <div id="drawCanvas" style="width:80%;"></div>
 </template>
 
 <script lang="ts">
@@ -130,13 +130,15 @@ export default defineComponent({
 
         //CanDrawの分岐 描けないとき
         if (CanDraw.value == false) {
+      console.log('candraw is true')
+
 
           //取ってきたデータの自動描画
           if (drawAnotherPicture.value == true) {
             drawAnotherPicture.value = false
-            if (timeCounter.value % 2 == 0) {
+            // if (timeCounter.value % 2 == 0) {
               waitAndDraw(100) //ms
-            }
+            // }
           }
         }
 

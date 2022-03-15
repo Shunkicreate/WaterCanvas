@@ -1,5 +1,5 @@
 <template>
-  <div class="colorSection">
+  <div class="colorSection" id="colorSection">
     <div class="style colors">
       <div class="picker">
         <div class="colorBox random" @click="generate(1)">
@@ -59,7 +59,7 @@
       </div>
       <div class="toolBar">
         <div class="bar blur">
-          <input type="range" id="blur" min="0" max="100" step="1" value="50" />
+          <input class="blurChange" type="range" id="blur" min="0" max="100" step="1" value="50" />
           <p>Blur</p>
         </div>
         <span id="currentValue"></span>
@@ -140,6 +140,7 @@ export default defineComponent({
     const CanDraw = inject('CanDraw') as Ref
 
     function generate(color:number) {
+      console.log('watch')
       ResetCanvas()
       generatePicture(childWindowWidth.value, childWindowHeight.value, color).forEach((element) => {
         childDrawCircles.push(element)
@@ -166,7 +167,7 @@ export default defineComponent({
     }
 
     function ResetCanvas() {
-      canvasReset.value = !canvasReset.value
+      canvasReset.value = true
       console.log('reset')
       childDrawCircles.length = 0;
     }
@@ -190,31 +191,35 @@ export default defineComponent({
     }
 
     function Watch() {
+      console.log('watch')
       CanDraw.value = false
       ResetCanvas()
       isLoading.value = true  //load circle and disable display
-      axios
-        .get('https://watercanvas.herokuapp.com/randomget')
-        .then((res: AxiosResponse<drawCircles[]>) => {
-          console.log("data", res.data, typeof (res.data))
-          res.data.forEach((element) => {
+      // axios
+      //   .get('https://watercanvas.herokuapp.com/randomget')
+      //   .then((res: AxiosResponse<drawCircles[]>) => {
+      //     console.log("data", res.data, typeof (res.data))
+      //     res.data.forEach((element) => {
 
-            childDrawCircles.push(element)
-            isLoading.value = false
+      //       childDrawCircles.push(element)
+      //       isLoading.value = false
 
+      //       drawAnotherPicture.value = true
+      //     })
+      //       // generate(2)
+      //   })
+      //   .catch(
+      //     error => {
+      //       console.log(error)
+
+      //       // generate(2)
+      //       drawAnotherPicture.value = true
+      //       isLoading.value = false
+      //     }
+      //   )
+            generate(1)
             drawAnotherPicture.value = true
-          })
-            // generate()
-        })
-        .catch(
-          error => {
-            console.log(error)
-            // generate()
-
-            drawAnotherPicture.value = true
             isLoading.value = false
-          }
-        )
     }
 
     function ChangeCanDraw(){
@@ -258,6 +263,7 @@ export default defineComponent({
 <style>
 .colorSection {
   display: inline-flex;
+  /* max-width: ; */
 }
 
 .style {
@@ -454,9 +460,22 @@ p {
   padding: 0.15rem 0 0;
 }
 
+input[type=range]{
+  -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-color: red;
+  height: 2.125rem;
+  width: 5px;
+}
+
+
 @media only screen and (max-width: 599px){
   .colorSection {
   display: none;
+
 }
 }
 </style>
