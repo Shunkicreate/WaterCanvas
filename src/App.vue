@@ -7,7 +7,7 @@
       <span></span>
     </div>
   </header>
-  <div style="text-align: center; height:100%">
+  <div class="home" style="text-align: center; height:100%">
     <div v-show="isLoading">
       <div class="loader"></div>
     </div>
@@ -96,8 +96,7 @@ export default defineComponent({
 }
 
 canvas {
-  float: left;
-  margin: 0 4% 0 5%;
+  display: inline-flex;
   border-radius: 1.5rem;
   background: #fafaf7;
   box-shadow: 15px 15px 20px #d9d7d4, -15px -15px 20px #fff;
@@ -111,6 +110,10 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.home {
+  display: flex;
 }
 
 .title {

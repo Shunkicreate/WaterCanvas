@@ -8,7 +8,7 @@
             <p>mix</p>
           </div>
         </div>
-        <div class="colorBox red" @click="generateRed()">
+        <div class="colorBox red" @click="generate()">
           <img class="color sample" src="../assets/red.jpeg" />
           <div class="color text">
             <p>red</p>
@@ -115,7 +115,7 @@ import { defineComponent, inject, Ref } from "vue";
 import colorSelector from "../tsfiles/colorSelector";
 import drawCircles from "../tsfiles/drawCirclesClass";
 import { generatePicture } from "../tsfiles/generatePicture";
-import { generatePictureRed } from "../tsfiles/generatePictureRed";
+//import { generatePictureRed } from "../tsfiles/generatePictureRed";
 import { ProductKey } from '../tsfiles/symbols'
 import $ from 'jquery';
 import axios, { AxiosResponse } from 'axios'
@@ -132,6 +132,7 @@ export default defineComponent({
     const canvasReset = inject('canvasReset') as Ref
     const childWindowWidth = inject('WindowWidth') as number
     const childWindowHeight = inject('WindowHeight') as number
+    const childWindowColor= inject('WindowColor') as number
     const autoDraw = inject('autoDraw') as Ref
     const SavedImageJudge = inject('SavedImageJudge') as Ref
     const blurValue = inject('blurValue') as Ref
@@ -141,6 +142,18 @@ export default defineComponent({
 
     function generate() {
       ResetCanvas()
+      generatePicture(childWindowWidth, childWindowHeight, childWindowColor).forEach((element) => {
+        childDrawCircles.push(element)
+      })
+      if (autoDraw.value == false) {
+        autoDraw.value = true
+      }
+      
+    }
+
+    /*
+    function generateRed() {
+      ResetCanvas()
       generatePicture(childWindowWidth, childWindowHeight).forEach((element) => {
         childDrawCircles.push(element)
       })
@@ -148,16 +161,7 @@ export default defineComponent({
         autoDraw.value = true
       }
     }
-
-    function generateRed() {
-      ResetCanvas()
-      generatePictureRed(childWindowWidth, childWindowHeight).forEach((element) => {
-        childDrawCircles.push(element)
-      })
-      if (autoDraw.value == false) {
-        autoDraw.value = true
-      }
-    }
+    */
 
     function ChangeMode() {
       console.log("water")
@@ -240,7 +244,7 @@ export default defineComponent({
       ChangeMode,
       ResetCanvas,
       generate,
-      generateRed,
+      //generateRed,
       SaveImage,
       WhatIsThis,
       Watch,
