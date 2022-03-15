@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-center" id="drawCanvas"></div>
+  <div id="drawCanvas" style="width:80%;"></div>
 </template>
 
 <script lang="ts">
@@ -17,7 +17,7 @@ export default defineComponent({
   setup() {
     const positionY = ref(0);
     const positionX = ref(0);
-    
+
     // const DrawWidth = ref(window.innerWidth * 0.67);
     // const DrawHeight = ref(window.innerWidth * 0.67);
     // const HeaderHeight = ref(3)
@@ -26,8 +26,8 @@ export default defineComponent({
     const childDrawCircles = inject(ProductKey, [demoData]);
     // const childDrawCircles = inject<drawCircles[]>('CircleData')
     // console.log(typeof childDrawCircles)
-    const childWindowWidth = inject('WindowWidth') as number
-    const childWindowHeight = inject('WindowHeight') as number
+    const childWindowWidth = inject('WindowWidth') as Ref
+    const childWindowHeight = inject('WindowHeight') as Ref
     const timeCounter = ref(0)
     const canvasCounter = ref(0)
     const drawing = ref(false)
@@ -35,23 +35,25 @@ export default defineComponent({
     const canvasReset = inject('canvasReset') as Ref
     const autoDraw = inject('autoDraw') as Ref
     const SavedImageJudge = inject('SavedImageJudge') as Ref
+    const drawAnotherPicture = inject('drawAnotherPicture') as Ref
+    const CanDraw = inject('CanDraw') as Ref
     var canvas!: p5.Element
 
     // const ChildSavedImage = inject('SavedImage') as Ref
 
-
+    const wait = async (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
     const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
     const output = () => {
       timeCounter.value += 1;
     }
+
 
     //50msごとにカウンターを設置
     setInterval(output, 50)
 
     const sketch = (p: p5) => {
       p.setup = () => {
-        // let Canvas = p.createCanvas(childWindowWidth, childWindowHeight).parent('drawCanvas');
-        canvas = p.createCanvas(childWindowWidth, childWindowHeight).parent('drawCanvas');
+        canvas = p.createCanvas(childWindowWidth.value, childWindowHeight.value).parent('drawCanvas');
         // カラーモデルをHSBに
         p.colorMode(p.HSB);
         // 矩形を描画方法を指定する
@@ -103,7 +105,47 @@ export default defineComponent({
           });
         };
 
-          // モードがwaterの時の処理
+        //キャンバスの初期化関数
+        if (canvasReset.value == true) {
+          canvasReset.value = false;
+          p.fill('#fafaf7')
+          p.rect(0, 0, p.width * 2, p.height * 2)
+        }
+
+        //自動描画関数
+        async function waitAndDraw(t: number) {
+          // console.log('before', timeCounter.value)
+          await new Promise(resolve => setTimeout(resolve, t))
+          for (var i = 0; i < childDrawCircles.length; i++) {
+            await new Promise(resolve => setTimeout(resolve, t))
+            for (j = 0; j < i; j++) {
+              var k = i - j
+              p.fill(childDrawCircles[j].h[k], childDrawCircles[j].s[k], childDrawCircles[j].b[k], childDrawCircles[j].a[k],)
+              p.ellipse(childDrawCircles[j].x[k], childDrawCircles[j].y[k], childDrawCircles[j].r[k], childDrawCircles[j].r[k],)
+            }
+            console.log('write')
+          }
+          // console.log('after', timeCounter.value, drawAnotherPicture.value)
+        }
+
+        //CanDrawの分岐 描けないとき
+        if (CanDraw.value == false) {
+      console.log('candraw is true')
+
+
+          //取ってきたデータの自動描画
+          if (drawAnotherPicture.value == true) {
+            drawAnotherPicture.value = false
+            // if (timeCounter.value % 2 == 0) {
+              waitAndDraw(100) //ms
+            // }
+          }
+        }
+
+        //CanDrawの分岐 描けるとき
+        else if (CanDraw.value == true) {
+
+          //waterモードの時
           if (mode.value == 'water') {
             if (drawing.value && timeCounter.value % 2 == 0) {
               drawEllipse()
@@ -118,9 +160,13 @@ export default defineComponent({
                 createNewEllipse()
               }
             };
+            //自動描画
+            if (autoDraw.value == true) {
+              drawing.value = true
+            }
           }
 
-          // モードがcanvasのときの処理
+          //canvasモードの時
           else if (mode.value == 'canvas') {
             canvasCounter.value++;
             p.touchMoved = () => {
@@ -131,46 +177,28 @@ export default defineComponent({
             }
           }
 
-          //キャンバスの初期化関数
-          if (canvasReset.value == true) {
-            canvasReset.value = false;
+          //自動描画
+          if (autoDraw.value == true) {
             p.fill('#fafaf7')
             p.rect(0, 0, p.width * 2, p.height * 2)
-          }
-
-        //自動描画
-        if (autoDraw.value == true) {
-          if( mode.value == 'water'  ){
-            drawing.value = true
-          }
-          console.log('auto draw', childDrawCircles)
-          p.fill('#fafaf7')
-          p.rect(0, 0, p.width * 2, p.height * 2)
-          for (var i = 0; i < childDrawCircles.length; i++) {
-            const elem = childDrawCircles[i]
-            // for (var j = 0; j <= i; j++) {
-            //   for (var k = j; k > 0; k--) {
-            //     // p.fill("#fafaf710")
-            //     // p.rect(0, 0, childWindowWidth, childWindowHeight)
-            //     console.log(childDrawCircles[j])
-            //     p.fill(childDrawCircles[j].h[k], childDrawCircles[j].s[k], childDrawCircles[j].b[k], childDrawCircles[i - j].a[j],)
-            //     p.ellipse(childDrawCircles[j].x[k], childDrawCircles[j].y[k], childDrawCircles[j].r[k], childDrawCircles[j].r[k],)
-            //   }
-            //     console.log("----------------------------------------------------------")
-            //   k--;
-            // }
-            for (var j = 0; j < elem.a.length; j++) {
-              p.fill(elem.h[j], elem.s[j], elem.b[j], elem.a[j],)
-              p.ellipse(elem.x[j], elem.y[j], elem.r[j], elem.r[j],)
+            for (var i = 0; i < childDrawCircles.length; i++) {
+              const elem = childDrawCircles[i]
+              for (var j = 0; j < elem.a.length; j++) {
+                p.fill(elem.h[j], elem.s[j], elem.b[j], elem.a[j],)
+                p.ellipse(elem.x[j], elem.y[j], elem.r[j], elem.r[j],)
               }
             }
-          autoDraw.value = !autoDraw.value
+            autoDraw.value = !autoDraw.value
           }
+        }
 
-        if (SavedImageJudge.value == true){
-          p.saveCanvas(canvas,'WaterCanvas','jpg')
+
+
+        if (SavedImageJudge.value == true) {
+          p.saveCanvas(canvas, 'WaterCanvas', 'jpg')
           SavedImageJudge.value = !SavedImageJudge.value
-          }
+        }
+
       };
     };
 
@@ -195,7 +223,5 @@ export default defineComponent({
 
 });
 </script>
-
-
 <style scoped>
 </style>
