@@ -14,6 +14,7 @@ export function generatePicture(width: number, height: number) {
     var returnData: drawCircles[] = []
     const algorithmNum = 9
     const selectNum = Math.floor(Math.random() * algorithmNum) + 1
+    //const selectRed = algorithm2
     if (selectNum == 1) returnData = algorithm1(width, height)
     if (selectNum == 2) returnData = algorithm2(width, height)
     if (selectNum == 3) returnData = algorithm3(width, height)
