@@ -256,10 +256,7 @@ export default defineComponent({
 </script>
 
 <style>
-
-
 .colorSection {
-  width: 32%;
   display: inline-flex;
 }
 
