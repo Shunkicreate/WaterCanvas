@@ -148,7 +148,7 @@ export default defineComponent({
       if (autoDraw.value == false) {
         autoDraw.value = true
       }
-      
+
     }
 
     /*
@@ -270,16 +270,16 @@ export default defineComponent({
 </script>
 
 <style>
-.style {
-  background: #fafaf7;
-  box-shadow: 0.9rem 0.9rem 1.25rem #d9d7d4, -0.9rem -0.9rem 1.25rem #fff;
-  display: inline-flex;
-}
+
 
 .colorSection {
   width: 32%;
-  float: left;
   display: inline-flex;
+}
+
+.style {
+  background: #fafaf7;
+  box-shadow: 0.9rem 0.9rem 1.25rem #d9d7d4, -0.9rem -0.9rem 1.25rem #fff;
 }
 
 .colors {
@@ -466,5 +466,11 @@ p {
   left: 37%;
   color: #9ed5ff;
   padding: 0.15rem 0 0;
+}
+
+@media only screen and (max-width: 599px){
+  .colorSection {
+  display: none;
+}
 }
 </style>

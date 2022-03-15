@@ -62,8 +62,8 @@ export default defineComponent({
     document.addEventListener('mousewheel', disableScroll, { passive: false });
     provide('CircleData', CircleData)
     provide('ColorData', ColorData)
-    provide('WindowWidth', WindowWidth.value)
-    provide('WindowHeight', WindowHeight.value)
+    provide('WindowWidth', WindowWidth)
+    provide('WindowHeight', WindowHeight)
     provide('SavedImageJudge', SavedImageJudge)
     provide('mode', mode)
     provide('canvasReset', canvasReset)
@@ -99,7 +99,7 @@ header {
   text-align: left;
   color: #858585;
   background-color: #fafaf7;
-  height: 5em;
+  height: 4em;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -352,6 +352,10 @@ canvas {
     left: 18px;
     transform: translateY(-6px) rotate(45deg);
     width: 30%;
+  }
+
+  .home {
+    justify-content: center;
   }
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-center" id="drawCanvas"></div>
+  <div id="drawCanvas"></div>
 </template>
 
 <script lang="ts">
@@ -26,8 +26,8 @@ export default defineComponent({
     const childDrawCircles = inject(ProductKey, [demoData]);
     // const childDrawCircles = inject<drawCircles[]>('CircleData')
     // console.log(typeof childDrawCircles)
-    const childWindowWidth = inject('WindowWidth') as number
-    const childWindowHeight = inject('WindowHeight') as number
+    const childWindowWidth = inject('WindowWidth') as Ref
+    const childWindowHeight = inject('WindowHeight') as Ref
     const timeCounter = ref(0)
     const canvasCounter = ref(0)
     const drawing = ref(false)
@@ -54,7 +54,7 @@ export default defineComponent({
     const sketch = (p: p5) => {
       p.setup = () => {
         // let Canvas = p.createCanvas(childWindowWidth, childWindowHeight).parent('drawCanvas');
-        canvas = p.createCanvas(childWindowWidth, childWindowHeight).parent('drawCanvas');
+        canvas = p.createCanvas(childWindowWidth.value, childWindowHeight.value).parent('drawCanvas');
         // カラーモデルをHSBに
         p.colorMode(p.HSB);
         // 矩形を描画方法を指定する
