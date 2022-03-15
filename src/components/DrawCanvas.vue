@@ -1,5 +1,5 @@
 <template>
-  <div id="drawCanvas" ></div>
+  <div id="drawCanvas"></div>
 </template>
 
 <script lang="ts">
@@ -10,6 +10,8 @@ import drawCircles from '../tsfiles/drawCirclesClass'
 import drawCircle from '../tsfiles/drawCircleClass'
 import { ProductKey } from '../tsfiles/symbols';
 import axios from 'axios'
+import unlockUrl from '../assets/unlock.png?url'
+import lockUrl from '../assets/lock.png?url'
 
 
 export default defineComponent({
@@ -38,6 +40,7 @@ export default defineComponent({
     const drawAnotherPicture = inject('drawAnotherPicture') as Ref
     const CanDraw = inject('CanDraw') as Ref
     var canvas!: p5.Element
+    const changeTwoPic = inject("changeTwoPic") as Ref
 
     // const ChildSavedImage = inject('SavedImage') as Ref
 
@@ -132,16 +135,24 @@ export default defineComponent({
           // console.log('after', timeCounter.value, drawAnotherPicture.value)
         }
 
+        //ロック写真
+        // CanDraw.value = !CanDraw.value
+        if (CanDraw.value) {
+          changeTwoPic.value = unlockUrl
+        } else if (!CanDraw.value) {
+          changeTwoPic.value = lockUrl
+        }
+
         //CanDrawの分岐 描けないとき
         if (CanDraw.value == false) {
-      // console.log('candraw is true')
+          // console.log('candraw is true')
 
 
           //取ってきたデータの自動描画
           if (drawAnotherPicture.value == true) {
             drawAnotherPicture.value = false
             // if (timeCounter.value % 2 == 0) {
-              waitAndDraw(100) //ms
+            waitAndDraw(100) //ms
             // }
           }
         }

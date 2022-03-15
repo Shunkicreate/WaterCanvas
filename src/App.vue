@@ -56,6 +56,8 @@ export default defineComponent({
     const isLoading = ref(false)
     const drawAnotherPicture = ref(false)
     const CanDraw = ref(true)
+    const changeTwoPic = ref("")
+    changeTwoPic.value = 'src/assets/unlock.png'
     provide('blurValue',blurValue);
     // const postError = ref(true)
     function disableScroll(event: any) {
@@ -75,6 +77,7 @@ export default defineComponent({
     provide('CanDraw', CanDraw)
     provide(ProductKey, CircleData);
     provide('isLoading', isLoading)
+    provide('changeTwoPic', changeTwoPic)
 
     return {
       isLoading,
