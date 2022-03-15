@@ -53,7 +53,11 @@ export default defineComponent({
 
     const sketch = (p: p5) => {
       p.setup = () => {
-        canvas = p.createCanvas(childWindowWidth.value, childWindowHeight.value).parent('drawCanvas');
+        if (childWindowWidth.value <= 1024){
+          canvas = p.createCanvas(childWindowWidth.value * 0.7, childWindowHeight.value * 0.85).parent('drawCanvas');
+        }else{
+          canvas = p.createCanvas(childWindowWidth.value * 0.55 , childWindowHeight.value * 0.85).parent('drawCanvas');
+        }
         // カラーモデルをHSBに
         p.colorMode(p.HSB);
         // 矩形を描画方法を指定する

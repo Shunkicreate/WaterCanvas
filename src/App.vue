@@ -1,4 +1,5 @@
 <template>
+
   <header>
     <div class="title">WATER CANVAS</div>
     <div class="menuBtn">
@@ -7,16 +8,16 @@
       <span></span>
     </div>
   </header>
-  <div  style="text-align: center; height:100%">
-    <div v-show="isLoading">
-      <div class="loader"></div>
-    </div>
-    <div  class="home" v-show="!isLoading">
-      <DrawCanvas></DrawCanvas>
-      <div class="menu">
-        <ColorSetting></ColorSetting>
+    <!-- <div  style="text-align: center; height:100%"> -->
+      <div v-show="isLoading">
+          <div class="loader"></div>
       </div>
-    </div>
+      <div  class="home" v-show="!isLoading">
+        <DrawCanvas></DrawCanvas>
+        <div class="wrapper">
+          <ColorSetting></ColorSetting>
+        </div>
+      <!-- </div> -->
   </div>
 </template>
 
@@ -45,8 +46,8 @@ export default defineComponent({
       s: 0,
       v: 0,
     })
-    const WindowWidth = ref(window.innerWidth * 0.55)
-    const WindowHeight = ref(window.innerHeight * 0.85)
+    const WindowWidth = ref(window.innerWidth)
+    const WindowHeight = ref(window.innerHeight)
     const SavedImageJudge = ref(false)
     const mode = ref("canvas")
     const canvasReset = ref(false)
@@ -82,7 +83,8 @@ export default defineComponent({
   mounted(){
     $(".menuBtn").click(function () {
       $(".menuBtn").toggleClass('active');
-      $('.menu').toggleClass('fade')
+      $('.wrapper').toggleClass('fade')
+      $('.colorSection').toggleClass('fade')
     });
   }
 })
