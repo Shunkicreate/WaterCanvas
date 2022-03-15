@@ -504,12 +504,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 @media only screen and (max-width: 599px) {
   .colorSection {
-<<<<<<< HEAD
-  display: none;
-}
-=======
     display: none;
   }
->>>>>>> c0689e8d9623de8fb139662ff2327e851306b56b
 }
 </style>
