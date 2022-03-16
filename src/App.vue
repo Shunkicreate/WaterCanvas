@@ -61,6 +61,7 @@ export default defineComponent({
     changeTwoPic.value = 'src/assets/unlock.png'
     provide('blurValue',blurValue);
     // const postError = ref(true)
+    
     function disableScroll(event: any) {
       event.preventDefault();
     }
