@@ -16,6 +16,7 @@
         </div>
         <div class="colorBox orange" @click="generate(3)">
           <img class="color sample" src="../assets/orange.JPEG" />
+          
           <div class="color text">
             <p>orange</p>
           </div>
