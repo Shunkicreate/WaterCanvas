@@ -77,6 +77,7 @@ export default defineComponent({
     provide('autoDraw', autoDraw)
     provide('drawAnotherPicture', drawAnotherPicture)
     provide('CanDraw', CanDraw)
+    
     provide(ProductKey, CircleData);
     provide('isLoading', isLoading)
     provide('changeTwoPic', changeTwoPic)
