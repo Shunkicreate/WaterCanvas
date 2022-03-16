@@ -68,16 +68,18 @@ export default defineComponent({
 
         //円を作る関数
         function createNewEllipse() {
-          const H = p.random(0, 360)
-          const S = p.random(20, 100)
-          const B = p.random(90, 100)
-          const A = 10;
-          const R = p.random(30, 120)
-
-          const newData = new drawCircles(p.mouseX, p.mouseY, R, H, S, B, A)
-          childDrawCircles.push(newData)
-          p.fill(H, S, B, A)
-          p.ellipse(p.mouseX, p.mouseY, R, R)
+          if(childgenerate.value == false){
+            const H = p.random(0, 360)
+            const S = p.random(20, 100)
+            const B = p.random(90, 100)
+            const A = 10;
+            const R = p.random(30, 120)
+  
+            const newData = new drawCircles(p.mouseX, p.mouseY, R, H, S, B, A)
+            childDrawCircles.push(newData)
+            p.fill(H, S, B, A)
+            p.ellipse(p.mouseX, p.mouseY, R, R)
+          }
         };
 
         //円を更新する関数
