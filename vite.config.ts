@@ -6,6 +6,7 @@ import { resolve } from "path";
 export default defineConfig({
   plugins: [vue()],
   alias: {
-    "@": resolve(__dirname, "src"),
+    "/@asseets/": resolve(__dirname, "src/assets"),
   },
+  // assetsInclude: ['**/*.JPEG', '**/*.png']
 })
