@@ -3,19 +3,19 @@
     <div class="style colors">
       <div class="picker">
         <div class="colorBox random" @click="generate(1)">
-          <img class="color sample"  />
+          <img class="color sample"  src="../assets/random.jpg"/>
           <div class="color text">
             <p>mix</p>
           </div>
         </div>
         <div class="colorBox red" @click="generate(2)">
-          <img class="color sample" />
+          <img class="color sample" src="../assets/red.jpg"/>
           <div class="color text">
             <p>red</p>
           </div>
         </div>
         <div class="colorBox orange" @click="generate(3)">
-          <img class="color sample" 
+          <img class="color sample" src="../assets/orange.jpg"
           />
           
           <div class="color text">
@@ -23,37 +23,37 @@
           </div>
         </div>
         <div class="colorBox yellow" @click="generate(4)">
-          <img class="color sample" />
+          <img class="color sample" src="../assets/yellow.jpg"/>
           <div class="color text">
             <p>yellow</p>
           </div>
         </div>
         <div class="colorBox green" @click="generate(5)">
-          <img class="color sample" />
+          <img class="color sample" src="../assets/green.jpg"/>
           <div class="color text">
             <p>green</p>
           </div>
         </div>
         <div class="colorBox lightblue" @click="generate(6)">
-          <img class="color sample"/>
+          <img class="color sample" src="../assets/lightblue.jpg"/>
           <div class="color text">
             <p>lightblue</p>
           </div>
         </div>
         <div class="colorBox blue" @click="generate(7)">
-          <img class="color sample" />
+          <img class="color sample" src="../assets/blue.jpg"/>
           <div class="color text">
             <p>blue</p>
           </div>
         </div>
         <div class="colorBox purple" @click="generate(8)">
-          <img class="color sample"  />
+          <img class="color sample" src="../assets/purple.jpg" />
           <div class="color text">
             <p>purple</p>
           </div>
         </div>
         <div class="colorBox pink" @click="generate(9)">
-          <img class="color sample" />
+          <img class="color sample" src="../assets/pink.jpg"/>
           <div class="color text">
             <p>pink</p>
           </div>
