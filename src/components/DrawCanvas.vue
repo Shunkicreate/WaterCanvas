@@ -39,6 +39,8 @@ export default defineComponent({
     const output = () => {
       timeCounter.value += 1;
     }
+    const childgenerate = inject('generate') as Ref
+
 
     //50msごとにカウンターを設置
     setInterval(output, 50)
@@ -140,8 +142,9 @@ export default defineComponent({
               if (!drawing.value) {
                 drawing.value = true;
               }
-              if (timeCounter.value % 5 == 0) {
+              if (timeCounter.value % 5 == 0 && childgenerate.value == false) {
                 createNewEllipse()
+                // childgenerate.value == true
               }
             };
             //自動描画
@@ -155,7 +158,11 @@ export default defineComponent({
             canvasCounter.value++;
             p.touchMoved = () => {
               if (canvasCounter.value % 10 == 0) {
-                createNewEllipse()
+                if (childgenerate.value == false) {
+                  createNewEllipse()
+                  // childgenerate.value == true
+
+                }
                 drawEllipse()
               };
             }

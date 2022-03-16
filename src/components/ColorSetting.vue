@@ -65,7 +65,7 @@
         <span id="currentValue"></span>-->
         <!-- <div class="bar opacity">
           <p>Opacity</p>
-        </div> -->
+        </div>-->
       </div>
       <div class="changeArea">
         <div class="toggle" @click="ChangeMode()">
@@ -78,7 +78,10 @@
       <div class="actions">
         <div class="action btn save">
           <a @click="SaveImage">
-            <p>Save Image<img src="../assets/download.png" class="download"></p>
+            <p>
+              Save Image
+              <img src="../assets/download.png" class="download" />
+            </p>
           </a>
         </div>
         <div class="action btn watch" @click="Watch()">
@@ -142,9 +145,11 @@ export default defineComponent({
     const drawAnotherPicture = inject('drawAnotherPicture') as Ref
     const CanDraw = inject('CanDraw') as Ref
     const changeTwoPic = inject('changeTwoPic') as Ref
+    const childgenerate = inject('generate') as Ref
 
     function generate(color: number) {
       console.log('watch')
+      childgenerate.value == true
       ResetCanvas()
       generatePicture(childWindowWidth.value, childWindowHeight.value, color).forEach((element) => {
         childDrawCircles.push(element)
@@ -214,12 +219,12 @@ export default defineComponent({
           })
           isLoading.value = false
           drawAnotherPicture.value = true
-          generate(Math.floor(Math.random()*9))
+          generate(Math.floor(Math.random() * 9))
         })
         .catch(
           error => {
             console.log(error)
-            generate(Math.floor(Math.random()*9))
+            generate(Math.floor(Math.random() * 9))
             drawAnotherPicture.value = true
             isLoading.value = false
           }
