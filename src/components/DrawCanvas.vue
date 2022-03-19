@@ -12,58 +12,34 @@ import unlockUrl from '../assets/unlock.png?url'
 import lockUrl from '../assets/lock.png?url'
 import { colorRange } from "../tsfiles/colorRange";
 import { WindowStatusKey } from "../tsfiles/WindowStatusKey";
-// import WindowStatus from "../tsfiles/WindowStatus";
+import WindowStatusClass from '../tsfiles/WindowStatusClass'
 export default defineComponent({
   name: "DrawCanvas",
   setup() {
     const positionY = ref(0);
     const positionX = ref(0);
     const DemoCircleData = new drawCircles(0, 0, 0, 0, 0, 0, 0,)
-    // const DemoWindowData = new WindowStatus({
-    //   WindowWidth: window.innerWidth,
-    //   WindowHeight: window.innerHeight,
-    //   Mode: "Canvas",
-    //   ChangeTwoPic: "src/assets/unlock.png",
-    //   SavedImageJudge: false,
-    //   CanvasReset: false,
-    //   AutoDraw: false,
-    //   IsLoading: false,
-    //   DrawAnotherPicture: false,
-    //   CanDraw: false,
-    // })
     const childDrawCircles = inject(DrawCirclesKey, [DemoCircleData]);
-    const WindowStatus = inject(WindowStatusKey)
-    console.log(WindowStatus?.WindowHeight)
-    const childWindowWidth = inject('WindowWidth') as Ref
-    const childWindowHeight = inject('WindowHeight') as Ref
+    const DemoWindowData = new WindowStatusClass(0, 0, 0, 0, "", "", false, false, false, false, false, false, false)
+    const WindowStatus = inject(WindowStatusKey, DemoWindowData)
+    console.log(WindowStatus.WindowHeight)
     const timeCounter = ref(0)
     const canvasCounter = ref(0)
     const drawing = ref(false)
-    const Mode = inject('Mode') as Ref
-    const CanvasReset = inject('CanvasReset') as Ref
-    const AutoDraw = inject('AutoDraw') as Ref
-    const SavedImageJudge = inject('SavedImageJudge') as Ref
-    const DrawAnotherPicture = inject('DrawAnotherPicture') as Ref
-    const CanDraw = inject('CanDraw') as Ref
     var canvas!: p5.Element
-    const ChangeTwoPic = inject("ChangeTwoPic") as Ref
-    const BlurValue = inject("BlurValue") as Ref
     const output = () => {
       timeCounter.value += 1;
     }
-    const childgenerate = inject('Generate') as Ref
-    const ColorMode = inject('ColorMode') as Ref
-
 
     //50msごとにカウンターを設置
     setInterval(output, 50)
 
     const sketch = (p: p5) => {
       p.setup = () => {
-        if (childWindowWidth.value <= 1024) {
-          canvas = p.createCanvas(childWindowWidth.value * 0.7, childWindowHeight.value * 0.85).parent('drawCanvas');
+        if (WindowStatus.WindowWidth <= 1024) {
+          canvas = p.createCanvas(WindowStatus.WindowWidth * 0.7, WindowStatus.WindowHeight * 0.85).parent('drawCanvas');
         } else {
-          canvas = p.createCanvas(childWindowWidth.value * 0.55, childWindowHeight.value * 0.85).parent('drawCanvas');
+          canvas = p.createCanvas(WindowStatus.WindowWidth * 0.55, WindowStatus.WindowHeight * 0.85).parent('drawCanvas');
         }
         // カラーモデルをHSBに
         p.colorMode(p.HSB);
@@ -81,7 +57,7 @@ export default defineComponent({
 
         //円を作る関数
         function createNewEllipse() {
-          const H = colorRange(ColorMode.value)
+          const H = colorRange(WindowStatus.ColorMode)
           const S = p.random(20, 100)
           const B = p.random(90, 100)
           const A = 10;
@@ -105,8 +81,8 @@ export default defineComponent({
         };
 
         //キャンバスの初期化関数
-        if (CanvasReset.value == true) {
-          CanvasReset.value = false;
+        if (WindowStatus.CanvasReset == true) {
+          WindowStatus.CanvasReset = false;
           p.fill('#fafaf7')
           p.rect(0, 0, p.width * 2, p.height * 2)
         }
@@ -126,28 +102,28 @@ export default defineComponent({
         }
 
         //ロック写真
-        if (CanDraw.value) {
-          ChangeTwoPic.value = unlockUrl
-        } else if (!CanDraw.value) {
-          ChangeTwoPic.value = lockUrl
+        if (WindowStatus.CanDraw) {
+          WindowStatus.ChangeTwoPic = unlockUrl
+        } else if (!WindowStatus.CanDraw) {
+          WindowStatus.ChangeTwoPic = lockUrl
         }
 
         //CanDrawの分岐 描けないとき
-        if (CanDraw.value == false) {
+        if (WindowStatus.CanDraw == false) {
 
 
           //取ってきたデータの自動描画
-          if (DrawAnotherPicture.value == true) {
-            DrawAnotherPicture.value = false
+          if (WindowStatus.DrawAnotherPicture == true) {
+            WindowStatus.DrawAnotherPicture = false
             waitAndDraw(100) //ms
           }
         }
 
         //CanDrawの分岐 描けるとき
-        else if (CanDraw.value == true) {
+        else if (WindowStatus.CanDraw == true) {
 
           //waterモードの時
-          if (Mode.value == 'Water') {
+          if (WindowStatus.Mode == 'Water') {
             if (drawing.value && timeCounter.value % 2 == 0) {
               drawEllipse()
             }
@@ -155,9 +131,9 @@ export default defineComponent({
               if (!drawing.value) {
                 drawing.value = true;
               }
-              if (timeCounter.value % 5 == 0 && childgenerate.value == false) {
+              if (timeCounter.value % 5 == 0 && WindowStatus.Generate == false) {
                 createNewEllipse()
-                // childgenerate.value == true
+                // WindowStatus.Generate == true
               }
             };
             p.touchStarted = () => {
@@ -168,19 +144,19 @@ export default defineComponent({
               drawEllipse()
             }
             //自動描画
-            if (AutoDraw.value == true) {
+            if (WindowStatus.AutoDraw == true) {
               drawing.value = true
             }
           }
 
           //canvasモードの時
-          else if (Mode.value == 'Canvas') {
+          else if (WindowStatus.Mode == 'Canvas') {
             canvasCounter.value++;
             p.touchMoved = () => {
               if (canvasCounter.value % 10 == 0) {
-                if (childgenerate.value == false) {
+                if (WindowStatus.Generate == false) {
                   createNewEllipse()
-                  // childgenerate.value == true
+                  // WindowStatus.Generate == true
 
                 }
                 drawEllipse()
@@ -193,7 +169,7 @@ export default defineComponent({
           }
 
           //自動描画
-          if (AutoDraw.value == true) {
+          if (WindowStatus.AutoDraw == true) {
             p.fill('#fafaf7')
             p.rect(0, 0, p.width * 2, p.height * 2)
             for (var i = 0; i < childDrawCircles.length; i++) {
@@ -203,15 +179,15 @@ export default defineComponent({
                 p.ellipse(elem.x[j], elem.y[j], elem.r[j], elem.r[j],)
               }
             }
-            AutoDraw.value = !AutoDraw.value
+            WindowStatus.AutoDraw = !WindowStatus.AutoDraw
           }
         }
 
 
 
-        if (SavedImageJudge.value == true) {
+        if (WindowStatus.SavedImageJudge == true) {
           p.saveCanvas(canvas, 'WaterCanvas', 'jpg')
-          SavedImageJudge.value = !SavedImageJudge.value
+          WindowStatus.SavedImageJudge = !WindowStatus.SavedImageJudge
         }
 
       };
@@ -223,10 +199,11 @@ export default defineComponent({
       positionY,
       positionX,
       timeCounter,
-      CanvasReset,
+      // CanvasReset,
+      WindowStatus,
       canvasData,
-      Mode,
-      BlurValue,
+      // Mode,
+      // BlurValue,
     };
   },
 });

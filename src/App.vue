@@ -8,10 +8,10 @@
     </div>
   </header>
   <!-- <div  style="text-align: center; height:100%"> -->
-  <div v-show="IsLoading">
+  <div v-show="WindowStatus.IsLoading">
     <div class="loader"></div>
   </div>
-  <div class="home" v-show="!IsLoading">
+  <div class="home" v-show="!WindowStatus.IsLoading">
     <DrawCanvas></DrawCanvas>
     <div class="wrapper">
       <ColorSetting></ColorSetting>
@@ -50,6 +50,8 @@ export default defineComponent({
     const WindowStatus = reactive<WindowStatus>({
       WindowWidth: window.innerWidth,
       WindowHeight: window.innerHeight,
+      BlurValue: 3,
+      ColorMode: 1,
       Mode: "Canvas",
       ChangeTwoPic: "src/assets/unlock.png",
       SavedImageJudge: false,
@@ -57,52 +59,21 @@ export default defineComponent({
       AutoDraw: false,
       IsLoading: false,
       DrawAnotherPicture: false,
-      CanDraw: false,
+      CanDraw: true,
+      Generate: false,
     })
-
-    const WindowWidth = ref(window.innerWidth)
-    const WindowHeight = ref(window.innerHeight)
-    const SavedImageJudge = ref(false)
-    const Mode = ref("Canvas")
-    const CanvasReset = ref(false)
-    const AutoDraw = ref(false)
-    const IsLoading = ref(false)
-    const DrawAnotherPicture = ref(false)
-    const CanDraw = ref(true)
-    const ChangeTwoPic = ref("")
-    const BlurValue = ref(3)
-    const Generate = ref(false)
-    const ColorMode = ref(1)
-    ChangeTwoPic.value = 'src/assets/unlock.png'
-    provide('BlurValue', BlurValue);
-    // const postError = ref(true)
 
     function disableScroll(event: any) {
       event.preventDefault();
     }
     document.addEventListener('touchmove', disableScroll, { passive: false });
     document.addEventListener('mousewheel', disableScroll, { passive: false });
-    // provide('CircleData', CircleData)
     provide('ColorData', ColorData)
-    provide('WindowWidth', WindowWidth)
-    provide('WindowHeight', WindowHeight)
-    provide('SavedImageJudge', SavedImageJudge)
-    provide('Mode', Mode)
-    provide('CanvasReset', CanvasReset)
-    provide('AutoDraw', AutoDraw)
-    provide('DrawAnotherPicture', DrawAnotherPicture)
-    provide('CanDraw', CanDraw)
-
     provide(DrawCirclesKey, CircleData);
     provide(WindowStatusKey, WindowStatus);
-    provide('IsLoading', IsLoading)
-    provide('ChangeTwoPic', ChangeTwoPic)
-    provide('Generate', Generate)
-    provide('ColorMode', ColorMode)
 
     return {
-      IsLoading,
-      BlurValue,
+      WindowStatus,
     }
   },
   mounted() {

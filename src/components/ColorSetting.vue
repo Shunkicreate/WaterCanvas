@@ -89,7 +89,7 @@
           <p>watch</p>
         </div>
         <div class="action btn candraw" @click="ChangeCanDraw()">
-          <img :src="ChangeTwoPic"/>
+          <img :src="WindowStatus.ChangeTwoPic" />
           <!--<p>Can Draw: {{ CanDraw }}</p>-->
         </div>
         <!--<div class="action btn what">
@@ -128,65 +128,53 @@ import { DrawCirclesKey } from '../tsfiles/symbols'
 import $ from 'jquery';
 import axios, { AxiosResponse } from 'axios'
 import GetFromDB from '../tsfiles/getFromDb'
-
+import WindowStatusClass from "../tsfiles/WindowStatusClass";
+import { WindowStatusKey } from "../tsfiles/WindowStatusKey";
 export default defineComponent({
   name: "ColorSetting",
   setup() {
-    const childColorSelector = inject('ColorData') as colorSelector
-    const Mode = inject('Mode') as Ref
-    const demoData = new drawCircles(0, 0, 0, 0, 0, 0, 0,)
-    const childDrawCircles = inject(DrawCirclesKey, [demoData]);
-    const CanvasReset = inject('CanvasReset') as Ref
-    const childWindowWidth = inject('WindowWidth') as Ref
-    const childWindowHeight = inject('WindowHeight') as Ref
-    const AutoDraw = inject('AutoDraw') as Ref
-    const SavedImageJudge = inject('SavedImageJudge') as Ref
-    const BlurValue = inject('BlurValue') as Ref
-    const IsLoading = inject('IsLoading') as Ref
-    const DrawAnotherPicture = inject('DrawAnotherPicture') as Ref
-    const CanDraw = inject('CanDraw') as Ref
-    const ChangeTwoPic = inject('ChangeTwoPic') as Ref
-    const childgenerate = inject('Generate') as Ref
-    const ColorMode = inject('ColorMode') as Ref
+    const DemoData = new drawCircles(0, 0, 0, 0, 0, 0, 0,)
+    const childDrawCircles = inject(DrawCirclesKey, [DemoData]);
+    const DemoWindowData = new WindowStatusClass(0, 0, 0, 0, "", "", false, false, false, false, false, false, false)
+    const WindowStatus = inject(WindowStatusKey, DemoWindowData)
 
     function Generate(color: number) {
       console.log('watch')
-      childgenerate.value == true
-      ColorMode.value = color
+      WindowStatus.Generate == true
+      WindowStatus.ColorMode = color
       ResetCanvas()
-      generatePicture(childWindowWidth.value, childWindowHeight.value, color).forEach((element) => {
+      generatePicture(WindowStatus.WindowWidth, WindowStatus.WindowHeight, color).forEach((element) => {
         childDrawCircles.push(element)
       })
-      if (AutoDraw.value == false) {
-        AutoDraw.value = true
+      if (WindowStatus.AutoDraw == false) {
+        WindowStatus.AutoDraw = true
       }
-
     }
 
     function ChangeMode() {
       console.log("Water")
-      if (AutoDraw.value == true) {
-        AutoDraw.value = false
+      if (WindowStatus.AutoDraw == true) {
+        WindowStatus.AutoDraw = false
       }
-      if (Mode.value == 'Canvas') {
-        Mode.value = 'Water'
+      if (WindowStatus.Mode == 'Canvas') {
+        WindowStatus.Mode = 'Water'
       }
-      else if (Mode.value == 'Water') {
-        Mode.value = 'Canvas'
+      else if (WindowStatus.Mode == 'Water') {
+        WindowStatus.Mode = 'Canvas'
       }
-      CanvasReset.value = !CanvasReset.value
+      WindowStatus.CanvasReset = !WindowStatus.CanvasReset
       childDrawCircles.length = 0;
     }
 
     function ResetCanvas() {
-      CanvasReset.value = true
+      WindowStatus.CanvasReset = true
       console.log('reset')
       childDrawCircles.length = 0;
     }
 
     function SaveImage() {
-      SavedImageJudge.value = !SavedImageJudge.value
-      console.log(SavedImageJudge.value)
+      WindowStatus.SavedImageJudge = !WindowStatus.SavedImageJudge
+      console.log(WindowStatus.SavedImageJudge)
       axios
         .post('https://watercanvas.herokuapp.com/post', childDrawCircles)
         .catch(function (error) {
@@ -203,9 +191,9 @@ export default defineComponent({
 
     function Watch() {
       console.log('watch')
-      CanDraw.value = false
+      WindowStatus.CanDraw = false
       ResetCanvas()
-      IsLoading.value = true  //load circle and disable display
+      WindowStatus.IsLoading = true  //load circle and disable display
       axios
         .get<GetFromDB>(`https://watercanvas.herokuapp.com/randomgets`, {
           headers: {
@@ -220,40 +208,41 @@ export default defineComponent({
             childDrawCircles.push(element)
 
           })
-          IsLoading.value = false
-          DrawAnotherPicture.value = true
+          WindowStatus.IsLoading = false
+          WindowStatus.DrawAnotherPicture = true
           Generate(Math.floor(Math.random() * 9))
         })
         .catch(
           error => {
             console.log(error)
             Generate(Math.floor(Math.random() * 9))
-            DrawAnotherPicture.value = true
-            IsLoading.value = false
+            WindowStatus.DrawAnotherPicture = true
+            WindowStatus.IsLoading = false
           }
         )
     }
 
     function ChangeCanDraw() {
       ResetCanvas()
-      CanDraw.value = !CanDraw.value
+      WindowStatus.CanDraw = !WindowStatus.CanDraw
     }
 
     return {
-      childColorSelector,
+      // childColorSelector,
       ChangeMode,
       ResetCanvas,
       Generate,
       SaveImage,
       WhatIsThis,
       Watch,
-      DrawAnotherPicture,
-      Mode,
-      CanDraw,
+      // DrawAnotherPicture,
+      // Mode,
+      // CanDraw,
       ChangeCanDraw,
-      ChangeTwoPic,
-      BlurValue,
-      ColorMode,
+      // ChangeTwoPic,
+      // BlurValue,
+      // ColorMode,
+      WindowStatus,
     }
   },
 
