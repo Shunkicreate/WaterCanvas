@@ -7,9 +7,7 @@ import { defineComponent, ref, reactive, Ref, InjectionKey } from "vue";
 import { inject } from 'vue'
 import p5 from "p5";
 import drawCircles from '../tsfiles/drawCirclesClass'
-import drawCircle from '../tsfiles/drawCircleClass'
 import { ProductKey } from '../tsfiles/symbols';
-import axios from 'axios'
 import unlockUrl from '../assets/unlock.png?url'
 import lockUrl from '../assets/lock.png?url'
 
