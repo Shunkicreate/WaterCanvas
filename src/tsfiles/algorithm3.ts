@@ -3,15 +3,21 @@ import drawCircles from "./drawCirclesClass";
 import { colorRange } from "./colorRange";
 
 
-export function algorithm3(width:number, height:number, color:number){
-  const circleNum = Math.random()*50;
+export function algorithm3(width: number, height: number, color: number) {
+    
+    const circleNum = Math.random()*50;
     var returnData: drawCircles[] = []
     
-
+    //一つの円
     for (let i = circleNum; i > 0; i--){
-        // if (typeof color !== 'undefined') {
-            const newData = new drawCircles(Math.random()*width, Math.random()*height, Math.random()*90 + 30, colorRange(color), Math.random()*80 + 20, Math.random()*10 + 90, Math.random()*20)
-    //   }
+        const newData = new drawCircles(
+            Math.random() * width,      //x
+            Math.random() * height,     //y
+            Math.random() * 90 + 30,    //r
+            colorRange(color),          //h
+            Math.random() * 80 + 20,    //s
+            Math.random() * 10 + 90,    //b
+            Math.random() * 20)         //a
       
       const count = 1000
       // const count = Math.min(circleNum, 50)
@@ -35,8 +41,9 @@ export function algorithm3(width:number, height:number, color:number){
           newData.a.push(newData.a[j] - Math.random() )
       }
       returnData.push(newData)
-      // console.log(newData.a)
+    }
 
-  }
+    
+    
   return returnData;
 }
