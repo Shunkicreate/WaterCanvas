@@ -10,6 +10,7 @@ import drawCircles from '../tsfiles/drawCirclesClass'
 import { ProductKey } from '../tsfiles/symbols';
 import unlockUrl from '../assets/unlock.png?url'
 import lockUrl from '../assets/lock.png?url'
+import { colorRange } from "../tsfiles/colorRange";
 
 
 export default defineComponent({
@@ -38,6 +39,7 @@ export default defineComponent({
       timeCounter.value += 1;
     }
     const childgenerate = inject('generate') as Ref
+    const colorMode = inject('colorMode') as Ref
 
 
     //50msごとにカウンターを設置
@@ -66,7 +68,7 @@ export default defineComponent({
 
         //円を作る関数
         function createNewEllipse() {
-          const H = p.random(0, 360)
+          const H = colorRange(colorMode.value)
           const S = p.random(20, 100)
           const B = p.random(90, 100)
           const A = 10;
@@ -145,6 +147,13 @@ export default defineComponent({
                 // childgenerate.value == true
               }
             };
+            p.touchStarted = () => {
+              if (!drawing.value) {
+                drawing.value = true;
+              }
+              createNewEllipse()
+              drawEllipse()
+            }
             //自動描画
             if (autoDraw.value == true) {
               drawing.value = true
@@ -163,6 +172,10 @@ export default defineComponent({
                 }
                 drawEllipse()
               };
+            }
+            p.touchStarted = () => {
+              createNewEllipse()
+              drawEllipse()
             }
           }
 

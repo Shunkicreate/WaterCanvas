@@ -147,10 +147,12 @@ export default defineComponent({
     const CanDraw = inject('CanDraw') as Ref
     const changeTwoPic = inject('changeTwoPic') as Ref
     const childgenerate = inject('generate') as Ref
+    const colorMode = inject('colorMode') as Ref
 
     function generate(color: number) {
       console.log('watch')
       childgenerate.value == true
+      colorMode.value = color
       ResetCanvas()
       generatePicture(childWindowWidth.value, childWindowHeight.value, color).forEach((element) => {
         childDrawCircles.push(element)
@@ -251,6 +253,7 @@ export default defineComponent({
       ChangeCanDraw,
       changeTwoPic,
       blurValue,
+      colorMode,
     }
   },
 

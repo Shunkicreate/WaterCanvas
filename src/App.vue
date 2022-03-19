@@ -58,6 +58,7 @@ export default defineComponent({
     const changeTwoPic = ref("")
     const blurValue = ref(3)
     const generate = ref(false)
+    const colorMode = ref(1)
     changeTwoPic.value = 'src/assets/unlock.png'
     provide('blurValue',blurValue);
     // const postError = ref(true)
@@ -82,6 +83,7 @@ export default defineComponent({
     provide('isLoading', isLoading)
     provide('changeTwoPic', changeTwoPic)
     provide('generate', generate)
+    provide('colorMode', colorMode)
 
     return {
       isLoading,
