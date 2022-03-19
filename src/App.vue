@@ -1,5 +1,4 @@
 <template>
-
   <header>
     <div class="title">WATER CANVAS</div>
     <div class="menuBtn">
@@ -8,16 +7,16 @@
       <span></span>
     </div>
   </header>
-    <!-- <div  style="text-align: center; height:100%"> -->
-      <div v-show="isLoading">
-          <div class="loader"></div>
-      </div>
-      <div  class="home" v-show="!isLoading">
-        <DrawCanvas></DrawCanvas>
-        <div class="wrapper">
-          <ColorSetting></ColorSetting>
-        </div>
-      <!-- </div> -->
+  <!-- <div  style="text-align: center; height:100%"> -->
+  <div v-show="IsLoading">
+    <div class="loader"></div>
+  </div>
+  <div class="home" v-show="!IsLoading">
+    <DrawCanvas></DrawCanvas>
+    <div class="wrapper">
+      <ColorSetting></ColorSetting>
+    </div>
+    <!-- </div> -->
   </div>
 </template>
 
@@ -28,8 +27,10 @@ import DrawCanvas from './components/DrawCanvas.vue'
 import ColorSetting from './components/ColorSetting.vue'
 import drawCircles from './tsfiles/drawCirclesClass'
 import colorSelector from './tsfiles/colorSelector';
-import { ProductKey } from './tsfiles/symbols';
+import { DrawCirclesKey } from './tsfiles/symbols';
 import $ from 'jquery';
+import WindowStatus from './tsfiles/WindowStatus'
+import { WindowStatusKey } from './tsfiles/WindowStatusKey';
 
 export default defineComponent({
   name: 'Home',
@@ -46,51 +47,65 @@ export default defineComponent({
       s: 0,
       v: 0,
     })
+    const WindowStatus = reactive<WindowStatus>({
+      WindowWidth: window.innerWidth,
+      WindowHeight: window.innerHeight,
+      Mode: "Canvas",
+      ChangeTwoPic: "src/assets/unlock.png",
+      SavedImageJudge: false,
+      CanvasReset: false,
+      AutoDraw: false,
+      IsLoading: false,
+      DrawAnotherPicture: false,
+      CanDraw: false,
+    })
+
     const WindowWidth = ref(window.innerWidth)
     const WindowHeight = ref(window.innerHeight)
     const SavedImageJudge = ref(false)
-    const mode = ref("canvas")
-    const canvasReset = ref(false)
-    const autoDraw = ref(false)
-    const isLoading = ref(false)
-    const drawAnotherPicture = ref(false)
+    const Mode = ref("Canvas")
+    const CanvasReset = ref(false)
+    const AutoDraw = ref(false)
+    const IsLoading = ref(false)
+    const DrawAnotherPicture = ref(false)
     const CanDraw = ref(true)
-    const changeTwoPic = ref("")
-    const blurValue = ref(3)
-    const generate = ref(false)
-    const colorMode = ref(1)
-    changeTwoPic.value = 'src/assets/unlock.png'
-    provide('blurValue',blurValue);
+    const ChangeTwoPic = ref("")
+    const BlurValue = ref(3)
+    const Generate = ref(false)
+    const ColorMode = ref(1)
+    ChangeTwoPic.value = 'src/assets/unlock.png'
+    provide('BlurValue', BlurValue);
     // const postError = ref(true)
-    
+
     function disableScroll(event: any) {
       event.preventDefault();
     }
     document.addEventListener('touchmove', disableScroll, { passive: false });
     document.addEventListener('mousewheel', disableScroll, { passive: false });
-    provide('CircleData', CircleData)
+    // provide('CircleData', CircleData)
     provide('ColorData', ColorData)
     provide('WindowWidth', WindowWidth)
     provide('WindowHeight', WindowHeight)
     provide('SavedImageJudge', SavedImageJudge)
-    provide('mode', mode)
-    provide('canvasReset', canvasReset)
-    provide('autoDraw', autoDraw)
-    provide('drawAnotherPicture', drawAnotherPicture)
+    provide('Mode', Mode)
+    provide('CanvasReset', CanvasReset)
+    provide('AutoDraw', AutoDraw)
+    provide('DrawAnotherPicture', DrawAnotherPicture)
     provide('CanDraw', CanDraw)
-    
-    provide(ProductKey, CircleData);
-    provide('isLoading', isLoading)
-    provide('changeTwoPic', changeTwoPic)
-    provide('generate', generate)
-    provide('colorMode', colorMode)
+
+    provide(DrawCirclesKey, CircleData);
+    provide(WindowStatusKey, WindowStatus);
+    provide('IsLoading', IsLoading)
+    provide('ChangeTwoPic', ChangeTwoPic)
+    provide('Generate', Generate)
+    provide('ColorMode', ColorMode)
 
     return {
-      isLoading,
-      blurValue,
+      IsLoading,
+      BlurValue,
     }
   },
-  mounted(){
+  mounted() {
     $(".menuBtn").click(function () {
       $(".menuBtn").toggleClass('active');
       $('.wrapper').toggleClass('fade')

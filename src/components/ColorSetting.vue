@@ -2,56 +2,56 @@
   <div class="colorSection" id="colorSection">
     <div class="style colors">
       <div class="picker">
-        <div class="colorBox random" @click="generate(1)">
+        <div class="colorBox random" @click="Generate(1)">
           <img class="color sample" src="../assets/random.jpg" />
           <div class="color text">
             <p>mix</p>
           </div>
         </div>
-        <div class="colorBox red" @click="generate(2)">
+        <div class="colorBox red" @click="Generate(2)">
           <img class="color sample" src="../assets/red.jpg" />
           <div class="color text">
             <p>red</p>
           </div>
         </div>
-        <div class="colorBox orange" @click="generate(3)">
+        <div class="colorBox orange" @click="Generate(3)">
           <img class="color sample" src="../assets/orange.jpg" />
 
           <div class="color text">
             <p>orange</p>
           </div>
         </div>
-        <div class="colorBox yellow" @click="generate(4)">
+        <div class="colorBox yellow" @click="Generate(4)">
           <img class="color sample" src="../assets/yellow.jpg" />
           <div class="color text">
             <p>yellow</p>
           </div>
         </div>
-        <div class="colorBox green" @click="generate(5)">
+        <div class="colorBox green" @click="Generate(5)">
           <img class="color sample" src="../assets/green.jpg" />
           <div class="color text">
             <p>green</p>
           </div>
         </div>
-        <div class="colorBox lightblue" @click="generate(6)">
+        <div class="colorBox lightblue" @click="Generate(6)">
           <img class="color sample" src="../assets/lightblue.jpg" />
           <div class="color text">
             <p>lightblue</p>
           </div>
         </div>
-        <div class="colorBox blue" @click="generate(7)">
+        <div class="colorBox blue" @click="Generate(7)">
           <img class="color sample" src="../assets/blue.jpg" />
           <div class="color text">
             <p>blue</p>
           </div>
         </div>
-        <div class="colorBox purple" @click="generate(8)">
+        <div class="colorBox purple" @click="Generate(8)">
           <img class="color sample" src="../assets/purple.jpg" />
           <div class="color text">
             <p>purple</p>
           </div>
         </div>
-        <div class="colorBox pink" @click="generate(9)">
+        <div class="colorBox pink" @click="Generate(9)">
           <img class="color sample" src="../assets/pink.jpg" />
           <div class="color text">
             <p>pink</p>
@@ -60,7 +60,7 @@
       </div>
       <div class="toolBar">
         <!--<div class="bar blur">
-          <input class="blurChange" type="range" id="blur" min="0" max="60" step="0.1" :value="blurValue" />
+          <input class="blurChange" type="range" id="blur" min="0" max="60" step="0.1" :value="BlurValue" />
           <p>Blur</p>
         </div>
         <span id="currentValue"></span>-->
@@ -72,7 +72,7 @@
         <div class="toggle" @click="ChangeMode()">
           <input type="checkbox" name="checked" />
         </div>
-        <div class="mode btn reset" @click="ResetCanvas()">
+        <div class="Mode btn reset" @click="ResetCanvas()">
           <p>Reset</p>
         </div>
       </div>
@@ -89,7 +89,7 @@
           <p>watch</p>
         </div>
         <div class="action btn candraw" @click="ChangeCanDraw()">
-          <img :src="changeTwoPic"/>
+          <img :src="ChangeTwoPic"/>
           <!--<p>Can Draw: {{ CanDraw }}</p>-->
         </div>
         <!--<div class="action btn what">
@@ -124,7 +124,7 @@ import { defineComponent, inject, Ref, ref } from "vue";
 import colorSelector from "../tsfiles/colorSelector";
 import drawCircles from "../tsfiles/drawCirclesClass";
 import { generatePicture } from "../tsfiles/generatePicture";
-import { ProductKey } from '../tsfiles/symbols'
+import { DrawCirclesKey } from '../tsfiles/symbols'
 import $ from 'jquery';
 import axios, { AxiosResponse } from 'axios'
 import GetFromDB from '../tsfiles/getFromDb'
@@ -133,53 +133,53 @@ export default defineComponent({
   name: "ColorSetting",
   setup() {
     const childColorSelector = inject('ColorData') as colorSelector
-    const mode = inject('mode') as Ref
+    const Mode = inject('Mode') as Ref
     const demoData = new drawCircles(0, 0, 0, 0, 0, 0, 0,)
-    const childDrawCircles = inject(ProductKey, [demoData]);
-    const canvasReset = inject('canvasReset') as Ref
+    const childDrawCircles = inject(DrawCirclesKey, [demoData]);
+    const CanvasReset = inject('CanvasReset') as Ref
     const childWindowWidth = inject('WindowWidth') as Ref
     const childWindowHeight = inject('WindowHeight') as Ref
-    const autoDraw = inject('autoDraw') as Ref
+    const AutoDraw = inject('AutoDraw') as Ref
     const SavedImageJudge = inject('SavedImageJudge') as Ref
-    const blurValue = inject('blurValue') as Ref
-    const isLoading = inject('isLoading') as Ref
-    const drawAnotherPicture = inject('drawAnotherPicture') as Ref
+    const BlurValue = inject('BlurValue') as Ref
+    const IsLoading = inject('IsLoading') as Ref
+    const DrawAnotherPicture = inject('DrawAnotherPicture') as Ref
     const CanDraw = inject('CanDraw') as Ref
-    const changeTwoPic = inject('changeTwoPic') as Ref
-    const childgenerate = inject('generate') as Ref
-    const colorMode = inject('colorMode') as Ref
+    const ChangeTwoPic = inject('ChangeTwoPic') as Ref
+    const childgenerate = inject('Generate') as Ref
+    const ColorMode = inject('ColorMode') as Ref
 
-    function generate(color: number) {
+    function Generate(color: number) {
       console.log('watch')
       childgenerate.value == true
-      colorMode.value = color
+      ColorMode.value = color
       ResetCanvas()
       generatePicture(childWindowWidth.value, childWindowHeight.value, color).forEach((element) => {
         childDrawCircles.push(element)
       })
-      if (autoDraw.value == false) {
-        autoDraw.value = true
+      if (AutoDraw.value == false) {
+        AutoDraw.value = true
       }
 
     }
 
     function ChangeMode() {
-      console.log("water")
-      if (autoDraw.value == true) {
-        autoDraw.value = false
+      console.log("Water")
+      if (AutoDraw.value == true) {
+        AutoDraw.value = false
       }
-      if (mode.value == 'canvas') {
-        mode.value = 'water'
+      if (Mode.value == 'Canvas') {
+        Mode.value = 'Water'
       }
-      else if (mode.value == 'water') {
-        mode.value = 'canvas'
+      else if (Mode.value == 'Water') {
+        Mode.value = 'Canvas'
       }
-      canvasReset.value = !canvasReset.value
+      CanvasReset.value = !CanvasReset.value
       childDrawCircles.length = 0;
     }
 
     function ResetCanvas() {
-      canvasReset.value = true
+      CanvasReset.value = true
       console.log('reset')
       childDrawCircles.length = 0;
     }
@@ -205,7 +205,7 @@ export default defineComponent({
       console.log('watch')
       CanDraw.value = false
       ResetCanvas()
-      isLoading.value = true  //load circle and disable display
+      IsLoading.value = true  //load circle and disable display
       axios
         .get<GetFromDB>(`https://watercanvas.herokuapp.com/randomgets`, {
           headers: {
@@ -220,16 +220,16 @@ export default defineComponent({
             childDrawCircles.push(element)
 
           })
-          isLoading.value = false
-          drawAnotherPicture.value = true
-          generate(Math.floor(Math.random() * 9))
+          IsLoading.value = false
+          DrawAnotherPicture.value = true
+          Generate(Math.floor(Math.random() * 9))
         })
         .catch(
           error => {
             console.log(error)
-            generate(Math.floor(Math.random() * 9))
-            drawAnotherPicture.value = true
-            isLoading.value = false
+            Generate(Math.floor(Math.random() * 9))
+            DrawAnotherPicture.value = true
+            IsLoading.value = false
           }
         )
     }
@@ -243,17 +243,17 @@ export default defineComponent({
       childColorSelector,
       ChangeMode,
       ResetCanvas,
-      generate,
+      Generate,
       SaveImage,
       WhatIsThis,
       Watch,
-      drawAnotherPicture,
-      mode,
+      DrawAnotherPicture,
+      Mode,
       CanDraw,
       ChangeCanDraw,
-      changeTwoPic,
-      blurValue,
-      colorMode,
+      ChangeTwoPic,
+      BlurValue,
+      ColorMode,
     }
   },
 

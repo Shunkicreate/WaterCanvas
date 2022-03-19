@@ -1,5 +1,5 @@
 <template>
-  <div id="drawCanvas" style="filter:blur({blurValue})"></div>
+  <div id="drawCanvas" style="filter:blur({BlurValue})"></div>
 </template>
 
 <script lang="ts">
@@ -7,39 +7,52 @@ import { defineComponent, ref, reactive, Ref, InjectionKey } from "vue";
 import { inject } from 'vue'
 import p5 from "p5";
 import drawCircles from '../tsfiles/drawCirclesClass'
-import { ProductKey } from '../tsfiles/symbols';
+import { DrawCirclesKey } from '../tsfiles/symbols';
 import unlockUrl from '../assets/unlock.png?url'
 import lockUrl from '../assets/lock.png?url'
 import { colorRange } from "../tsfiles/colorRange";
-
-
+import { WindowStatusKey } from "../tsfiles/WindowStatusKey";
+// import WindowStatus from "../tsfiles/WindowStatus";
 export default defineComponent({
   name: "DrawCanvas",
   setup() {
     const positionY = ref(0);
     const positionX = ref(0);
-
-    const demoData = new drawCircles(0, 0, 0, 0, 0, 0, 0,)
-    const childDrawCircles = inject(ProductKey, [demoData]);
+    const DemoCircleData = new drawCircles(0, 0, 0, 0, 0, 0, 0,)
+    // const DemoWindowData = new WindowStatus({
+    //   WindowWidth: window.innerWidth,
+    //   WindowHeight: window.innerHeight,
+    //   Mode: "Canvas",
+    //   ChangeTwoPic: "src/assets/unlock.png",
+    //   SavedImageJudge: false,
+    //   CanvasReset: false,
+    //   AutoDraw: false,
+    //   IsLoading: false,
+    //   DrawAnotherPicture: false,
+    //   CanDraw: false,
+    // })
+    const childDrawCircles = inject(DrawCirclesKey, [DemoCircleData]);
+    const WindowStatus = inject(WindowStatusKey)
+    console.log(WindowStatus?.WindowHeight)
     const childWindowWidth = inject('WindowWidth') as Ref
     const childWindowHeight = inject('WindowHeight') as Ref
     const timeCounter = ref(0)
     const canvasCounter = ref(0)
     const drawing = ref(false)
-    const mode = inject('mode') as Ref
-    const canvasReset = inject('canvasReset') as Ref
-    const autoDraw = inject('autoDraw') as Ref
+    const Mode = inject('Mode') as Ref
+    const CanvasReset = inject('CanvasReset') as Ref
+    const AutoDraw = inject('AutoDraw') as Ref
     const SavedImageJudge = inject('SavedImageJudge') as Ref
-    const drawAnotherPicture = inject('drawAnotherPicture') as Ref
+    const DrawAnotherPicture = inject('DrawAnotherPicture') as Ref
     const CanDraw = inject('CanDraw') as Ref
     var canvas!: p5.Element
-    const changeTwoPic = inject("changeTwoPic") as Ref
-    const blurValue = inject("blurValue") as Ref
+    const ChangeTwoPic = inject("ChangeTwoPic") as Ref
+    const BlurValue = inject("BlurValue") as Ref
     const output = () => {
       timeCounter.value += 1;
     }
-    const childgenerate = inject('generate') as Ref
-    const colorMode = inject('colorMode') as Ref
+    const childgenerate = inject('Generate') as Ref
+    const ColorMode = inject('ColorMode') as Ref
 
 
     //50msごとにカウンターを設置
@@ -68,7 +81,7 @@ export default defineComponent({
 
         //円を作る関数
         function createNewEllipse() {
-          const H = colorRange(colorMode.value)
+          const H = colorRange(ColorMode.value)
           const S = p.random(20, 100)
           const B = p.random(90, 100)
           const A = 10;
@@ -92,8 +105,8 @@ export default defineComponent({
         };
 
         //キャンバスの初期化関数
-        if (canvasReset.value == true) {
-          canvasReset.value = false;
+        if (CanvasReset.value == true) {
+          CanvasReset.value = false;
           p.fill('#fafaf7')
           p.rect(0, 0, p.width * 2, p.height * 2)
         }
@@ -114,9 +127,9 @@ export default defineComponent({
 
         //ロック写真
         if (CanDraw.value) {
-          changeTwoPic.value = unlockUrl
+          ChangeTwoPic.value = unlockUrl
         } else if (!CanDraw.value) {
-          changeTwoPic.value = lockUrl
+          ChangeTwoPic.value = lockUrl
         }
 
         //CanDrawの分岐 描けないとき
@@ -124,8 +137,8 @@ export default defineComponent({
 
 
           //取ってきたデータの自動描画
-          if (drawAnotherPicture.value == true) {
-            drawAnotherPicture.value = false
+          if (DrawAnotherPicture.value == true) {
+            DrawAnotherPicture.value = false
             waitAndDraw(100) //ms
           }
         }
@@ -134,7 +147,7 @@ export default defineComponent({
         else if (CanDraw.value == true) {
 
           //waterモードの時
-          if (mode.value == 'water') {
+          if (Mode.value == 'Water') {
             if (drawing.value && timeCounter.value % 2 == 0) {
               drawEllipse()
             }
@@ -155,13 +168,13 @@ export default defineComponent({
               drawEllipse()
             }
             //自動描画
-            if (autoDraw.value == true) {
+            if (AutoDraw.value == true) {
               drawing.value = true
             }
           }
 
           //canvasモードの時
-          else if (mode.value == 'canvas') {
+          else if (Mode.value == 'Canvas') {
             canvasCounter.value++;
             p.touchMoved = () => {
               if (canvasCounter.value % 10 == 0) {
@@ -180,7 +193,7 @@ export default defineComponent({
           }
 
           //自動描画
-          if (autoDraw.value == true) {
+          if (AutoDraw.value == true) {
             p.fill('#fafaf7')
             p.rect(0, 0, p.width * 2, p.height * 2)
             for (var i = 0; i < childDrawCircles.length; i++) {
@@ -190,7 +203,7 @@ export default defineComponent({
                 p.ellipse(elem.x[j], elem.y[j], elem.r[j], elem.r[j],)
               }
             }
-            autoDraw.value = !autoDraw.value
+            AutoDraw.value = !AutoDraw.value
           }
         }
 
@@ -210,10 +223,10 @@ export default defineComponent({
       positionY,
       positionX,
       timeCounter,
-      canvasReset,
+      CanvasReset,
       canvasData,
-      mode,
-      blurValue,
+      Mode,
+      BlurValue,
     };
   },
 });
