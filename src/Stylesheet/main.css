@@ -115,7 +115,7 @@ canvas {
 
 .color p {
     font-size: 0.8rem;
-    text-shadow: .2rem .2rem .5rem #cccccc,
+    text-shadow: .2rem .2rem .5rem #cccccc;
 }
 
 .toolBar {

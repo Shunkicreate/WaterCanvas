@@ -192,21 +192,6 @@ export default defineComponent({
         .catch(error => console.log(error))
     }
 
-
-    // const axios = require('axios')
-    function AI (){
-      axios
-        .post("https://watercanvas.herokuapp.com/azure", {
-          "url": "https://www.kaigo-antenna.jp/uploads/magazine/main_image/71/resize_AC-789-01_l.jpg" 
-        })
-	      .then(function (response) {
-		      console.log(response.data)
-		    })
-	      .catch(function (error) {
-		      console.log(error)
-  		  })
-    }
-
     function Watch() {
       console.log('watch')
       WindowStatus.CanDraw = false
@@ -238,6 +223,19 @@ export default defineComponent({
             WindowStatus.IsLoading = false
           }
         )
+    }
+
+    function AI (){
+      axios
+        .post("https://watercanvas.herokuapp.com/azure", {
+          "url": "https://www.kaigo-antenna.jp/uploads/magazine/main_image/71/resize_AC-789-01_l.jpg" 
+        })
+	      .then(function (response) {
+		      console.log(response.data)
+		    })
+	      .catch(function (error) {
+		      console.log(error)
+  		  })
     }
 
     function ChangeCanDraw() {
