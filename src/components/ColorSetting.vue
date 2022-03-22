@@ -195,24 +195,16 @@ export default defineComponent({
 
     // const axios = require('axios')
     function AI (){
-      console.log ("*** 開始 ***")
-
-      var args = {
-	      body: { "url": "https://www.kaigo-antenna.jp/uploads/magazine/main_image/71/resize_AC-789-01_l.jpg" },
-	      headers: { "Content-Type": "application/json" }
-      }
- 
       axios
-        .post("https://watercanvas.herokuapp.com/azure", args)
-	      .then(function (response: any) {
+        .post("https://watercanvas.herokuapp.com/azure", {
+          "url": "https://www.kaigo-antenna.jp/uploads/magazine/main_image/71/resize_AC-789-01_l.jpg" 
+        })
+	      .then(function (response) {
 		      console.log(response.data)
 		    })
-	      .catch(function (error: any) {
+	      .catch(function (error) {
 		      console.log(error)
   		  })
-	      .then(function () {
-		      console.log ("*** 終了 ***")
-		    })
     }
 
     function Watch() {
