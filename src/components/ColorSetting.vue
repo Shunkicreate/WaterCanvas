@@ -88,6 +88,9 @@
         <div class="action btn watch" @click="Watch()">
           <p>watch</p>
         </div>
+        <div class="action btn watch" @click="AI()">
+          <p>AI</p>
+        </div>
         <div class="action btn candraw" @click="ChangeCanDraw()">
           <img :src="WindowStatus.ChangeTwoPic" />
           <!--<p>Can Draw: {{ CanDraw }}</p>-->
@@ -125,7 +128,7 @@ import colorSelector from "../tsfiles/colorSelector";
 import drawCircles from "../tsfiles/drawCirclesClass";
 import { generatePicture } from "../tsfiles/generatePicture";
 import { DrawCirclesKey } from '../tsfiles/symbols'
-import $ from 'jquery';
+import $, { data } from 'jquery';
 import axios, { AxiosResponse } from 'axios'
 import GetFromDB from '../tsfiles/getFromDb'
 import WindowStatusClass from "../tsfiles/WindowStatusClass";
@@ -189,6 +192,29 @@ export default defineComponent({
         .catch(error => console.log(error))
     }
 
+
+    // const axios = require('axios')
+    function AI (){
+      console.log ("*** 開始 ***")
+
+      var args = {
+	      body: { "url": "https://www.kaigo-antenna.jp/uploads/magazine/main_image/71/resize_AC-789-01_l.jpg" },
+	      headers: { "Content-Type": "application/json" }
+      }
+ 
+      axios
+        .post("https://watercanvas.herokuapp.com/azure", args)
+	      .then(function (response: any) {
+		      console.log(response.data)
+		    })
+	      .catch(function (error: any) {
+		      console.log(error)
+  		  })
+	      .then(function () {
+		      console.log ("*** 終了 ***")
+		    })
+    }
+
     function Watch() {
       console.log('watch')
       WindowStatus.CanDraw = false
@@ -234,6 +260,7 @@ export default defineComponent({
       Generate,
       SaveImage,
       WhatIsThis,
+      AI,
       Watch,
       // DrawAnotherPicture,
       // Mode,
