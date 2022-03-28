@@ -88,7 +88,7 @@
         <div class="action btn watch" @click="Watch()">
           <p>watch</p>
         </div>
-        <div class="action btn watch" @click="AI()">
+        <div class="action btn watch" id="AI" @click="AI()">
           <p>AI</p>
         </div>
         <div class="action btn candraw" @click="ChangeCanDraw()">
@@ -232,6 +232,14 @@ export default defineComponent({
         })
 	      .then(function (response) {
 		      console.log(response.data)
+          // id属性で要素を取得
+          var textbox_element = document.getElementById('AI');
+          // 新しいHTML要素を作成
+          var new_element = document.createElement('p');
+          new_element.textContent = response.data;
+          // 指定した要素の中の末尾に挿入
+          if (textbox_element === null) return;
+          textbox_element.appendChild(new_element);
 		    })
 	      .catch(function (error) {
 		      console.log(error)
