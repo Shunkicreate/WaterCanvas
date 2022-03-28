@@ -1,4 +1,4 @@
-//ランダム by hirokiwa
+//ランダム by hirokiwaa
 import drawCircles from "./drawCirclesClass";
 import { colorRange } from "./colorRange";
 
