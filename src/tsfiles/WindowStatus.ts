@@ -12,5 +12,7 @@ export default interface WindowStatus {
     DrawAnotherPicture: boolean 
     CanDraw: boolean 
     Generate: boolean
+    ImgData: string
+    ImgToUrlJudge: boolean
 }
 

@@ -6,6 +6,7 @@ export default class WindowStatusClass implements WindowStatus{
   WindowHeight: number
   Mode: string
   ChangeTwoPic: string
+  ImgData: string
   SavedImageJudge: boolean
   CanvasReset: boolean
   AutoDraw: boolean
@@ -13,7 +14,9 @@ export default class WindowStatusClass implements WindowStatus{
   DrawAnotherPicture: boolean
   CanDraw: boolean
   Generate: boolean
-  constructor(WindowWidth: number, WindowHeight: number, BlurValue: number, ColorMode: number, Mode: string, ChangeTwoPic: string, SavedImageJudge: boolean, CanvasReset: boolean, AutoDraw: boolean, IsLoading: boolean, DrawAnotherPicture: boolean, CanDraw: boolean, Generate: boolean) {
+  ImgToUrlJudge: boolean
+
+  constructor(WindowWidth: number, WindowHeight: number, BlurValue: number, ColorMode: number, Mode: string, ChangeTwoPic: string, SavedImageJudge: boolean, CanvasReset: boolean, AutoDraw: boolean, IsLoading: boolean, DrawAnotherPicture: boolean, CanDraw: boolean, Generate: boolean, ImgData: string, ImgToUrlJudge: boolean) {
     this.WindowWidth = WindowWidth;
     this.WindowHeight = WindowHeight;
     this.BlurValue = BlurValue;
@@ -27,5 +30,7 @@ export default class WindowStatusClass implements WindowStatus{
     this.DrawAnotherPicture = DrawAnotherPicture;
     this.CanDraw = CanDraw;
     this.Generate = Generate;
+    this.ImgData = ImgData;
+    this.ImgToUrlJudge = ImgToUrlJudge
   }
 }

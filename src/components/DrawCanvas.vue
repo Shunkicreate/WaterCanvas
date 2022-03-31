@@ -20,7 +20,7 @@ export default defineComponent({
     const positionX = ref(0);
     const DemoCircleData = new drawCircles(0, 0, 0, 0, 0, 0, 0,)
     const childDrawCircles = inject(DrawCirclesKey, [DemoCircleData]);
-    const DemoWindowData = new WindowStatusClass(0, 0, 0, 0, "", "", false, false, false, false, false, false, false)
+    const DemoWindowData = new WindowStatusClass(0, 0, 0, 0, "", "", false, false, false, false, false, false, false, "", false)
     const WindowStatus = inject(WindowStatusKey, DemoWindowData)
     console.log(WindowStatus.WindowHeight)
     const timeCounter = ref(0)
@@ -190,10 +190,50 @@ export default defineComponent({
           WindowStatus.SavedImageJudge = !WindowStatus.SavedImageJudge
         }
 
+        if (WindowStatus.ImgToUrlJudge) {
+          console.log("gaaaaaaaha")
+
+          WindowStatus.ImgToUrlJudge = !WindowStatus.ImgToUrlJudge
+          const board = <HTMLInputElement>document.getElementById("defaultCanvas0")
+          console.log(board)
+          WindowStatus.ImgData = canvas.elt.toDataURL()
+          console.log(WindowStatus.ImgData)
+          // const canas = board.("image/png");  // DataURI Schemaが返却される
+
+          // 送信情報の設定
+          // const param = {
+          //   method: "POST",
+          //   headers: {
+          //     "Content-Type": "application/json; charset=utf-8"
+          //   },
+          //   body: JSON.stringify({ data: canvas })
+          // };
+        }
       };
     };
 
     const canvasData = new p5(sketch)
+
+
+
+    console.log("gaaaaaaaha")
+    if (
+      WindowStatus.ImgToUrlJudge) {
+      console.log("gaaaaaaaha")
+      WindowStatus.ImgToUrlJudge = !WindowStatus.ImgToUrlJudge
+      const board = <HTMLInputElement>document.getElementById("defaultCanvas0")
+      console.log(board)
+      // const canvas = board.("image/png");  // DataURI Schemaが返却される
+
+      // 送信情報の設定
+      // const param  = {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json; charset=utf-8"
+      //   },
+      //   body: JSON.stringify({data: canvas})
+      // };
+    }
 
     return {
       positionY,
@@ -206,5 +246,8 @@ export default defineComponent({
       // BlurValue,
     };
   },
+  mounted() {
+
+  }
 });
 </script>

@@ -61,6 +61,8 @@ export default defineComponent({
       DrawAnotherPicture: false,
       CanDraw: true,
       Generate: false,
+      ImgData: "",
+      ImgToUrlJudge: false,
     })
 
     function disableScroll(event: any) {

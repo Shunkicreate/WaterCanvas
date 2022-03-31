@@ -133,12 +133,13 @@ import axios, { AxiosResponse } from 'axios'
 import GetFromDB from '../tsfiles/getFromDb'
 import WindowStatusClass from "../tsfiles/WindowStatusClass";
 import { WindowStatusKey } from "../tsfiles/WindowStatusKey";
+import { BlobServiceClient } from "@azure/storage-blob"
 export default defineComponent({
   name: "ColorSetting",
   setup() {
     const DemoData = new drawCircles(0, 0, 0, 0, 0, 0, 0,)
     const childDrawCircles = inject(DrawCirclesKey, [DemoData]);
-    const DemoWindowData = new WindowStatusClass(0, 0, 0, 0, "", "", false, false, false, false, false, false, false)
+    const DemoWindowData = new WindowStatusClass(0, 0, 0, 0, "", "", false, false, false, false, false, false, false, "", false)
     const WindowStatus = inject(WindowStatusKey, DemoWindowData)
 
     function Generate(color: number) {
@@ -225,13 +226,38 @@ export default defineComponent({
         )
     }
 
-    function AI (){
+    function AI() {
+      WindowStatus.ImgToUrlJudge = true;
+      console.log("gaaha")
+      // Update <placeholder> with your Blob service SAS URL string
+      const blobSasUrl = "https://canvasimg.blob.core.windows.net/?sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacupitfx&se=2022-04-29T18:04:51Z&st=2022-03-29T10:04:51Z&sip=14.13.194.67&spr=https&sig=64tI9Ve2ykn6gZkilkEpi%2BkJY%2Bt%2BpSkPp%2B70yeMr2Y0%3D";
+      // Create a new BlobServiceClient
+      const blobServiceClient = new BlobServiceClient(blobSasUrl);
+      const containerName = "img"
+      // Get a container client from the BlobServiceClient
+      const containerClient = blobServiceClient.getContainerClient(containerName);
+      async () => {
+        try {
+          console.log("Uploading files...");
+          const promises = [];
+          for (const file of fileInput.files) {
+            const blockBlobClient = containerClient.getBlockBlobClient("img" + new Date().getTime());
+            promises.push(blockBlobClient.uploadBrowserData(WindowStatus.ImgData));
+            // promises.push(blockBlobClient.uploadBrowserData(file));
+          }
+          await Promise.all(  );
+          console.log("Done.");
+        }
+        catch (error) {
+          console.log(error);
+        }
+      }
       axios
         .post("https://watercanvas.herokuapp.com/azure", {
-          "url": "https://www.kaigo-antenna.jp/uploads/magazine/main_image/71/resize_AC-789-01_l.jpg" 
+          "url": "https://www.kaigo-antenna.jp/uploads/magazine/main_image/71/resize_AC-789-01_l.jpg"
         })
-	      .then(function (response) {
-		      console.log(response.data)
+        .then(function (response) {
+          console.log(response.data)
           // id属性で要素を取得
           var textbox_element = document.getElementById('AI');
           // 新しいHTML要素を作成
@@ -240,10 +266,10 @@ export default defineComponent({
           // 指定した要素の中の末尾に挿入
           if (textbox_element === null) return;
           textbox_element.appendChild(new_element);
-		    })
-	      .catch(function (error) {
-		      console.log(error)
-  		  })
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
     }
 
     function ChangeCanDraw() {
