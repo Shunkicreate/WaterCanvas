@@ -13,6 +13,10 @@ import lockUrl from '../assets/lock.png?url'
 import { colorRange } from "../tsfiles/colorRange";
 import { WindowStatusKey } from "../tsfiles/WindowStatusKey";
 import WindowStatusClass from '../tsfiles/WindowStatusClass'
+import { BlobServiceClient } from "@azure/storage-blob";
+import { sampleBlobData } from "../tsfiles/sampleBlobData"
+
+
 export default defineComponent({
   name: "DrawCanvas",
   setup() {
@@ -190,25 +194,117 @@ export default defineComponent({
           WindowStatus.SavedImageJudge = !WindowStatus.SavedImageJudge
         }
 
-        if (WindowStatus.ImgToUrlJudge) {
-          
-          const board = <HTMLInputElement>document.getElementById("defaultCanvas0")
-          console.log(board)
-          WindowStatus.ImgData = canvas.elt.toDataURL('image/jpeg', 1.0)
-          WindowStatus.ImgToUrlJudge = !WindowStatus.ImgToUrlJudge
-          console.log("gaaaaaaaha")
-          // console.log(WindowStatus.ImgData)
-          // const canas = board.("image/png");  // DataURI Schemaが返却される
+        //引数はbase64形式の文字列 blobに変換する関数
+        function toBlob(base64: string) {
+          var bin = atob(base64.replace(/^.*,/, ''));
+          var buffer = new Uint8Array(bin.length);
+          for (var i = 0; i < bin.length; i++) {
+            buffer[i] = bin.charCodeAt(i);
+          }
+          // Blobを作成
+          try {
+            var blob: Blob = new Blob([buffer.buffer], {
+              type: 'image/jpg'
+            });
 
-          // 送信情報の設定
-          // const param = {
-          //   method: "POST",
-          //   headers: {
-          //     "Content-Type": "application/json; charset=utf-8"
-          //   },
-          //   body: JSON.stringify({ data: canvas })
-          // };
+          } catch (e) {
+            console.log(e)
+            bin = atob(sampleBlobData.replace(/^.*,/, ''))
+            buffer = new Uint8Array(bin.length);
+            for (var i = 0; i < bin.length; i++) {
+              buffer[i] = bin.charCodeAt(i);
+            }
+            var falseblob: Blob = new Blob([buffer.buffer], {
+              type: 'image/jpg'
+            });
+            return falseblob;
+          }
+          return blob;
         }
+
+        if (WindowStatus.ImgToUrlJudge) {
+          WindowStatus.ImgToUrlJudge = !WindowStatus.ImgToUrlJudge
+          const AZURE_STORAGE_CONNECTION_STRING =
+            import.meta.env.VITE_AZURE_STORAGE_CONNECTION_STRING;
+          // if (typeof VITE_AZURE_STORAGE_CONNECTION_STRING == "string") {
+          //   const blobServiceClient = BlobServiceClient.fromConnectionString(
+          //     VITE_AZURE_STORAGE_CONNECTION_STRING
+          //   );
+          // async () => {
+          // try {
+          //   // Update <placeholder> with your Blob service SAS URL string
+          //   const blobSasUrl = "https://canvasimg.blob.core.windows.net/?sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacupitfx&se=2022-04-29T18:04:51Z&st=2022-03-29T10:04:51Z&sip=14.13.194.67&spr=https&sig=64tI9Ve2ykn6gZkilkEpi%2BkJY%2Bt%2BpSkPp%2B70yeMr2Y0%3D";
+
+          //   // Create a new BlobServiceClient
+          //   const blobServiceClient = new BlobServiceClient(blobSasUrl);
+          //   // Create a unique name for the container by 
+          //   // appending the current time to the file name
+          //   const containerName = "container" + new Date().getTime();
+          //   // Get a container client from the BlobServiceClient
+          //   const containerClient = blobServiceClient.getContainerClient(containerName);
+          //   containerClient.create();
+          // } catch (error) {
+          //   console.log(error);
+          // }
+          // };
+
+
+          const board = <HTMLInputElement>document.getElementById("defaultCanvas0")
+          // console.log(board)
+          WindowStatus.ImgData = canvas.elt.toDataURL('image/jpeg', 1.0)
+          const blobData: Blob = toBlob(WindowStatus.ImgData)
+
+          // Update <placeholder> with your Blob service SAS URL string
+          const blobSasUrl = "https://canvasimg.blob.core.windows.net/?sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacupitfx&se=2022-04-29T18:04:51Z&st=2022-03-29T10:04:51Z&sip=14.13.194.67&spr=https&sig=64tI9Ve2ykn6gZkilkEpi%2BkJY%2Bt%2BpSkPp%2B70yeMr2Y0%3D";
+          // Create a new BlobServiceClient
+          const blobServiceClient = new BlobServiceClient(blobSasUrl);
+          const containerName = "img"
+          // Get a container client from the BlobServiceClient
+          const containerClient = blobServiceClient.getContainerClient(containerName);
+
+          console.log("Uploading files...");
+          async function uploadfile() {
+            try {
+              console.log("Uploading files...");
+              // const promises = [];
+              // for (const file of fileInput.files) {
+              const options = {
+                blobHTTPHeaders: {
+                  blobContentType: 'image/jpeg',
+                },
+              };
+              const blockBlobClient = containerClient.getBlockBlobClient("img" + new Date().getTime() + ".jpg");
+              await blockBlobClient.upload(blobData, blobData.size, options).then(response => {
+                console.log("Done: ", response)
+              })
+                .catch(response => {
+                  console.log("expection happend: ", response)
+                })
+              // // promises.push(blockBlobClient.uploadBrowserData(blobData));
+              // // promises.push(blockBlobClient.uploadBrowserData(file));
+              // // }
+              // // await Promise.all();
+              // console.log("Done.");
+            }
+            catch (error) {
+              console.log("exception happend", error);
+            }
+          }
+          uploadfile()
+          console.log("gaaaaaaaha")
+        }
+        // console.log(WindowStatus.ImgData)
+        // const canas = board.("image/png");  // DataURI Schemaが返却される
+
+        // 送信情報の設定
+        // const param = {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json; charset=utf-8"
+        //   },
+        //   body: JSON.stringify({ data: canvas })
+        // };
+        // }
       };
     };
 
