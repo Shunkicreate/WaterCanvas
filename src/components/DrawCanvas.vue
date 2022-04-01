@@ -191,13 +191,13 @@ export default defineComponent({
         }
 
         if (WindowStatus.ImgToUrlJudge) {
-          console.log("gaaaaaaaha")
-
-          WindowStatus.ImgToUrlJudge = !WindowStatus.ImgToUrlJudge
+          
           const board = <HTMLInputElement>document.getElementById("defaultCanvas0")
           console.log(board)
-          WindowStatus.ImgData = canvas.elt.toDataURL()
-          console.log(WindowStatus.ImgData)
+          WindowStatus.ImgData = canvas.elt.toDataURL('image/jpeg', 1.0)
+          WindowStatus.ImgToUrlJudge = !WindowStatus.ImgToUrlJudge
+          console.log("gaaaaaaaha")
+          // console.log(WindowStatus.ImgData)
           // const canas = board.("image/png");  // DataURI Schemaが返却される
 
           // 送信情報の設定

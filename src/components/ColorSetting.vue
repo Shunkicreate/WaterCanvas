@@ -133,7 +133,8 @@ import axios, { AxiosResponse } from 'axios'
 import GetFromDB from '../tsfiles/getFromDb'
 import WindowStatusClass from "../tsfiles/WindowStatusClass";
 import { WindowStatusKey } from "../tsfiles/WindowStatusKey";
-import { BlobServiceClient } from "@azure/storage-blob"
+import { BlobServiceClient } from "@azure/storage-blob";
+import { sampleBlobData } from "../tsfiles/sampleBlobData"
 export default defineComponent({
   name: "ColorSetting",
   setup() {
@@ -226,9 +227,36 @@ export default defineComponent({
         )
     }
 
+    //引数はbase64形式の文字列
+    function toBlob(base64: string) {
+      var bin = atob(base64.replace(/^.*,/, ''));
+      var buffer = new Uint8Array(bin.length);
+      for (var i = 0; i < bin.length; i++) {
+        buffer[i] = bin.charCodeAt(i);
+      }
+      // Blobを作成
+      try {
+        var blob: Blob = new Blob([buffer.buffer], {
+          type: 'image/png'
+        });
+      } catch (e) {
+        console.log(e)
+        bin = atob(sampleBlobData.replace(/^.*,/, ''))
+        buffer = new Uint8Array(bin.length);
+        for (var i = 0; i < bin.length; i++) {
+          buffer[i] = bin.charCodeAt(i);
+        }
+        var falseblob: Blob = new Blob([buffer.buffer], {
+          type: 'image/png'
+        });
+        return falseblob;
+      }
+      return blob;
+    }
+
     function AI() {
       WindowStatus.ImgToUrlJudge = true;
-      console.log("gaaha")
+      const blobData: Blob = toBlob(WindowStatus.ImgData)
       // Update <placeholder> with your Blob service SAS URL string
       const blobSasUrl = "https://canvasimg.blob.core.windows.net/?sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacupitfx&se=2022-04-29T18:04:51Z&st=2022-03-29T10:04:51Z&sip=14.13.194.67&spr=https&sig=64tI9Ve2ykn6gZkilkEpi%2BkJY%2Bt%2BpSkPp%2B70yeMr2Y0%3D";
       // Create a new BlobServiceClient
@@ -236,40 +264,46 @@ export default defineComponent({
       const containerName = "img"
       // Get a container client from the BlobServiceClient
       const containerClient = blobServiceClient.getContainerClient(containerName);
+      console.log("Uploading files...");
       async () => {
         try {
           console.log("Uploading files...");
           const promises = [];
-          for (const file of fileInput.files) {
-            const blockBlobClient = containerClient.getBlockBlobClient("img" + new Date().getTime());
-            promises.push(blockBlobClient.uploadBrowserData(WindowStatus.ImgData));
-            // promises.push(blockBlobClient.uploadBrowserData(file));
-          }
-          await Promise.all(  );
+          // for (const file of fileInput.files) {
+          const blockBlobClient = containerClient.getBlockBlobClient("img" + new Date().getTime());
+          await blockBlobClient.upload(blobData, blobData.size).then(response => {
+            console.log("Done: ", response)
+          }).catch(response => {
+            console.log("expection happend: ", response)
+          })
+          // promises.push(blockBlobClient.uploadBrowserData(blobData));
+          // promises.push(blockBlobClient.uploadBrowserData(file));
+          // }
+          // await Promise.all();
           console.log("Done.");
         }
         catch (error) {
-          console.log(error);
+          console.log("exception happend",error);
         }
       }
-      axios
-        .post("https://watercanvas.herokuapp.com/azure", {
-          "url": "https://www.kaigo-antenna.jp/uploads/magazine/main_image/71/resize_AC-789-01_l.jpg"
-        })
-        .then(function (response) {
-          console.log(response.data)
-          // id属性で要素を取得
-          var textbox_element = document.getElementById('AI');
-          // 新しいHTML要素を作成
-          var new_element = document.createElement('p');
-          new_element.textContent = response.data;
-          // 指定した要素の中の末尾に挿入
-          if (textbox_element === null) return;
-          textbox_element.appendChild(new_element);
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
+      // axios
+      //   .post("https://watercanvas.herokuapp.com/azure", {
+      //     "url": "https://www.kaigo-antenna.jp/uploads/magazine/main_image/71/resize_AC-789-01_l.jpg"
+      //   })
+      //   .then(function (response) {
+      //     console.log(response.data)
+      //     // id属性で要素を取得
+      //     var textbox_element = document.getElementById('AI');
+      //     // 新しいHTML要素を作成
+      //     var new_element = document.createElement('p');
+      //     new_element.textContent = response.data;
+      //     // 指定した要素の中の末尾に挿入
+      //     if (textbox_element === null) return;
+      //     textbox_element.appendChild(new_element);
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error)
+      //   })
     }
 
     function ChangeCanDraw() {
