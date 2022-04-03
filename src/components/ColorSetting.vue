@@ -214,12 +214,10 @@ export default defineComponent({
           })
           WindowStatus.IsLoading = false
           WindowStatus.DrawAnotherPicture = true
-          Generate(Math.floor(Math.random() * 9))
         })
         .catch(
           error => {
             console.log(error)
-            Generate(Math.floor(Math.random() * 9))
             WindowStatus.DrawAnotherPicture = true
             WindowStatus.IsLoading = false
           }
