@@ -235,7 +235,18 @@ export default defineComponent({
           // Get a container client from the BlobServiceClient
           const containerClient = blobServiceClient.getContainerClient(containerName);
           const imgName = "img" + new Date().getTime() + ".jpg"
+          const URL = "https://canvasimg.blob.core.windows.net/img/" + imgName
 
+
+          async function delotefile(URL: string) {
+            await containerClient.deleteBlob(imgName)
+              .then(response => {
+                console.log(response)
+              })
+              .catch(e => {
+                console.log(e)
+              })
+          }
           console.log("Uploading files...");
           async function uploadfile() {
             try {
@@ -248,7 +259,6 @@ export default defineComponent({
               const blockBlobClient = containerClient.getBlockBlobClient(imgName);
               await blockBlobClient.upload(blobData, blobData.size, options).then(response => {
                 console.log("Done: ", response)
-                const URL = "https://canvasimg.blob.core.windows.net/img/" + imgName
                 axios
                   .post("https://watercanvas.herokuapp.com/azure", {
                     "url": URL
@@ -263,6 +273,8 @@ export default defineComponent({
                     // 指定した要素の中の末尾に挿入
                     if (textbox_element === null) return;
                     textbox_element.appendChild(new_element);
+                    delotefile(URL)
+
                   })
                   .catch(function (error) {
                     console.log(error)
@@ -277,6 +289,7 @@ export default defineComponent({
             }
           }
           uploadfile()
+          
           console.log("gaaaaaaaha")
         }
       };
