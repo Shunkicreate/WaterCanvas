@@ -14,7 +14,8 @@ import { colorRange } from "../tsfiles/colorRange";
 import { WindowStatusKey } from "../tsfiles/WindowStatusKey";
 import WindowStatusClass from '../tsfiles/WindowStatusClass'
 import { BlobServiceClient } from "@azure/storage-blob";
-import { sampleBlobData } from "../tsfiles/sampleBlobData"
+import { sampleBlobData } from "../tsfiles/sampleBlobData";
+import axios, { AxiosResponse } from "axios";
 
 
 export default defineComponent({
@@ -224,36 +225,8 @@ export default defineComponent({
 
         if (WindowStatus.ImgToUrlJudge) {
           WindowStatus.ImgToUrlJudge = !WindowStatus.ImgToUrlJudge
-          const AZURE_STORAGE_CONNECTION_STRING =
-            import.meta.env.VITE_AZURE_STORAGE_CONNECTION_STRING;
-          // if (typeof VITE_AZURE_STORAGE_CONNECTION_STRING == "string") {
-          //   const blobServiceClient = BlobServiceClient.fromConnectionString(
-          //     VITE_AZURE_STORAGE_CONNECTION_STRING
-          //   );
-          // async () => {
-          // try {
-          //   // Update <placeholder> with your Blob service SAS URL string
-          //   const blobSasUrl = "https://canvasimg.blob.core.windows.net/?sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacupitfx&se=2022-04-29T18:04:51Z&st=2022-03-29T10:04:51Z&sip=14.13.194.67&spr=https&sig=64tI9Ve2ykn6gZkilkEpi%2BkJY%2Bt%2BpSkPp%2B70yeMr2Y0%3D";
-
-          //   // Create a new BlobServiceClient
-          //   const blobServiceClient = new BlobServiceClient(blobSasUrl);
-          //   // Create a unique name for the container by 
-          //   // appending the current time to the file name
-          //   const containerName = "container" + new Date().getTime();
-          //   // Get a container client from the BlobServiceClient
-          //   const containerClient = blobServiceClient.getContainerClient(containerName);
-          //   containerClient.create();
-          // } catch (error) {
-          //   console.log(error);
-          // }
-          // };
-
-
-          const board = <HTMLInputElement>document.getElementById("defaultCanvas0")
-          // console.log(board)
           WindowStatus.ImgData = canvas.elt.toDataURL('image/jpeg', 1.0)
           const blobData: Blob = toBlob(WindowStatus.ImgData)
-
           // Update <placeholder> with your Blob service SAS URL string
           const blobSasUrl = "https://canvasimg.blob.core.windows.net/?sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacupitfx&se=2022-04-29T18:04:51Z&st=2022-03-29T10:04:51Z&sip=14.13.194.67&spr=https&sig=64tI9Ve2ykn6gZkilkEpi%2BkJY%2Bt%2BpSkPp%2B70yeMr2Y0%3D";
           // Create a new BlobServiceClient
@@ -261,30 +234,43 @@ export default defineComponent({
           const containerName = "img"
           // Get a container client from the BlobServiceClient
           const containerClient = blobServiceClient.getContainerClient(containerName);
+          const imgName = "img" + new Date().getTime() + ".jpg"
 
           console.log("Uploading files...");
           async function uploadfile() {
             try {
               console.log("Uploading files...");
-              // const promises = [];
-              // for (const file of fileInput.files) {
               const options = {
                 blobHTTPHeaders: {
                   blobContentType: 'image/jpeg',
                 },
               };
-              const blockBlobClient = containerClient.getBlockBlobClient("img" + new Date().getTime() + ".jpg");
+              const blockBlobClient = containerClient.getBlockBlobClient(imgName);
               await blockBlobClient.upload(blobData, blobData.size, options).then(response => {
                 console.log("Done: ", response)
+                const URL = "https://canvasimg.blob.core.windows.net/img/" + imgName
+                axios
+                  .post("https://watercanvas.herokuapp.com/azure", {
+                    "url": URL
+                  })
+                  .then(function (response) {
+                    console.log(response.data)
+                    // id属性で要素を取得
+                    var textbox_element = document.getElementById('AI');
+                    // 新しいHTML要素を作成
+                    var new_element = document.createElement('p');
+                    new_element.textContent = response.data;
+                    // 指定した要素の中の末尾に挿入
+                    if (textbox_element === null) return;
+                    textbox_element.appendChild(new_element);
+                  })
+                  .catch(function (error) {
+                    console.log(error)
+                  })
               })
                 .catch(response => {
                   console.log("expection happend: ", response)
                 })
-              // // promises.push(blockBlobClient.uploadBrowserData(blobData));
-              // // promises.push(blockBlobClient.uploadBrowserData(file));
-              // // }
-              // // await Promise.all();
-              // console.log("Done.");
             }
             catch (error) {
               console.log("exception happend", error);
@@ -293,18 +279,6 @@ export default defineComponent({
           uploadfile()
           console.log("gaaaaaaaha")
         }
-        // console.log(WindowStatus.ImgData)
-        // const canas = board.("image/png");  // DataURI Schemaが返却される
-
-        // 送信情報の設定
-        // const param = {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json; charset=utf-8"
-        //   },
-        //   body: JSON.stringify({ data: canvas })
-        // };
-        // }
       };
     };
 
