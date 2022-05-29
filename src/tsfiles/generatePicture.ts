@@ -23,8 +23,8 @@ export function generatePicture(width: number, height: number, color: number) {
     else if(randomAlgorithmNum == 2){
         returnData = algorithm3(width, height, color)
     }
-    else if(randomAlgorithmNum == 3){
-        returnData = algorithm4(width, height, color)
-    }
+    // else if(randomAlgorithmNum == 3){
+    //     returnData = algorithm4(width, height, color)
+    // }
     return returnData;
 }
