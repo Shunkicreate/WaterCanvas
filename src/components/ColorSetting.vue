@@ -88,9 +88,9 @@
         <div class="action btn watch" @click="Watch()">
           <p>watch</p>
         </div>
-        <div class="action btn watch" id="AI" @click="AI()">
+        <!-- <div class="action btn watch" id="AI" @click="AI()">
           <p>AI</p>
-        </div>
+        </div> -->
         <div class="action btn candraw" @click="ChangeCanDraw()">
           <img :src="WindowStatus.ChangeTwoPic" />
           <!--<p>Can Draw: {{ CanDraw }}</p>-->
