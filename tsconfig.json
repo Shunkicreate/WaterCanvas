@@ -11,7 +11,7 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/components/*.vue"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/components/*.vue", "src/assets/*.JPEG", "src/assets/*.png"],
   "references": [{ "path": "./tsconfig.node.json" }],
   "pwa":{
     "themeColor": "#efeff0",
