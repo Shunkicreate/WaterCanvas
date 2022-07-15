@@ -156,7 +156,7 @@ export default defineComponent({
     }
 
     function ChangeMode() {
-      console.log("Water")
+      // console.log("Water")
       if (WindowStatus.AutoDraw == true) {
         WindowStatus.AutoDraw = false
       }

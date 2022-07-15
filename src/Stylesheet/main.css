@@ -259,7 +259,7 @@ p {
 }
 
 .toggle:after {
-    content: "CANVAS";
+    content: "WATER";
     position: absolute;
     top: 0.2rem;
     left: 0.18rem;
@@ -267,7 +267,8 @@ p {
     height: 80%;
     display: block;
     border-radius: 1.25rem;
-    background: #aaaab3;
+    background: #98bbd9;
+    /* background: #aaaab3; */
     -webkit-transition: 0.2s ease-out;
     transition: 0.2s ease-out;
     text-align: center;
@@ -283,11 +284,12 @@ p {
 }
 
 .toggle.checked:after {
-    content: "WATER";
+    content: "CANVAS";
     left: 37%;
-    color: #f5f5f5;
+    /* color: #f5f5f5; */
     background: #98bbd9;
-    padding: 0.15rem 0 0;
+    background: #aaaab3;
+    /* padding: 0.15rem 0 0; */
 }
 
 input[type="range"] {

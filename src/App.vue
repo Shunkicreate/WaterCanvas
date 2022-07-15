@@ -52,7 +52,7 @@ export default defineComponent({
       WindowHeight: window.innerHeight,
       BlurValue: 3,
       ColorMode: 1,
-      Mode: "Canvas",
+      Mode: "Water",
       ChangeTwoPic: "src/assets/unlock.png",
       SavedImageJudge: false,
       CanvasReset: false,
